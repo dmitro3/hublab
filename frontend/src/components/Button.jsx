@@ -50,7 +50,7 @@ const Button = ({
               ? "bg-white text-[#00ADEF] border border-[#00ADEF]"
               : "bg-[#00ADEF] text-[#FCFCFC]"
           } rounded-[4px] transition-all leading-none duration-500 text-[14px] font-medium ${
-            !props.disabled ? "hover:scale-[1.02] active:scale-[0.95]" : ""
+            !props.disabled ? "hover:scale-[1.02] active:scale-[0.95] hover:top-1 hover:left-1"  : ""
           }  min-w-full
       flex items-center place-items-cente justify-center gap-2 px-[18px] py-2 capitalize relative z-50`,
           className
