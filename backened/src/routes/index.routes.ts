@@ -1,0 +1,8 @@
+import profileRouter from "./profile.routes";
+import docRouter from "./doc.routes";
+import { basePath } from "../configs/constants.configs";
+
+export default (app: { use: (arg0: string, arg1: any) => void; }) => {
+    app.use(`${basePath}/profiles`, profileRouter);
+    app.use(`${basePath}/docs`, docRouter);
+};
