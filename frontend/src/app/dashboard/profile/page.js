@@ -6,7 +6,10 @@ import XLogo from "../../../assets/X-logo.svg";
 import Check from "../../../assets/check-icon.svg";
 import Socials from "@/components/socials";
 import Points from "@/components/points";
-import Badges from "@/components/badges";
+import EarlyAdoptersBadge from "@/components/earlyAdopterBadges";
+import CompletionistBadge from "@/components/CompletionistBadge";
+import MilestoneBadge from "@/components/MilestoneBadge";
+import ExpertBadge from "@/components/ExpertBadge";
 import Referralmodal from "@/components/modals/referalmodal";
 
 const Page = () => {
@@ -75,10 +78,10 @@ const Page = () => {
             Badges
           </h2>
           <div className="grid grid-cols-2 gap-10">
-            <Badges />
-            <Badges />
-            <Badges />
-            <Badges />
+            <EarlyAdoptersBadge />
+            <CompletionistBadge />
+            <MilestoneBadge />
+            <ExpertBadge />
           </div>
 
           <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
