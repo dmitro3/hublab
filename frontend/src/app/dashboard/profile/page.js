@@ -135,7 +135,7 @@ const Page = () => {
               </div>
             </>
           ) : (
-            <EditProfile/>
+            <EditProfile />
           )}
         </div>
         <div className="w-[40%] p-5">
