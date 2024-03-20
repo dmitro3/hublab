@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { INTERESTS } from "../configs/constants.configs";
 
-const createSchema = Joi.object({
+const profileSchema = Joi.object({
     firstName: Joi.string().optional().trim(),
     lastName: Joi.string().optional().trim(),
     email: Joi.string().email().optional().lowercase().trim(),
@@ -9,20 +9,20 @@ const createSchema = Joi.object({
     bio: Joi.string().optional().trim(),
     interests: Joi.array().items(Joi.string().valid(...INTERESTS)).optional(),
     socials: Joi.object({
-        twitter: Joi.string(),
-        linkedIn: Joi.string(),
-        discord: Joi.string(),
-        gitHub: Joi.string(),
-        instagram: Joi.string(),
-        website: Joi.string()
+        twitter: Joi.string().optional().trim(),
+        linkedIn: Joi.string().optional().trim(),
+        discord: Joi.string().optional().trim(),
+        gitHub: Joi.string().optional().trim(),
+        instagram: Joi.string().optional().trim(),
+        website: Joi.string().optional().trim()
     }),
     points: Joi.object({
-        totalPoints: Joi.number().integer().min(0).optional(),
-        referalPoints: Joi.number().integer().min(0).optional(),
-        rewardPoints: Joi.number().integer().min(0).optional()
+        totalPoints: Joi.number().optional(),
+        referalPoints: Joi.number().optional(),
+        rewardPoints: Joi.number().optional()
     })
 });
 
 export {
-    createSchema
+    profileSchema
 }

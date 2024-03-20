@@ -12,9 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const router = express_1.default.Router();
-router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.redirect("https://documenter.getpostman.com/view/22416364/2sA358eRhE")
-}));
-exports.default = router;
+const profile_services_1 = __importDefault(require("../services/profile.services"));
+const { findOne } = new profile_services_1.default();
+function generateReferralCode() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let code = '';
+        while (true) {
+            for (let i = 0; i < 8; i++) {
+                code += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            const existingUser = yield findOne({ referralCode: code });
+            if (!existingUser) {
+                return code;
+            }
+            code = '';
+        }
+    });
+}
+exports.default = generateReferralCode;

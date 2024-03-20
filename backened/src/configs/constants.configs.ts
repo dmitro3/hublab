@@ -16,7 +16,8 @@ const MESSAGES = {
         NOT_FOUND: "Profile not found."
     },
 };
-const INTERESTS: string[] = ["Content", "Development", "Trading", "Earning", "Blockchain", "Bounty"]
+const INTERESTS: string[] = ["Content", "Development", "Trading", "Earning", "Blockchain", "Bounty"];
+const FRONTEND_SIGNUP_LINK = "";
 
 export {
     PORT,
@@ -24,5 +25,6 @@ export {
     basePath,
     MESSAGES,
     DATABASES,
-    INTERESTS
+    INTERESTS,
+    FRONTEND_SIGNUP_LINK
 };

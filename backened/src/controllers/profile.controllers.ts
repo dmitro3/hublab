@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
-import { MESSAGES } from "../configs/constants.configs";
+import { FRONTEND_SIGNUP_LINK, MESSAGES } from "../configs/constants.configs";
 import ProfileService from "../services/profile.services";
+import cloudinary from "../configs/cloudinary.configs";
+import generateReferralCode from "../utils/generateReferralCode.utils";
+import getBonus from "../utils/getBonus.utils";
 const {
   create,
   findOne,
@@ -33,6 +36,23 @@ export default class ProfileController {
       }
     }
     
+    let imageUrl;
+    if (req.file) {
+      // Upload file to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
+      imageUrl = result.secure_url;
+      if(!imageUrl) {
+        return res.status(409).send({
+          success: false,
+          message: "File Upload Failed"
+        });
+      }
+    }
+
+    const code = await generateReferralCode();
+    
+    req.body.referralCode = code;
+    req.body.imageUrl = imageUrl;
     const profileFromId = await findOne({_id: id});
     if (profileFromId) {
       const updatedProfile = await editById(id, req.body);
@@ -43,8 +63,18 @@ export default class ProfileController {
         profile: updatedProfile
       });
     } else {
+      const bonus = await getBonus();
       //creates a profile if the email and id doesn't exist
-      const createdProfile = await create({_id: id, ...req.body});
+      const createdProfile = await create({_id: id, points: {totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp}, ...req.body});
+
+      const {referralCode} = req.query;
+      const referredUser = await findOne(referralCode);
+
+      if (referredUser && referredUser.points) {
+        const totalReferralPoints = referredUser.points.referalPoints + 1000;
+        const updatedProfile = await editById(referredUser._id, {points: {totalPoints: referredUser.points.totalPoints, referalPoints: totalReferralPoints, rewardPoints: referredUser.points.rewardPoints}});
+      }
+
       return res.status(201)
       .send({
         success: true,
@@ -53,7 +83,7 @@ export default class ProfileController {
       });
     }
   }
-  
+
   async getProfile(req: Request, res: Response) {
     const profile = await findOne({_id: req.params.id});
     if (profile) {
@@ -68,6 +98,49 @@ export default class ProfileController {
       .send({
         success: false,
         message: NOT_FOUND
+      });
+  }
+
+  async claimPoints(req: Request, res: Response) {
+    const {id} = req.params
+    const profile = await findOne({_id: id});
+    if (profile) {
+      const updatedProfile = await editById(id, {
+        points: {
+          totalPoints: 0,
+          rewardPoints: 0,
+          referalPoints: 0
+        }
+      });
+      return res.status(200)
+      .send({
+        success: true,
+        message: "Points successfully claimed",
+        profile: updatedProfile
+      });
+    }
+    return res.status(404)
+      .send({
+        success: false,
+        message: NOT_FOUND
+      });
+  }
+
+  async getReferralLink(req: Request, res: Response) {
+    const {id} = req.params
+    const profile = await findOne({_id: id});
+    if(!profile) {
+      return res.status(404)
+      .send({
+        success: false,
+        message: NOT_FOUND
+      });
+    }
+    return res.status(200)
+      .send({
+        success: true,
+        message: "Points successfully claimed",
+        profile: `${FRONTEND_SIGNUP_LINK}?referral=${profile.referralCode}`
       });
   }
 }

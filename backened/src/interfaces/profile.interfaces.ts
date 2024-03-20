@@ -1,10 +1,10 @@
 export default interface IProfile {
     _id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    imageUrl: string;
-    bio: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    imageUrl?: string;
+    bio?: string;
     interests: [];
     socials: {
         twitter: string;
@@ -14,7 +14,7 @@ export default interface IProfile {
         instagram: string;
         website: string;
     };
-    points: {
+    points?: {
         totalPoints: number;
         referalPoints: number;
         rewardPoints: number;
