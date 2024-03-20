@@ -14,17 +14,12 @@ const createSchema = joi_1.default.object({
     bio: joi_1.default.string().optional().trim(),
     interests: joi_1.default.array().items(joi_1.default.string().valid(...constants_configs_1.INTERESTS)).optional(),
     socials: joi_1.default.object({
-        twitter: joi_1.default.string(),
-        linkedIn: joi_1.default.string(),
-        discord: joi_1.default.string(),
-        gitHub: joi_1.default.string(),
-        instagram: joi_1.default.string(),
-        website: joi_1.default.string()
+        twitter: joi_1.default.string().optional().trim(),
+        linkedIn: joi_1.default.string().optional().trim(),
+        discord: joi_1.default.string().optional().trim(),
+        gitHub: joi_1.default.string().optional().trim(),
+        instagram: joi_1.default.string().optional().trim(),
+        website: joi_1.default.string().optional().trim()
     }),
-    points: joi_1.default.object({
-        totalPoints: joi_1.default.number().integer().min(0).optional(),
-        referalPoints: joi_1.default.number().integer().min(0).optional(),
-        rewardPoints: joi_1.default.number().integer().min(0).optional()
-    })
 });
 exports.createSchema = createSchema;

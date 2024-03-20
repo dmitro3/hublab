@@ -89,5 +89,31 @@ class ProfileController {
             });
         });
     }
+    claimPoints(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const profile = yield findOne({ _id: id });
+            if (profile) {
+                const updatedProfile = yield editById(id, {
+                    points: {
+                        totalPoints: 0,
+                        rewardPoints: 0,
+                        referalPoints: 0
+                    }
+                });
+                return res.status(200)
+                    .send({
+                    success: true,
+                    message: "Points successfully claimed",
+                    profile: updatedProfile
+                });
+            }
+            return res.status(404)
+                .send({
+                success: false,
+                message: NOT_FOUND
+            });
+        });
+    }
 }
 exports.default = ProfileController;

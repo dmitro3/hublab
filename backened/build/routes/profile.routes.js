@@ -9,9 +9,11 @@ const validate_middleware_1 = __importDefault(require("../middlewares/validate.m
 const profile_schemas_1 = require("../schemas/profile.schemas");
 const multer_configs_1 = __importDefault(require("../configs/multer.configs"));
 const router = (0, express_1.Router)();
-const { createProfile, getProfile } = new profile_controllers_1.default();
+const { createProfile, getProfile, claimPoints } = new profile_controllers_1.default();
 //create or update a profile
 router.put("/:id", multer_configs_1.default.single("image"), (0, validate_middleware_1.default)(profile_schemas_1.createSchema), createProfile);
 //get a profile
 router.get("/:id", getProfile);
+//claim points
+router.patch("/claim/:id", claimPoints);
 exports.default = router;

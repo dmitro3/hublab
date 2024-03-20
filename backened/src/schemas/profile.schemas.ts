@@ -9,18 +9,13 @@ const createSchema = Joi.object({
     bio: Joi.string().optional().trim(),
     interests: Joi.array().items(Joi.string().valid(...INTERESTS)).optional(),
     socials: Joi.object({
-        twitter: Joi.string(),
-        linkedIn: Joi.string(),
-        discord: Joi.string(),
-        gitHub: Joi.string(),
-        instagram: Joi.string(),
-        website: Joi.string()
+        twitter: Joi.string().optional().trim(),
+        linkedIn: Joi.string().optional().trim(),
+        discord: Joi.string().optional().trim(),
+        gitHub: Joi.string().optional().trim(),
+        instagram: Joi.string().optional().trim(),
+        website: Joi.string().optional().trim()
     }),
-    points: Joi.object({
-        totalPoints: Joi.number().integer().min(0).optional(),
-        referalPoints: Joi.number().integer().min(0).optional(),
-        rewardPoints: Joi.number().integer().min(0).optional()
-    })
 });
 
 export {
