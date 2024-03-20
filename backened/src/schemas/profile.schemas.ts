@@ -2,7 +2,6 @@ import Joi from "joi";
 import { INTERESTS } from "../configs/constants.configs";
 
 const createSchema = Joi.object({
-    _id: Joi.string().required().trim(),
     firstName: Joi.string().optional().trim(),
     lastName: Joi.string().optional().trim(),
     email: Joi.string().email().optional().lowercase().trim(),
