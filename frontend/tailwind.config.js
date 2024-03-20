@@ -23,7 +23,7 @@ const config = {
       fontFamily: {
         // lato: "var(--lato)",
         // poppins: "var(--poppins)",
-        inter: "var(--inter)",
+        roboto_Slab: "var(--roboto_Slab)",
       },
       colors: {
         primary: "#0D0E32",
