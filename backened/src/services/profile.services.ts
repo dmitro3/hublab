@@ -4,7 +4,7 @@ import Profile from "../models/profile.models";
 export default class ProfileService {
     async create(profile: Partial<IProfile>) {
         const createdProfile = await Profile.create(profile);
-        return await Profile.findOne({ _id: createdProfile.id}, "-__v -password");
+        return await Profile.findOne({ _id: createdProfile.id}, "-__v");
     }
 
     async findOne(param: any) {
@@ -12,8 +12,6 @@ export default class ProfileService {
     }
 
     async editById(id: string, obj: Partial<IProfile>) {
-        if(await Profile.findOne({ _id: id })){
-            return await Profile.findByIdAndUpdate(id, { $set: obj }, { new: true }).select("-password");
-        }
+        return await Profile.findByIdAndUpdate(id, { $set: obj }, { new: true });
     }
 }
