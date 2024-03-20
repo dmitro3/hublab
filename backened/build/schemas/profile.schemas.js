@@ -7,7 +7,6 @@ exports.createSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 const constants_configs_1 = require("../configs/constants.configs");
 const createSchema = joi_1.default.object({
-    _id: joi_1.default.string().required().trim(),
     firstName: joi_1.default.string().optional().trim(),
     lastName: joi_1.default.string().optional().trim(),
     email: joi_1.default.string().email().optional().lowercase().trim(),
