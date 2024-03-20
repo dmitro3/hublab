@@ -57,7 +57,7 @@ export default class ProfileController {
   }
   
   async getProfile(req: Request, res: Response) {
-    const profile = await findOne({_id: req.params._id});
+    const profile = await findOne({_id: req.params.id});
     if (profile) {
       return res.status(200)
       .send({

@@ -12,6 +12,6 @@ const {
 router.put("/", validate(createSchema), createProfile);
 
 //get a profile
-router.get("/:_id", getProfile);
+router.get("/:id", getProfile);
 
 export default router;
