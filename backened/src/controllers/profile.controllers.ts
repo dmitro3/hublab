@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { MESSAGES } from "../configs/constants.configs";
 import ProfileService from "../services/profile.services";
+import cloudinary from "../configs/cloudinary.configs";
 const {
   create,
   findOne,
@@ -33,6 +34,20 @@ export default class ProfileController {
       }
     }
     
+    let imageUrl;
+    if (req.file) {
+      // Upload file to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
+      imageUrl = result.secure_url;
+      if(!imageUrl) {
+        return res.status(409).send({
+          success: false,
+          message: "File Upload Failed"
+        });
+      }
+    }
+    
+    req.body.imageUrl = imageUrl;
     const profileFromId = await findOne({_id: id});
     if (profileFromId) {
       const updatedProfile = await editById(id, req.body);

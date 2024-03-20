@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_configs_1 = require("../configs/constants.configs");
 const profile_services_1 = __importDefault(require("../services/profile.services"));
+const cloudinary_configs_1 = __importDefault(require("../configs/cloudinary.configs"));
 const { create, findOne, editById } = new profile_services_1.default();
 const { DUPLICATE_EMAIL, CREATED, UPDATED, NOT_FOUND } = constants_configs_1.MESSAGES.PROFILE;
 class ProfileController {
@@ -35,6 +36,19 @@ class ProfileController {
                     }
                 }
             }
+            let imageUrl;
+            if (req.file) {
+                // Upload file to Cloudinary
+                const result = yield cloudinary_configs_1.default.uploader.upload(req.file.path);
+                imageUrl = result.secure_url;
+                if (!imageUrl) {
+                    return res.status(409).send({
+                        success: false,
+                        message: "File Upload Failed"
+                    });
+                }
+            }
+            req.body.imageUrl = imageUrl;
             const profileFromId = yield findOne({ _id: id });
             if (profileFromId) {
                 const updatedProfile = yield editById(id, req.body);
