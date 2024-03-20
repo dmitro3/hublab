@@ -15,13 +15,14 @@ const {
 
 export default class ProfileController {
   async createProfile(req: Request, res: Response) {
-    const {_id, email} = req.body;
+    const {_id} = req.params;
+    const {email} = req.body;
     
     //checks if profile with email and id exists
-    const profile = await findOne({email: email});
-    const profile2 = await findOne({_id: _id});
-    if (profile) {
-      if(profile._id !== _id) {
+    const profileFromEmail = await findOne({email: email});
+    const profileFromId = await findOne({_id: _id});
+    if (profileFromEmail) {
+      if(profileFromEmail._id !== _id) {
         //sends an error if the email exists
         return res.status(409)
         .send({
@@ -29,14 +30,9 @@ export default class ProfileController {
           message: DUPLICATE_EMAIL
         });
       }
-      const updatedProfile = await editById(_id, req.body);
-      return res.status(201)
-      .send({
-        success: true,
-        message: UPDATED,
-        profile: updatedProfile
-      });
-    } else if (profile2) {
+    }
+    
+    if (profileFromId) {
       const updatedProfile = await editById(_id, req.body);
       return res.status(201)
       .send({

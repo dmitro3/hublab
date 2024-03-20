@@ -9,7 +9,7 @@ const {
 } = new ProfileController();
 
 //create or update a profile
-router.put("/", validate(createSchema), createProfile);
+router.put("/:id", validate(createSchema), createProfile);
 
 //get a profile
 router.get("/:id", getProfile);
