@@ -11,7 +11,7 @@ const storage = multer_1.default.diskStorage({
     },
     filename: (req, file, cb) => {
         cb(null, `${file.fieldname}-${Date.now()}${path_1.default.extname(file.originalname)}`);
-    },
+    }
 });
 // Check file type
 function checkFileType(file, cb) {
