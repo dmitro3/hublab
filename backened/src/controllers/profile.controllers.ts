@@ -15,25 +15,27 @@ const {
 
 export default class ProfileController {
   async createProfile(req: Request, res: Response) {
-    const {_id} = req.params;
+    const {id} = req.params;
     const {email} = req.body;
     
     //checks if profile with email and id exists
-    const profileFromEmail = await findOne({email: email});
-    const profileFromId = await findOne({_id: _id});
-    if (profileFromEmail) {
-      if(profileFromEmail._id !== _id) {
-        //sends an error if the email exists
-        return res.status(409)
-        .send({
-          success: false,
-          message: DUPLICATE_EMAIL
-        });
+    if(email) {
+      const profileFromEmail = await findOne({email: email});
+      if (profileFromEmail) {
+        if(profileFromEmail._id !== id) {
+          //sends an error if the email exists
+          return res.status(409)
+          .send({
+            success: false,
+            message: DUPLICATE_EMAIL
+          });
+        }
       }
     }
     
+    const profileFromId = await findOne({_id: id});
     if (profileFromId) {
-      const updatedProfile = await editById(_id, req.body);
+      const updatedProfile = await editById(id, req.body);
       return res.status(201)
       .send({
         success: true,
@@ -42,7 +44,7 @@ export default class ProfileController {
       });
     } else {
       //creates a profile if the email and id doesn't exist
-      const createdProfile = await create(req.body);
+      const createdProfile = await create({_id: id, ...req.body});
       return res.status(201)
       .send({
         success: true,

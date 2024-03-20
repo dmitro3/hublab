@@ -24,7 +24,6 @@ const profileSchema = new mongoose_1.Schema({
     },
     imageUrl: {
         type: String,
-        required: true,
         trim: true
     },
     bio: {
@@ -35,7 +34,8 @@ const profileSchema = new mongoose_1.Schema({
         type: [{
                 type: String,
                 enum: constants_configs_1.INTERESTS
-            }]
+            }],
+        required: false
     },
     social: {
         type: {
