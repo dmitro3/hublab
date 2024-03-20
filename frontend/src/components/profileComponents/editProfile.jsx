@@ -2,7 +2,8 @@
 import Image from "next/image";
 import React, { useState, useRef } from "react";
 import Edit from "../../assets/edit.svg";
-import EarlyAdopter from "../../assets/early-adopter.svg";
+// import EarlyAdopter from "../../assets/early-adopter.svg";
+import EarlyAdopter from "../../assets/EarlyBadge.svg";
 import { Formik, Form, Field } from "formik";
 import * as Yup from 'yup'
 
