@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { MESSAGES } from "../configs/constants.configs";
 import ProfileService from "../services/profile.services";
+import cloudinary from "../configs/cloudinary.configs";
 const {
   create,
   findOne,
@@ -33,6 +34,20 @@ export default class ProfileController {
       }
     }
     
+    let imageUrl;
+    if (req.file) {
+      // Upload file to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
+      imageUrl = result.secure_url;
+      if(!imageUrl) {
+        return res.status(409).send({
+          success: false,
+          message: "File Upload Failed"
+        });
+      }
+    }
+    
+    req.body.imageUrl = imageUrl;
     const profileFromId = await findOne({_id: id});
     if (profileFromId) {
       const updatedProfile = await editById(id, req.body);
@@ -53,7 +68,7 @@ export default class ProfileController {
       });
     }
   }
-  
+
   async getProfile(req: Request, res: Response) {
     const profile = await findOne({_id: req.params.id});
     if (profile) {
@@ -69,5 +84,31 @@ export default class ProfileController {
         success: false,
         message: NOT_FOUND
       });
+  }
+
+  async claimPoints(req: Request, res: Response) {
+    const {id} = req.params
+    const profile = await findOne({_id: id});
+    if (profile) {
+      const updatedProfile = await editById(id, {
+        points: {
+          totalPoints: 0,
+          rewardPoints: 0,
+          referalPoints: 0
+        }
+      });
+      return res.status(200)
+      .send({
+        success: true,
+        message: "Points successfully claimed",
+        profile: updatedProfile
+      });
+    }
+    return res.status(404)
+      .send({
+        success: false,
+        message: NOT_FOUND
+      });
+
   }
 }

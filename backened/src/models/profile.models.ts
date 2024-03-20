@@ -19,6 +19,7 @@ const profileSchema = new Schema({
     type: String,
     lowercase: true,
     unique: true,
+    sparse: true,
     trim: true
   },
   imageUrl: {
@@ -33,54 +34,56 @@ const profileSchema = new Schema({
     type: [{
       type: String,
       enum: INTERESTS
-    }],
-    required: false
+    }]
   },
-  social: {
-    type: {
-      twitter: {
-        type: String,
-        trim: true    
-      },
-      linkedIn: {
-        type: String,
-        trim: true    
-      },
-      discord: {
-        type: String,
-        trim: true    
-      },
-      gitHub: {
-        type: String,
-        trim: true    
-      },
-      instagram: {
-        type: String,
-        trim: true    
-      },
-      website: {
-        type: String,
-        trim: true    
-      }
+  socials: {
+    twitter: {
+      type: String,
+      default: "",
+      trim: true    
     },
+    linkedIn: {
+      type: String,
+      default: "",
+      trim: true    
+    },
+    discord: {
+      type: String,
+      default: "",
+      trim: true    
+    },
+    gitHub: {
+      type: String,
+      default: "",
+      trim: true    
+    },
+    instagram: {
+      type: String,
+      default: "",
+      trim: true    
+    },
+    website: {
+      type: String,
+      default: "",
+      trim: true
+    }
   },
   points: {
-    type: {
-      totalPoints: {
-        type: Number,
-        default: 0
-      },
-      referalPoints: {
-        type: Number,
-        default: 0
-      },
-      rewardPoints: {
-        type: Number,
-        default: 0
-      }
+    totalPoints: {
+      type: Number,
+      default: 0
+    },
+    referalPoints: {
+      type: Number,
+      default: 0
+    },
+    rewardPoints: {
+      type: Number,
+      default: 0
     }
   }
 }, {
+  strict: true,
   timestamps: true
 });
 

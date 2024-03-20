@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_configs_1 = require("../configs/constants.configs");
 const profile_services_1 = __importDefault(require("../services/profile.services"));
+const cloudinary_configs_1 = __importDefault(require("../configs/cloudinary.configs"));
 const { create, findOne, editById } = new profile_services_1.default();
 const { DUPLICATE_EMAIL, CREATED, UPDATED, NOT_FOUND } = constants_configs_1.MESSAGES.PROFILE;
 class ProfileController {
@@ -35,6 +36,19 @@ class ProfileController {
                     }
                 }
             }
+            let imageUrl;
+            if (req.file) {
+                // Upload file to Cloudinary
+                const result = yield cloudinary_configs_1.default.uploader.upload(req.file.path);
+                imageUrl = result.secure_url;
+                if (!imageUrl) {
+                    return res.status(409).send({
+                        success: false,
+                        message: "File Upload Failed"
+                    });
+                }
+            }
+            req.body.imageUrl = imageUrl;
             const profileFromId = yield findOne({ _id: id });
             if (profileFromId) {
                 const updatedProfile = yield editById(id, req.body);
@@ -66,6 +80,32 @@ class ProfileController {
                     success: true,
                     message: "Profile fetched successfully",
                     profile: profile
+                });
+            }
+            return res.status(404)
+                .send({
+                success: false,
+                message: NOT_FOUND
+            });
+        });
+    }
+    claimPoints(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const profile = yield findOne({ _id: id });
+            if (profile) {
+                const updatedProfile = yield editById(id, {
+                    points: {
+                        totalPoints: 0,
+                        rewardPoints: 0,
+                        referalPoints: 0
+                    }
+                });
+                return res.status(200)
+                    .send({
+                    success: true,
+                    message: "Points successfully claimed",
+                    profile: updatedProfile
                 });
             }
             return res.status(404)
