@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { DATABASES } from "../configs/constants.configs";
+import { DATABASES, INTERESTS } from "../configs/constants.configs";
 
 const profileSchema = new Schema({
   _id: {
@@ -9,49 +9,80 @@ const profileSchema = new Schema({
   },
   firstName: {
     type: String,
-    required: true,
     trim: true
   },
   lastName: {
     type: String,
-    required: true,
     trim: true
   },
-  profilePicUrl: {
+  email: {
+    type: String,
+    lowercase: true,
+    unique: true,
+    trim: true
+  },
+  imageUrl: {
     type: String,
     required: true,
     trim: true
   },
   bio: {
     type: String,
-    required: true,
     trim: true
   },
-  email: {
-    type: String,
-    required: true,
-    lowercase: true,
-    unique: true,
-    trim: true
+  interests: {
+    type: [{
+      type: String,
+      enum: INTERESTS
+    }]
   },
-  phoneNumber: {
-    type: String,
-    required: true,
-    trim: true
-  },  
-  website: {
-    type: String,
-    required: true,
-    trim: true
-  },  
-  powUrl: {
-    type: String,
-    required: true,
-    trim: true
+  social: {
+    type: {
+      twitter: {
+        type: String,
+        trim: true    
+      },
+      linkedIn: {
+        type: String,
+        trim: true    
+      },
+      discord: {
+        type: String,
+        trim: true    
+      },
+      gitHub: {
+        type: String,
+        trim: true    
+      },
+      instagram: {
+        type: String,
+        trim: true    
+      },
+      website: {
+        type: String,
+        trim: true    
+      }
+    },
   },
+  points: {
+    type: {
+      totalPoints: {
+        type: Number,
+        default: 0
+      },
+      referalPoints: {
+        type: Number,
+        default: 0
+      },
+      rewardPoints: {
+        type: Number,
+        default: 0
+      }
+    }
+  }
 }, {
   timestamps: true
 });
 
-const Profile = model(DATABASES.USER, profileSchema);
+const Profile = model(DATABASES.PROFILE, profileSchema);
 export default Profile;

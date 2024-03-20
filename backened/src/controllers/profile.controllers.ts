@@ -11,7 +11,7 @@ const {
   CREATED,
   UPDATED,
   NOT_FOUND
-} = MESSAGES.USER;
+} = MESSAGES.PROFILE;
 
 export default class ProfileController {
   async createProfile(req: Request, res: Response) {
