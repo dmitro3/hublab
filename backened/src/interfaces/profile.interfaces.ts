@@ -5,8 +5,8 @@ export default interface IProfile {
     email?: string;
     imageUrl?: string;
     bio?: string;
-    interests?: [];
-    socials?: {
+    interests: [];
+    socials: {
         twitter: string;
         linkedIn: string;
         discord: string;

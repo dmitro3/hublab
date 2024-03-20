@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { INTERESTS } from "../configs/constants.configs";
 
-const createSchema = Joi.object({
+const profileSchema = Joi.object({
     firstName: Joi.string().optional().trim(),
     lastName: Joi.string().optional().trim(),
     email: Joi.string().email().optional().lowercase().trim(),
@@ -16,8 +16,13 @@ const createSchema = Joi.object({
         instagram: Joi.string().optional().trim(),
         website: Joi.string().optional().trim()
     }),
+    points: Joi.object({
+        totalPoints: Joi.number().optional(),
+        referalPoints: Joi.number().optional(),
+        rewardPoints: Joi.number().optional()
+    })
 });
 
 export {
-    createSchema
+    profileSchema
 }
