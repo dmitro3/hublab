@@ -4,10 +4,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import XLogo from "../../../assets/X-logo.svg";
 import Check from "../../../assets/check-icon.svg";
-import EarlyAdopter from "../../../assets/early-adopter.svg";
-import Completionist from "../../../assets/completionalist.svg";
+import EarlyAdopter from "../../../assets/EarlyBadge.svg";
+import Completionist from "../../../assets/Completionist.svg";
 import Milestone from "../../../assets/milestone.svg";
-// import Expert from "../../../assets/";
+import Expert from "../../../assets/EarlyBadge.svg";
 import BulletPoint from "../../../assets/bullet-point.svg";
 import Socials from "@/components/socials";
 import Points from "@/components/points";
@@ -31,7 +31,7 @@ const Page = () => {
   return (
     <>
       <div className="border m-7 flex rounded-xl ">
-        <div className=" border-r w-[60%] p-5">
+        <div className=" border-r w-[70%] p-5">
           <div className="flex justify-between items-center mb-6 mt-1">
             <h2 className="text-[28px] font-semibold text-[#0D0E32]">
               My Profile
@@ -135,13 +135,13 @@ const Page = () => {
               </div>
             </>
           ) : (
-            <EditProfile/>
+            <EditProfile />
           )}
         </div>
         <div className="w-[40%] p-5">
           <Points />
           <div className="flex justify-between items-center p-4 border rounded-xl border-[#222482] mt-6">
-            <div className=" w-[60%]">
+            <div className=" w-[50%]">
               <p className="text-[13px]">Accumulated points</p>
               <div className="flex justify-center">
                 <p className="font-semibold text-[20px]">11, 6878.568</p>
@@ -153,10 +153,10 @@ const Page = () => {
             Badges
           </h2>
           <div className="grid grid-cols-2 gap-10">
-            <Badges img={EarlyAdopter} />
-            <Badges img={Completionist} />
-            <Badges img={Milestone} />
-            <Badges img={Milestone} />
+            <Badges img={EarlyAdopter} badgeName='Early Adopter' />
+            <Badges img={Completionist} badgeName='Completionist' />
+            <Badges img={Milestone} badgeName='Milestone' />
+            <Badges img={Expert} badgeName='Expert' />
           </div>
 
           <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
@@ -172,7 +172,7 @@ const Page = () => {
                   onClick={() => setModalOpen(true)}
                 />
               </div>
-              <div className="flex gap-2 border border-[#222482] rounded-lg w-[70%] justify-around p-2 text-[#0D0E32]">
+              <div className="flex gap-2 border border-[#222482] rounded-lg w-[80%] mt-5 justify-around p-2 text-[#0D0E32] text-[13px]">
                 <div className="flex gap-3 w-[50%] border-r border-[#222482]">
                   <Image alt="check icon" src={Check} />
                   <p>21 referrals</p>
