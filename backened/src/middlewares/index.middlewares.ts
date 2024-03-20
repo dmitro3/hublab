@@ -6,7 +6,7 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import asyncError from "./errors.middlewares";
-// import indexRoutes from "../routes/index.routes";
+import indexRoutes from "../routes/index.routes";
 
 export default (app: Application) => {
   app.use(morgan('combined'));
@@ -16,5 +16,5 @@ export default (app: Application) => {
   app.use(cookieParser());
   app.use(urlencoded());
   app.use(asyncError);
-  // indexRoutes(app);
+  indexRoutes(app);
 };
