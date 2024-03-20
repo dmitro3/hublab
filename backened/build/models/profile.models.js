@@ -82,6 +82,11 @@ const profileSchema = new mongoose_1.Schema({
             type: Number,
             default: 0
         }
+    },
+    referralCode: {
+        type: String,
+        required: true,
+        unique: true
     }
 }, {
     strict: true,

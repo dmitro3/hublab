@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.INTERESTS = exports.DATABASES = exports.MESSAGES = exports.basePath = exports.SECRET = exports.PORT = void 0;
+exports.FRONTEND_SIGNUP_LINK = exports.INTERESTS = exports.DATABASES = exports.MESSAGES = exports.basePath = exports.SECRET = exports.PORT = void 0;
 const PORT = process.env.PORT || 9871;
 exports.PORT = PORT;
 const SECRET = process.env.SECRET;
@@ -26,3 +26,5 @@ const MESSAGES = {
 exports.MESSAGES = MESSAGES;
 const INTERESTS = ["Content", "Development", "Trading", "Earning", "Blockchain", "Bounty"];
 exports.INTERESTS = INTERESTS;
+const FRONTEND_SIGNUP_LINK = "";
+exports.FRONTEND_SIGNUP_LINK = FRONTEND_SIGNUP_LINK;
