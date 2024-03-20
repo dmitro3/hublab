@@ -19,23 +19,25 @@ const { DUPLICATE_EMAIL, CREATED, UPDATED, NOT_FOUND } = constants_configs_1.MES
 class ProfileController {
     createProfile(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { _id } = req.params;
+            const { id } = req.params;
             const { email } = req.body;
             //checks if profile with email and id exists
-            const profileFromEmail = yield findOne({ email: email });
-            const profileFromId = yield findOne({ _id: _id });
-            if (profileFromEmail) {
-                if (profileFromEmail._id !== _id) {
-                    //sends an error if the email exists
-                    return res.status(409)
-                        .send({
-                        success: false,
-                        message: DUPLICATE_EMAIL
-                    });
+            if (email) {
+                const profileFromEmail = yield findOne({ email: email });
+                if (profileFromEmail) {
+                    if (profileFromEmail._id !== id) {
+                        //sends an error if the email exists
+                        return res.status(409)
+                            .send({
+                            success: false,
+                            message: DUPLICATE_EMAIL
+                        });
+                    }
                 }
             }
+            const profileFromId = yield findOne({ _id: id });
             if (profileFromId) {
-                const updatedProfile = yield editById(_id, req.body);
+                const updatedProfile = yield editById(id, req.body);
                 return res.status(201)
                     .send({
                     success: true,
@@ -45,7 +47,7 @@ class ProfileController {
             }
             else {
                 //creates a profile if the email and id doesn't exist
-                const createdProfile = yield create(req.body);
+                const createdProfile = yield create(Object.assign({ _id: id }, req.body));
                 return res.status(201)
                     .send({
                     success: true,

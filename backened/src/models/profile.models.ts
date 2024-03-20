@@ -23,7 +23,6 @@ const profileSchema = new Schema({
   },
   imageUrl: {
     type: String,
-    required: true,
     trim: true
   },
   bio: {
@@ -34,7 +33,8 @@ const profileSchema = new Schema({
     type: [{
       type: String,
       enum: INTERESTS
-    }]
+    }],
+    required: false
   },
   social: {
     type: {
