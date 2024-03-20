@@ -6,7 +6,8 @@ import upload from "../configs/multer.configs";
 const router = Router();
 const {
     createProfile,
-    getProfile
+    getProfile,
+    claimPoints
 } = new ProfileController();
 
 //create or update a profile
@@ -14,5 +15,8 @@ router.put("/:id", upload.single("image"), validate(createSchema), createProfile
 
 //get a profile
 router.get("/:id", getProfile);
+
+//claim points
+router.patch("/claim/:id", claimPoints);
 
 export default router;
