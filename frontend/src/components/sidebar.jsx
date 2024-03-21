@@ -32,8 +32,8 @@ const Sidebar = () => {
               <SidebarMenuItem key={`sidebar-item-${index}`} {...item} />
             ))}
           </ul>
-          <div className="flex justify-center ">
-            <WalletMultiButton />
+          <div className="flex justify-center " style={{ backgroundColor: '#00ADEF' }}>
+            <WalletMultiButton labels={{ 'no-wallet': 'Connect Wallet' }}/>
           </div>
           <div className="flex justify-center items-center gap-3">
             <p className="text-white text-[12px]">Powered by</p>
