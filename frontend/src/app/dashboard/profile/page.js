@@ -3,6 +3,10 @@ import Button from "@/components/Button";
 import React, { useState } from "react";
 import Image from "next/image";
 import XLogo from "../../../assets/X-logo.svg";
+import Linkedin from "../../../assets/linkedin-logo.svg";
+import Discord from "../../../assets/discord-logo.svg";
+import Github from "../../../assets/github-logo.svg";
+import Website from "../../../assets/website-logo.svg";
 import Check from "../../../assets/check-icon.svg";
 import EarlyAdopter from "../../../assets/EarlyBadge.svg";
 import Completionist from "../../../assets/Completionist.svg";
@@ -14,6 +18,7 @@ import Points from "@/components/points";
 import Badges from "@/components/badges";
 import Referralmodal from "@/components/modals/referalmodal";
 import EditProfile from "@/components/profileComponents/editProfile";
+import Referral from "@/components/profileComponents/referral";
 
 const Page = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -51,42 +56,23 @@ const Page = () => {
             )}
           </div>
 
-          {edit ? (
+          {!edit ? (
             <>
               <div className="relative">
                 <div className="flex text-center border border-[#222482] rounded-lg relative z-50 bg-white hover:top-2 hover:left-[7px]">
                   <div className="border-r w-[50%] p-5 flex flex-col justify-end">
                     <div className="flex relative justify-center ">
                       <div className="w-[115px] h-[115spx] bg-slate-500   rounded-full">
-                        {!selectedImage && (
-                          <Image
-                            src={EarlyAdopter}
-                            alt="profile picture"
-                            width={200}
-                            height={200}
-                            className="w-full h-full rounded-full bg-cover"
-                          />
-                        )}
-                        {/* <div
-                      className="bg-white p-[10px] rounded-full z-20 absolute -right-2 shadow-md top-[124px] cursor-pointer "
-                      // onClick={handleUploadButtonClick}
-                    >
-                      <Image
-                        src={EarlyAdopter}
-                        alt="Edit image"
-                        className=" w-6"
-                      />
-                    </div> */}
+                        {/* {!selectedImage && ( */}
+                        <Image
+                          src={EarlyAdopter}
+                          alt="profile picture"
+                          width={200}
+                          height={200}
+                          className="w-full h-full rounded-full bg-cover"
+                        />
+                        {/* )} */}
                       </div>
-                      <input
-                        name="profileImageDoc"
-                        type="file"
-                        capture="environment"
-                        className="hidden"
-                        accept="image/*"
-                        // ref={fileInputRef}
-                        // onChange={handleImageChange}
-                      />
                     </div>
                     <p className="text-[16px] font-semibold">
                       Kiraichi Enioluwa
@@ -122,16 +108,47 @@ const Page = () => {
                   blockchain technology and community growth
                 </p>
               </div>
+
+              <div className="mt-10">
+                <p className="font-normal text-[20px] mb-2 text-[#0D0E32]">
+                  Referral
+                </p>
+                {/* <div className="relative">
+                  <div className="border border-[#222482] rounded-lg p-3 bg-white relative z-50 hover:top-1 hover:left-[5px]">
+                    <div className="flex justify-between">
+                      <p>Refer a friend and get 500 points</p>
+                      <Button
+                        name="get link"
+                        outline
+                        onClick={() => setModalOpen(true)}
+                      />
+                    </div>
+                    <div className="flex gap-2 border border-[#222482] rounded-lg w-[60%] mt-5 justify-around p-2 text-[#0D0E32] text-[13px]">
+                      <div className="flex gap-3 w-[50%] border-r border-[#222482]">
+                        <Image alt="check icon" src={Check} />
+                        <p>21 referrals</p>
+                      </div>
+                      <div className="flex gap-3 w-[50%]">
+                        <Image alt="check icon" src={Check} />
+                        <p>4000 points</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-lg border border-[#222482] p-[18px absolute w-full top-[1px] left-[1px] h-full m-1 "></div>
+                </div> */}
+                {!edit && <Referral setModalOpen={setModalOpen} />}
+              </div>
+
               <div className="mt-10">
                 <p className="font-normal text-[20px] mb-2 text-[#0D0E32]">
                   Social
                 </p>
-                <Socials />
-                <Socials />
-                <Socials />
-                <Socials />
-                <Socials />
-                <Socials />
+                <div className="flex gap-6">
+                  <Image alt="logo" src={XLogo} className="w-[50px]" />
+                  <Image alt="logo" src={Linkedin} className="w-[50px]" />
+                  <Image alt="logo" src={Discord} className="w-[50px]" />
+                  <Image alt="logo" src={Github} className="w-[50px]" />
+                </div>
               </div>
             </>
           ) : (
@@ -153,38 +170,20 @@ const Page = () => {
             Badges
           </h2>
           <div className="grid grid-cols-2 gap-10">
-            <Badges img={EarlyAdopter} badgeName='Early Adopter' />
-            <Badges img={Completionist} badgeName='Completionist' />
-            <Badges img={Milestone} badgeName='Milestone' />
-            <Badges img={Expert} badgeName='Expert' />
+            <Badges img={EarlyAdopter} badgeName="Early Adopter" />
+            <Badges img={Completionist} badgeName="Completionist" />
+            <Badges img={Milestone} badgeName="Milestone" />
+            <Badges img={Expert} badgeName="Expert" />
           </div>
 
-          <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
-            Referal
-          </h2>
-          <div className="relative">
-            <div className="border border-[#222482] rounded-lg p-3 bg-white relative z-50 hover:top-1 hover:left-[5px]">
-              <div className="flex justify-between">
-                <p>Refer a friend and get 500 points</p>
-                <Button
-                  name="get link"
-                  outline
-                  onClick={() => setModalOpen(true)}
-                />
-              </div>
-              <div className="flex gap-2 border border-[#222482] rounded-lg w-[80%] mt-5 justify-around p-2 text-[#0D0E32] text-[13px]">
-                <div className="flex gap-3 w-[50%] border-r border-[#222482]">
-                  <Image alt="check icon" src={Check} />
-                  <p>21 referrals</p>
-                </div>
-                <div className="flex gap-3 w-[50%]">
-                  <Image alt="check icon" src={Check} />
-                  <p>4000 points</p>
-                </div>
-              </div>
-            </div>
-            <div className="rounded-lg border border-[#222482] p-[18px absolute w-full top-[1px] left-[1px] h-full m-1 "></div>
-          </div>
+          {edit && (
+            <>
+              <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-10">
+                Referal
+              </h2>
+              <Referral setModalOpen={setModalOpen} />
+            </>
+          )}
         </div>
       </div>
       {modalOpen && <Referralmodal setModalOpen={setModalOpen} />}
