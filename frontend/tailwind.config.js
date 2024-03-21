@@ -26,8 +26,12 @@ const config = {
         roboto_Slab: "var(--roboto_Slab)",
       },
       colors: {
+       
         primary: "#0D0E32",
         secondary: "#F4801D",
+        lightBlue: " #00ADEF",
+        tertiary: "#090A25",
+        textColor: "#DFDFF7",
         white: "#FBFBFE",
         black: "#101128",
         error: "#EF4444",
