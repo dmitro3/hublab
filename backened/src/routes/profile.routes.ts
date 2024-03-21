@@ -7,7 +7,8 @@ const router = Router();
 const {
     createProfile,
     getProfile,
-    claimPoints
+    claimPoints,
+    getReferralLink
 } = new ProfileController();
 
 //create or update a profile
@@ -18,5 +19,8 @@ router.get("/:id", getProfile);
 
 //claim points
 router.patch("/claim/:id", claimPoints);
+
+//get referral link
+router.get("/referral/:id", getReferralLink);
 
 export default router;

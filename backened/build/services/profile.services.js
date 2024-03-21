@@ -30,5 +30,10 @@ class ProfileService {
             return yield profile_models_1.default.findByIdAndUpdate(id, { $set: obj }, { new: true });
         });
     }
+    count() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield profile_models_1.default.countDocuments();
+        });
+    }
 }
 exports.default = ProfileService;

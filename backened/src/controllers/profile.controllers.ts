@@ -126,5 +126,21 @@ export default class ProfileController {
       });
   }
 
-
+  async getReferralLink(req: Request, res: Response) {
+    const {id} = req.params
+    const profile = await findOne({_id: id});
+    if(!profile) {
+      return res.status(404)
+      .send({
+        success: false,
+        message: NOT_FOUND
+      });
+    }
+    return res.status(200)
+      .send({
+        success: true,
+        message: "Points successfully claimed",
+        profile: `${FRONTEND_SIGNUP_LINK}?referral=${profile.referralCode}`
+      });
+  }
 }

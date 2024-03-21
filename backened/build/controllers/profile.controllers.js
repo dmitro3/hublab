@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const constants_configs_1 = require("../configs/constants.configs");
 const profile_services_1 = __importDefault(require("../services/profile.services"));
 const cloudinary_configs_1 = __importDefault(require("../configs/cloudinary.configs"));
+const generateReferralCode_utils_1 = __importDefault(require("../utils/generateReferralCode.utils"));
+const getBonus_utils_1 = __importDefault(require("../utils/getBonus.utils"));
 const { create, findOne, editById } = new profile_services_1.default();
 const { DUPLICATE_EMAIL, CREATED, UPDATED, NOT_FOUND } = constants_configs_1.MESSAGES.PROFILE;
 class ProfileController {
@@ -48,6 +50,8 @@ class ProfileController {
                     });
                 }
             }
+            const code = yield (0, generateReferralCode_utils_1.default)();
+            req.body.referralCode = code;
             req.body.imageUrl = imageUrl;
             const profileFromId = yield findOne({ _id: id });
             if (profileFromId) {
@@ -60,8 +64,15 @@ class ProfileController {
                 });
             }
             else {
+                const bonus = yield (0, getBonus_utils_1.default)();
                 //creates a profile if the email and id doesn't exist
-                const createdProfile = yield create(Object.assign({ _id: id }, req.body));
+                const createdProfile = yield create(Object.assign({ _id: id, points: { totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp } }, req.body));
+                const { referralCode } = req.query;
+                const referredUser = yield findOne(referralCode);
+                if (referredUser && referredUser.points) {
+                    const totalReferralPoints = referredUser.points.referalPoints + 1000;
+                    const updatedProfile = yield editById(referredUser._id, { points: { totalPoints: referredUser.points.totalPoints, referalPoints: 0, rewardPoints: referredUser.points.rewardPoints } });
+                }
                 return res.status(201)
                     .send({
                     success: true,
@@ -112,6 +123,25 @@ class ProfileController {
                 .send({
                 success: false,
                 message: NOT_FOUND
+            });
+        });
+    }
+    getReferralLink(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const profile = yield findOne({ _id: id });
+            if (!profile) {
+                return res.status(404)
+                    .send({
+                    success: false,
+                    message: NOT_FOUND
+                });
+            }
+            return res.status(200)
+                .send({
+                success: true,
+                message: "Points successfully claimed",
+                profile: `${constants_configs_1.FRONTEND_SIGNUP_LINK}?referral=${profile.referralCode}`
             });
         });
     }
