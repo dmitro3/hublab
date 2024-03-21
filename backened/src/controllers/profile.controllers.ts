@@ -139,7 +139,7 @@ export default class ProfileController {
     return res.status(200)
       .send({
         success: true,
-        message: "Points successfully claimed",
+        message: "Referral link successfully fetched",
         profile: `${FRONTEND_SIGNUP_LINK}?referral=${profile.referralCode}`
       });
   }
