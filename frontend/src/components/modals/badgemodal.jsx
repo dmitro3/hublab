@@ -5,7 +5,7 @@ import Image from "next/image";
 import Check from "../../assets/check-icon.svg";
 import { CloseCircle } from "iconsax-react";
 
-const Referralmodal = ({ setModalOpen }) => {
+const Badgemodal = ({ setModalOpen }) => {
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleCopy = () => {
@@ -59,4 +59,4 @@ const Referralmodal = ({ setModalOpen }) => {
   );
 };
 
-export default Referralmodal;
+export default Badgemodal;
