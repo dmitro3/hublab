@@ -14,4 +14,8 @@ export default class ProfileService {
     async editById(id: string, obj: Partial<IProfile>) {
         return await Profile.findByIdAndUpdate(id, { $set: obj }, { new: true });
     }
+
+    async count() {
+        return await Profile.countDocuments();
+    }
 }

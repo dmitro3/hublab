@@ -81,6 +81,11 @@ const profileSchema = new Schema({
       type: Number,
       default: 0
     }
+  },
+  referralCode: {
+    type: String,
+    required: true,
+    unique: true
   }
 }, {
   strict: true,

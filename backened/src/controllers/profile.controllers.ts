@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
-import { MESSAGES } from "../configs/constants.configs";
+import { FRONTEND_SIGNUP_LINK, MESSAGES } from "../configs/constants.configs";
 import ProfileService from "../services/profile.services";
 import cloudinary from "../configs/cloudinary.configs";
+import generateReferralCode from "../utils/generateReferralCode.utils";
+import getBonus from "../utils/getBonus.utils";
 const {
   create,
   findOne,
@@ -46,7 +48,10 @@ export default class ProfileController {
         });
       }
     }
+
+    const code = await generateReferralCode();
     
+    req.body.referralCode = code;
     req.body.imageUrl = imageUrl;
     const profileFromId = await findOne({_id: id});
     if (profileFromId) {
@@ -58,8 +63,18 @@ export default class ProfileController {
         profile: updatedProfile
       });
     } else {
+      const bonus = await getBonus();
       //creates a profile if the email and id doesn't exist
-      const createdProfile = await create({_id: id, ...req.body});
+      const createdProfile = await create({_id: id, points: {totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp}, ...req.body});
+
+      const {referralCode} = req.query;
+      const referredUser = await findOne(referralCode);
+
+      if (referredUser && referredUser.points) {
+        const totalReferralPoints = referredUser.points.referalPoints + 1000;
+        const updatedProfile = await editById(referredUser._id, {points: {totalPoints: referredUser.points.totalPoints, referalPoints: 0, rewardPoints: referredUser.points.rewardPoints}});
+      }
+
       return res.status(201)
       .send({
         success: true,
@@ -109,6 +124,7 @@ export default class ProfileController {
         success: false,
         message: NOT_FOUND
       });
-
   }
+
+
 }
