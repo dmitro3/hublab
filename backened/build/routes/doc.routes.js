@@ -15,6 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.redirect("");
+    res.redirect("https://go.postman.co/workspace/f596ac10-e535-40ee-8089-40e5e6bfc0ab/collection/22416364-c1c74f71-d557-41b3-b138-c3a09ec68aea");
 }));
 exports.default = router;

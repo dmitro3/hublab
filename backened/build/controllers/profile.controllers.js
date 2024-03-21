@@ -71,7 +71,7 @@ class ProfileController {
                 const referredUser = yield findOne(referralCode);
                 if (referredUser && referredUser.points) {
                     const totalReferralPoints = referredUser.points.referalPoints + 1000;
-                    const updatedProfile = yield editById(referredUser._id, { points: { totalPoints: referredUser.points.totalPoints, referalPoints: 0, rewardPoints: referredUser.points.rewardPoints } });
+                    const updatedProfile = yield editById(referredUser._id, { points: { totalPoints: referredUser.points.totalPoints, referalPoints: totalReferralPoints, rewardPoints: referredUser.points.rewardPoints } });
                 }
                 return res.status(201)
                     .send({
