@@ -2,7 +2,6 @@
 import Button from "@/components/Button";
 import React, { useState } from "react";
 import Image from "next/image";
-import XLogo from "../../../assets/X-logo.svg";
 import ProfileImg from "../../../assets/profileImg.png"
 import Check from "../../../assets/check-icon.svg";
 import EarlyAdopter from "../../../assets/EarlyBadge.svg";
