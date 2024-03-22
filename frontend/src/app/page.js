@@ -1,9 +1,9 @@
-// import Image from "next/image";
+import HowToEarn from "@/components/howToEarn";
 
 export default function Home() {
   return (
-    <main className=" b order  bg-primary text-white w-full h-screen">
-      {/* Landing page */}
+    <main className="w-full h-screen">
+      <HowToEarn />
     </main>
   );
 }

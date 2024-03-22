@@ -27,7 +27,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed border border-red-500 rounded top-0 text-white left-0 mx-auto md:max-h-[108px] z-50 w-full py-6 flex place-items-center 
+      className={`sticky border border-red-500 rounded top-0 text-white left-0 mx-auto md:max-h-[108px] z-50 w-full py-6 flex place-items-center 
       ${
         scrolled
           ? "backdrop-blur-[24px] texat-black bg-black/70 shadow-navbar text-primarycolortadi6"
