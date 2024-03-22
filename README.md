@@ -1,0 +1,12 @@
+<div align="center">
+
+[![logo](https://github.com/onyekachi11/Verxio-ICP-Zero-To-dApp/blob/main/src/assets/Logo.svg)](https://verxio-bnb.vercel.app/)
+
+Verxio - protocol that allows users to monetize their engagement and provides founders with an all-in-one marketing and growth tools to expand their reach on Solana.
+<h3>
+  
+[Verxio Pitch Deck](https://github.com/Axio-Lab/hublab/) | [Verxio Demo URL](https://www.verxio.xyz/) | [Verxio Demo Video](https://youtu.be/qPYI9hFOvI8)
+
+</h3>
+
+</div>
