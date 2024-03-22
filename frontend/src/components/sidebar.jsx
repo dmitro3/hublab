@@ -2,12 +2,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Logo, SidebarMenuItem } from "./atoms";
+import { ConnectButton } from '@particle-network/connect-react-ui';
 import Image from "next/image";
 import AxiosLogo from "../assets/AxiosLogo.svg";
 import { useNav } from "../context/nav_context";
 import { NavigationItems } from "../components/atoms/sideBarData";
 import Button from "./Button";
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import LogoutButton from "./logout";
 
 const Sidebar = () => {
   const { isOpen, setUser } = useNav();
@@ -32,9 +33,29 @@ const Sidebar = () => {
               <SidebarMenuItem key={`sidebar-item-${index}`} {...item} />
             ))}
           </ul>
-          <div className="flex justify-center " style={{ backgroundColor: '#00ADEF' }}>
-            <WalletMultiButton labels={{ 'no-wallet': 'Connect Wallet' }}/>
+
+            {/* <ConnectButton.Custom>
+            {({ account, openAccountModal, openConnectModal }) => {
+                const handleClick = account ? openAccountModal : openConnectModal;
+                return (
+                    <div>
+                      <Button name={account? 'See Details' : 'Connect'} onClick={handleClick}/>
+                    </div>
+                );
+            }}
+        </ConnectButton.Custom> */}
+
+
+          <div>
+              <ConnectButton/>
+              <LogoutButton />
+              <div className="flex justify-center items-center gap-3">
+                  <p className="text-white text-[12px]">Powered by</p>
+                  <Image src={AxiosLogo} alt="Axios Logo" width={50} height={50} />
+                </div> 
           </div>
+
+
           <div className="flex justify-center items-center gap-3">
             <p className="text-white text-[12px]">Powered by</p>
             <Image src={AxiosLogo} alt="Axios Logo" width={50} height={50} />
