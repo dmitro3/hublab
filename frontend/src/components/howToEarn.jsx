@@ -56,13 +56,13 @@ const HowToEarn = () => {
           />
         </div>
 
-        <div className="w-full min-h-6">
+        {/* <div className="w-full min-h-6">
           <div>
             <Image src={verxioPay} alt="play" width={200} height={200} />
           </div>
 
           <Image src={verxioRefer} alt="refer" width={200} height={200} />
-        </div>
+        </div> */}
       </section>
     </div>
   );
