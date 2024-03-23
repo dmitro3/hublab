@@ -1,7 +1,8 @@
 import { Inter, Roboto_Slab } from "next/font/google";
 import "./globals.css";
+import PageConnectKit from "@/context/PageConnectKit";
 import WalletContextProvider from "@/context/WalletContextProvider";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/landingComponents/navbar";
 import { Footer } from "@/components";
 
 const roboto_Slab = Roboto_Slab({ subsets: ["latin"] });
@@ -15,11 +16,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto_Slab.className}>
-        <WalletContextProvider>
+        {/* <WalletContextProvider> */}
+        <PageConnectKit>
           {/* <Navbar /> */}
           {children}
           {/* <Footer /> */}
-        </WalletContextProvider>
+        </PageConnectKit>
+        {/* </WalletContextProvider> */}
       </body>
     </html>
   );

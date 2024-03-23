@@ -25,7 +25,7 @@ import Referral from "@/components/profileComponents/referral";
 const Page = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(true);
 
   const interests = ["Development", "Content", "Earning", "Trading"];
 
@@ -139,8 +139,8 @@ const Page = () => {
           <div className="flex justify-between items-center p-4 border rounded-xl border-[#222482] mt-6">
             <div className=" w-[50%]">
               <p className="text-[13px]">Accumulated points</p>
-              <div className="flex justify-center">
-                <p className="font-semibold text-[20px]">11, 6878.568</p>
+              <div className="flex justify-start">
+                <p className="font-semibold text-[20px]">0</p>
               </div>
             </div>
             <Button name="claim rewards" outline className="" />

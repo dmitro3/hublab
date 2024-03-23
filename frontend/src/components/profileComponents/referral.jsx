@@ -20,11 +20,11 @@ const Referral = ({setModalOpen}) => {
           <div className="flex gap-2 border border-[#222482] rounded-lg w-[60%] mt-5 justify-around p-2 text-[#0D0E32] text-[13px]">
             <div className="flex gap-3 w-[50%] border-r border-[#222482]">
               <Image alt="check icon" src={Check} />
-              <p>21 referrals</p>
+              <p>0 referrals</p>
             </div>
             <div className="flex gap-3 w-[50%]">
               <Image alt="check icon" src={Check} />
-              <p>4000 points</p>
+              <p>0 points</p>
             </div>
           </div>
         </div>

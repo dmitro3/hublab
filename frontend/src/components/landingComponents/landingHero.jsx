@@ -1,5 +1,5 @@
 "use client";
-import Button from "../components/Button";
+import Button from "../Button";
 
 const LandingPageHero = () => {
   return (
@@ -20,7 +20,7 @@ const LandingPageHero = () => {
             audiences with our protocols
           </p>
 
-          <div className="flex items-center">
+          <div className="flex items-center relative z-20">
             <Button name="Start Earning" />
             <Button name="Start Campaign" outline className='bg-primary' />
           </div>

@@ -1,8 +1,8 @@
 // import Link from "next/link";
 import { HowToEarnCards } from "@/components";
-import { Image } from "iconsax-react";
-import verxioPay from "../assets/verxioPlay.svg";
-import verxioRefer from "../assets/verxioRefer.svg";
+// import { Image } from "iconsax-react";
+// import verxioPay from "../assets/verxioPlay.svg";
+// import verxioRefer from "../assets/verxioRefer.svg";
 
 const HowToEarn = () => {
   return (

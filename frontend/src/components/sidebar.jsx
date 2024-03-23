@@ -2,12 +2,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Logo, SidebarMenuItem } from "./atoms";
+import { ConnectButton } from "@particle-network/connect-react-ui";
 import Image from "next/image";
 import AxiosLogo from "../assets/AxiosLogo.svg";
 import { useNav } from "../context/nav_context";
 import { NavigationItems } from "../components/atoms/sideBarData";
 import Button from "./Button";
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import LogoutButton from "./logout";
 
 const Sidebar = () => {
   const { isOpen, setUser } = useNav();
@@ -26,18 +27,33 @@ const Sidebar = () => {
         <div className="mx-5">
           <Button name="Profile" className="my-7" />
         </div>
-        <div className="flex flex-col justify-betwee h-full">
+        <div className="flex flex-col justify-between h-[60%]">
           <ul className="">
             {NavigationItems.map((item, index) => (
               <SidebarMenuItem key={`sidebar-item-${index}`} {...item} />
             ))}
           </ul>
-          <div className="flex justify-center " style={{ backgroundColor: '#00ADEF' }}>
-            <WalletMultiButton labels={{ 'no-wallet': 'Connect Wallet' }}/>
-          </div>
-          <div className="flex justify-center items-center gap-3">
-            <p className="text-white text-[12px]">Powered by</p>
-            <Image src={AxiosLogo} alt="Axios Logo" width={50} height={50} />
+
+          {/* <ConnectButton.Custom>
+            {({ account, openAccountModal, openConnectModal }) => {
+                const handleClick = account ? openAccountModal : openConnectModal;
+                return (
+                    <div>
+                      <Button name={account? 'See Details' : 'Connect'} onClick={handleClick}/>
+                    </div>
+                );
+            }}
+        </ConnectButton.Custom> */}
+
+          <div>
+            <div className="flex flex-col justify-center items-center mb-10">
+              <ConnectButton />
+              {/* <LogoutButton /> */}
+            </div>
+            <div className="flex justify-center items-center gap-3">
+              <p className="text-white text-[12px]">Powered by</p>
+              <Image src={AxiosLogo} alt="Axios Logo" width={50} height={50} />
+            </div>
           </div>
         </div>
       </nav>
