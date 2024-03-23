@@ -1,9 +1,15 @@
-import Image from "next/image";
+import { LandingPageHero, HowToEarn, Tasks } from "@/components";
+import Navbar from "../components/landingComponents/navbar";
+import Footer from "../components/landingComponents/footer";
 
 export default function Home() {
   return (
-    <main className=" border  bg-primary text-white w-full h-screen"> 
-      Landing page
+    <main>
+      <Navbar />
+      <LandingPageHero />
+      <HowToEarn />
+      <Tasks />
+      <Footer />
     </main>
   );
 }
