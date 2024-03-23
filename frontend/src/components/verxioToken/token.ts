@@ -7,13 +7,19 @@ import {
     Transaction,
     LAMPORTS_PER_SOL,
 } from '@solana/web3.js';
+
 import {
     createInitializeNonTransferableMintInstruction,
     createInitializeMintInstruction,
     getMintLen,
     ExtensionType,
-    TOKEN_2022_PROGRAM_ID,
+    TYPE_SIZE,
+    LENGTH_SIZE,
+    TOKEN_2022_PROGRAM_ID
 } from '@solana/spl-token';
+
+import type { TokenMetadata } from '@solana/spl-token-metadata';
+import { createInitializeInstruction, pack } from '@solana/spl-token-metadata';
 
 (async () => {
     const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
@@ -24,11 +30,20 @@ import {
 
     const mintAuthority = Keypair.generate();
     const decimals = 9;
-
     const mintKeypair = Keypair.generate();
     const mint = mintKeypair.publicKey;
     const mintLen = getMintLen([ExtensionType.NonTransferable]);
-    const lamports = await connection.getMinimumBalanceForRentExemption(mintLen);
+
+    const metadata: TokenMetadata = {
+        mint: mint,
+        name: 'VERXIO',
+        symbol: 'VERXIO',
+        uri: 'URI',
+        additionalMetadata: [['new-field', 'new-value']],
+    };
+
+    const metadataLen = TYPE_SIZE + LENGTH_SIZE + pack(metadata).length;
+    const lamports = await connection.getMinimumBalanceForRentExemption(mintLen + metadataLen);
 
     const transaction = new Transaction().add(
         SystemProgram.createAccount({
@@ -39,7 +54,25 @@ import {
             programId: TOKEN_2022_PROGRAM_ID,
         }),
         createInitializeNonTransferableMintInstruction(mint, TOKEN_2022_PROGRAM_ID),
-        createInitializeMintInstruction(mint, decimals, mintAuthority.publicKey, null, TOKEN_2022_PROGRAM_ID)
+        createInitializeMintInstruction(
+            mint, 
+            decimals, 
+            mintAuthority.publicKey, 
+            null, 
+            TOKEN_2022_PROGRAM_ID
+            ),
+            createInitializeInstruction({
+                programId: TOKEN_2022_PROGRAM_ID,
+                mint: mint,
+                metadata: mint,
+                name: metadata.name,
+                symbol: metadata.symbol,
+                uri: metadata.uri,
+                mintAuthority: payer.publicKey,
+                updateAuthority: payer.publicKey,
+            }),
+
+            
     );
     await sendAndConfirmTransaction(connection, transaction, [payer, mintKeypair], undefined);
 })();
