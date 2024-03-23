@@ -2,7 +2,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Logo, SidebarMenuItem } from "./atoms";
-import { ConnectButton } from '@particle-network/connect-react-ui';
+import { ConnectButton } from "@particle-network/connect-react-ui";
 import Image from "next/image";
 import AxiosLogo from "../assets/AxiosLogo.svg";
 import { useNav } from "../context/nav_context";
@@ -27,14 +27,14 @@ const Sidebar = () => {
         <div className="mx-5">
           <Button name="Profile" className="my-7" />
         </div>
-        <div className="flex flex-col justify-between h-full">
+        <div className="flex flex-col justify-between h-[60%]">
           <ul className="">
             {NavigationItems.map((item, index) => (
               <SidebarMenuItem key={`sidebar-item-${index}`} {...item} />
             ))}
           </ul>
 
-            {/* <ConnectButton.Custom>
+          {/* <ConnectButton.Custom>
             {({ account, openAccountModal, openConnectModal }) => {
                 const handleClick = account ? openAccountModal : openConnectModal;
                 return (
@@ -45,20 +45,15 @@ const Sidebar = () => {
             }}
         </ConnectButton.Custom> */}
 
-
           <div>
-              <ConnectButton/>
-              <LogoutButton />
-              <div className="flex justify-center items-center gap-3">
-                  <p className="text-white text-[12px]">Powered by</p>
-                  <Image src={AxiosLogo} alt="Axios Logo" width={50} height={50} />
-                </div> 
-          </div>
-
-
-          <div className="flex justify-center items-center gap-3">
-            <p className="text-white text-[12px]">Powered by</p>
-            <Image src={AxiosLogo} alt="Axios Logo" width={50} height={50} />
+            <div className="flex flex-col justify-center items-center mb-10">
+              <ConnectButton />
+              {/* <LogoutButton /> */}
+            </div>
+            <div className="flex justify-center items-center gap-3">
+              <p className="text-white text-[12px]">Powered by</p>
+              <Image src={AxiosLogo} alt="Axios Logo" width={50} height={50} />
+            </div>
           </div>
         </div>
       </nav>

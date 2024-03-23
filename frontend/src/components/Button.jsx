@@ -19,27 +19,35 @@ const Button = ({
   ...props
 }) => {
   return href ? (
-    <Link
-      scroll={scroll}
-      onClick={onClick}
-      className={twMerge(
-        `${
-          outline
-            ? "bg-[transparent] text-[#00ADEF] border border-[#00ADEF]"
-            : "bg-[#00ADEF] text-[#FCFCFC]"
-        } rounded-[4px] transition-all leading-none duration-500 text-[14px] font-medium ${
-          !props.disabled ? "hover:scale-[1.02] active:scale-[0.95]" : ""
-        }  min-w-fit
-      flex items-center place-items-center justify-center gap-4 px-[18px] py-2 capitalize`,
-        className
-      )}
-      href={href}
-    >
-      {name}
-    </Link>
+    <div className="relative mr-">
+      <div className="rounded border border-[#00ADEF] h-full absolute w-full top-[4px] left-[3px]"></div>
+      <Link
+        href={href}
+        // disabled={isLoading}
+        // type={type}
+        {...props}
+        className={twMerge(
+          `${
+            outline
+              ? "bg-white text-[#00ADEF] border border-[#00ADEF]"
+              : "bg-[#00ADEF] text-[#FCFCFC]"
+          } rounded-[4px] transition-all leading-none duration-500 text-[14px] font-medium ${
+            !props.disabled
+              ? "hover:scale-[1.02] active:scale-[0.95] hover:top-1 hover:left-1"
+              : ""
+          }  min-w-full
+      flex items-center place-items-cente justify-center gap-2 px-[18px] py-2 capitalize relative z-50`,
+          className
+        )}
+        onClick={onClick}
+      >
+        {isLoading ? <LoadingSpinner /> : name}
+        {icon && <Image src={icon} className="w-4" alt="icon" />}
+      </Link>
+    </div>
   ) : (
-    <div className="relative mr-3">
-      <div className="rounded border border-[#00ADEF] h-full absolute w-full top-[4px] left-[3px]" ></div>
+    <div className="relative mr-">
+      <div className="rounded border border-[#00ADEF] h-full absolute w-full top-[4px] left-[3px]"></div>
       <button
         disabled={isLoading}
         type={type}
@@ -50,7 +58,9 @@ const Button = ({
               ? "bg-white text-[#00ADEF] border border-[#00ADEF]"
               : "bg-[#00ADEF] text-[#FCFCFC]"
           } rounded-[4px] transition-all leading-none duration-500 text-[14px] font-medium ${
-            !props.disabled ? "hover:scale-[1.02] active:scale-[0.95] hover:top-1 hover:left-1"  : ""
+            !props.disabled
+              ? "hover:scale-[1.02] active:scale-[0.95] hover:top-1 hover:left-1"
+              : ""
           }  min-w-full
       flex items-center place-items-cente justify-center gap-2 px-[18px] py-2 capitalize relative z-50`,
           className
