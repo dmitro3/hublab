@@ -1,7 +1,17 @@
+import Tasks from "./tasks";
 import NavBar from "./navbar";
 import Button from "./Button";
 import Footer from "./footer";
-import HowToEarnCards from "./howToEarnCards";
 import HowToEarn from "./howToEarn";
+import LandingPageHero from "./landingHero";
+import HowToEarnCards from "./howToEarnCards";
 
-export { NavBar, Button, Footer, HowToEarnCards, HowToEarn };
+export {
+  NavBar,
+  Button,
+  Footer,
+  HowToEarnCards,
+  HowToEarn,
+  Tasks,
+  LandingPageHero,
+};

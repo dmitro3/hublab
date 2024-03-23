@@ -15,8 +15,13 @@ const config = {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        earnBg: "url('/images/howToEarnBg.svg')",
+        herobg: "url('/images/heroBg.svg')",
+        task1: "url('/images/taskOneImage.svg')",
+        task2: "url('/images/taskTwoImage.svg')",
+        task3: "url('/images/taskThreeImage.svg')",
+        task4: "url('/images/taskFourImage.svg')",
+        // "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops)",
         // "post-hero-img": "url('/src/assets/post-bg-img.png')",
         // 'settings-hero-img': "url('/src/assets/settings-hero.png')",
       },
@@ -26,7 +31,6 @@ const config = {
         roboto_Slab: "var(--roboto_Slab)",
       },
       colors: {
-       
         primary: "#0D0E32",
         secondary: "#F4801D",
         lightBlue: " #00ADEF",

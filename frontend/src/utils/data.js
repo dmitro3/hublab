@@ -17,12 +17,12 @@ export const howToEarnData = [
     id: 1,
     headingText: "Contest",
     imageURL: "/images/contestImage.svg",
-    description: "showcase your skills, creativity, and expertise.",
+    description: "Showcase your skills, creativity, and expertise.",
   },
   {
     id: 1,
     headingText: "Projects",
-    imageURL: "/images/projectImage.svg",
-    description: "work together and achieve a common goal or objective.",
+    imageURL: "/images/projectsImage.svg",
+    description: "Work together and achieve a common goal or objective.",
   },
 ];

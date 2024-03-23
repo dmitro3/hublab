@@ -1,9 +1,10 @@
-import HowToEarn from "@/components/howToEarn";
-
+import { LandingPageHero, HowToEarn, Tasks } from "@/components";
 export default function Home() {
   return (
-    <main className="w-full h-screen">
+    <main>
+      <LandingPageHero />
       <HowToEarn />
+      <Tasks />
     </main>
   );
 }

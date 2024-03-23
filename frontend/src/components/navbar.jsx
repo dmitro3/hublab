@@ -6,6 +6,7 @@ import { useParams, usePathname } from "next/navigation";
 import { useScroll } from "@/hooks/useScroll";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { twMerge } from "tailwind-merge";
+import { Button } from "@/components";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -27,7 +28,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky border border-red-500 rounded top-0 text-white left-0 mx-auto md:max-h-[108px] z-50 w-full py-6 flex place-items-center 
+      className={`fixed top-0 text-white left-0 mx-auto md:max-h-[108px] z-50 w-full py-6 flex place-items-center
       ${
         scrolled
           ? "backdrop-blur-[24px] texat-black bg-black/70 shadow-navbar text-primarycolortadi6"
@@ -58,17 +59,17 @@ const Navbar = () => {
             )}
           >
             {isOpen && (
-              <div className=" relative top-[100px] flex flex-col w-full gap-4 my-6 md:hidden border border-red-500">
-                <button>Get Started </button>
-                <button>Get Started </button>
+              <div className=" relative top-[100px] flex flex-col justify-center items-center gap-4 my-6 md:hidden">
+                <Button outline>Start Campaign</Button>
+                <Button large>Start Earning</Button>
               </div>
             )}
           </ul>
         </div>
 
         <div className="hidden gap-4 md:flex ">
-          <button>Get Started </button>
-          <button>Get Started </button>
+          <Button>Start Campaign</Button>
+          <Button>Start Earning</Button>
         </div>
 
         <button
@@ -76,7 +77,7 @@ const Navbar = () => {
           className="z-50 flex items-center justify-center size-12 p-3 text-xl rounded-full cursor-pointer text-primary md:hidden active:bg-gray-800"
         >
           {isOpen ? (
-            <AiOutlineClose className="text-white-500 border border-red-500" />
+            <AiOutlineClose />
           ) : (
             <span>
               <AiOutlineMenu />
