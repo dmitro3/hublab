@@ -25,7 +25,7 @@ const Button = ({
       className={twMerge(
         `${
           outline
-            ? "bg-[transparent] text-[#00ADEF] border border-[#00ADEF]"
+            ? "bg-white text-[#00ADEF] border border-[#00ADEF]"
             : "bg-[#00ADEF] text-[#FCFCFC]"
         } rounded-[4px] transition-all leading-none duration-500 text-[14px] font-medium ${
           !props.disabled ? "hover:scale-[1.02] active:scale-[0.95]" : ""

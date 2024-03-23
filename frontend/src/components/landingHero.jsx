@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components";
+import Button from "../components/Button";
 
 const LandingPageHero = () => {
   return (
@@ -21,8 +21,8 @@ const LandingPageHero = () => {
           </p>
 
           <div className="flex items-center">
-            <Button>Start Earning</Button>
-            <Button>Start Campaign</Button>
+            <Button name="Start Earning" />
+            <Button name="Start Campaign" outline className='bg-primary' />
           </div>
         </div>
       </section>

@@ -6,7 +6,7 @@ import { useParams, usePathname } from "next/navigation";
 import { useScroll } from "@/hooks/useScroll";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { twMerge } from "tailwind-merge";
-import { Button } from "@/components";
+import Button from "../components/Button";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -60,16 +60,16 @@ const Navbar = () => {
           >
             {isOpen && (
               <div className=" relative top-[100px] flex flex-col justify-center items-center gap-4 my-6 md:hidden">
-                <Button outline>Start Campaign</Button>
-                <Button large>Start Earning</Button>
+                <Button name="Start Campaign" />
+                <Button name="Start Earning" />
               </div>
             )}
           </ul>
         </div>
 
         <div className="hidden gap-4 md:flex ">
-          <Button>Start Campaign</Button>
-          <Button>Start Earning</Button>
+          <Button name="Start Campaign" />
+          <Button name="Start Earning"  outline className='bg-primary'/>
         </div>
 
         <button
