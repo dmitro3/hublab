@@ -2,16 +2,18 @@
 import Button from "@/components/Button";
 import React, { useState } from "react";
 import Image from "next/image";
-import XLogo from "../../../assets/X-logo.svg";
+import ProfileImg from "../../../assets/profileImg.png"
 import Linkedin from "../../../assets/linkedin-logo.svg";
 import Discord from "../../../assets/discord-logo.svg";
 import Github from "../../../assets/github-logo.svg";
+import XLogo from "../../../assets/X-logo.svg";
 import Website from "../../../assets/website-logo.svg";
 import Check from "../../../assets/check-icon.svg";
+// import ProfileImg from "../../../assets/profileImg.png";
 import EarlyAdopter from "../../../assets/EarlyBadge.svg";
 import Completionist from "../../../assets/Completionist.svg";
 import Milestone from "../../../assets/milestone.svg";
-import Expert from "../../../assets/EarlyBadge.svg";
+import Expert from "../../../assets/Expert.svg";
 import BulletPoint from "../../../assets/bullet-point.svg";
 import Socials from "@/components/socials";
 import Points from "@/components/points";
@@ -65,7 +67,7 @@ const Page = () => {
                       <div className="w-[115px] h-[115spx] bg-slate-500   rounded-full">
                         {/* {!selectedImage && ( */}
                         <Image
-                          src={EarlyAdopter}
+                          src={ProfileImg}
                           alt="profile picture"
                           width={200}
                           height={200}
@@ -118,7 +120,7 @@ const Page = () => {
 
               <div className="mt-10">
                 <p className="font-normal text-[20px] mb-2 text-[#0D0E32]">
-                  Social
+                  Socials
                 </p>
                 <div className="flex gap-6">
                   <Image alt="logo" src={XLogo} className="w-[50px]" />
@@ -146,11 +148,11 @@ const Page = () => {
           <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
             Badges
           </h2>
-          <div className="grid grid-cols-2 gap-10">
-            <Badges img={EarlyAdopter} badgeName="Early Adopter" />
-            <Badges img={Completionist} badgeName="Completionist" />
-            <Badges img={Milestone} badgeName="Milestone" />
-            <Badges img={Expert} badgeName="Expert" />
+          <div className="grid grid-cols-2 gap-8" >
+            <Badges img={EarlyAdopter}  />
+            <Badges img={Completionist} />
+            <Badges img={Milestone} />
+            <Badges img={Expert} />
           </div>
 
           {edit && (

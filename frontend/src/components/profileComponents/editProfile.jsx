@@ -2,8 +2,7 @@
 import Image from "next/image";
 import React, { useState, useRef } from "react";
 import Edit from "../../assets/edit.svg";
-// import EarlyAdopter from "../../assets/early-adopter.svg";
-import EarlyAdopter from "../../assets/EarlyBadge.svg";
+import ProfileImg  from "../../assets/profileImg.png";
 import XLogo from "../../assets/X-logo.svg";
 import Linkedin from "../../assets/linkedin-logo.svg";
 import Discord from "../../assets/discord-logo.svg";
@@ -73,7 +72,7 @@ const EditProfile = () => {
         <div className="w-[115px] h-[115px] bg-slate-500 relative rounded-full">
           {/* {selectedImage && ( */}
           <Image
-            src={selectedImage === "" ? EarlyAdopter : selectedImage}
+            src={selectedImage === "" ? ProfileImg: selectedImage}
             alt="profile picture"
             width={200}
             height={200}
