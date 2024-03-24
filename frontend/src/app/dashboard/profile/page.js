@@ -1,8 +1,8 @@
 "use client";
 import Button from "@/components/Button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import ProfileImg from "../../../assets/profileImg.png"
+import ProfileImg from "../../../assets/profileImg.png";
 import Linkedin from "../../../assets/linkedin-logo.svg";
 import Discord from "../../../assets/discord-logo.svg";
 import Github from "../../../assets/github-logo.svg";
@@ -21,35 +21,52 @@ import Badges from "@/components/badges";
 import Referralmodal from "@/components/modals/referalmodal";
 import EditProfile from "@/components/profileComponents/editProfile";
 import Referral from "@/components/profileComponents/referral";
+import { getProfile } from "@/store/slices/profileSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Page = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
-  const [edit, setEdit] = useState(true);
+  const [edit, setEdit] = useState(false);
+  const [userProfile, setUserProfile] = useState({});
+
+  const dispatch = useDispatch();
 
   const interests = ["Development", "Content", "Earning", "Trading"];
 
-  const int = [
-    {
-      int: "Development",
-    },
-  ];
+  useEffect(() => {
+    // getUserProfile()
+
+    const getUserProfile = async () => {
+      try {
+        const response = await dispatch(getProfile(1));
+        console.log(response);
+        if (response.payload.success === true) {
+          console.log("success");
+          // toast.success(response?.payload.message);
+          setUserProfile(response?.payload.profile);
+        } else {
+          toast.error(response?.payload.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUserProfile();
+  }, [dispatch]);
+
+  console.log(userProfile);
 
   return (
     <>
-      <div className="border m-7 flex rounded-xl ">
-        <div className=" border-r w-[70%] p-5">
+      <div className="border m-3 sm:m-7 flex rounded-xl ">
+        <div className=" border-r w-[100%] sm:w-[70%] p-3 sm:p-5">
           <div className="flex justify-between items-center mb-6 mt-1">
             <h2 className="text-[28px] font-semibold text-[#0D0E32]">
               My Profile
             </h2>
-            {edit ? (
-              <Button
-                name="Save Profile"
-                outline
-                onClick={() => setEdit(false)}
-              />
-            ) : (
+            {edit ? null : ( // /> //   onClick={() => setEdit(false)} //   outline //   name="Save Profile" // <Button
               <Button
                 name="Edit Profile"
                 outline
@@ -76,17 +93,17 @@ const Page = () => {
                         {/* )} */}
                       </div>
                     </div>
-                    <p className="text-[16px] font-semibold">
-                      Kiraichi Enioluwa
+                    <p className="text-[16px] font-semibold capitalize">
+                      {userProfile.firstName} {userProfile.lastName}
                     </p>
                     <p className="text-[12px] font-normal">
-                      kirachienioluwa@gmail.com
+                      {userProfile.email}
                     </p>
                   </div>
                   <div className="text-center w-[50%] p-5 flex flex-col justify-center items-center">
                     <p className="text-[16px] font-semibold mb-2">INTERESTS</p>
                     <ul className="text-[13px] font-normal flex flex-col  items-start gap-1">
-                      {interests.map((items, index) => (
+                      {userProfile?.interests?.map((items, index) => (
                         <div key={index} className="flex items-center  gap-2">
                           <Image
                             alt="bullet point"
@@ -106,8 +123,7 @@ const Page = () => {
                   Bio
                 </p>
                 <p className="border rounded-lg p-3 text-[#757575] text-[16px] border-[#222482] shadow-md">
-                  Passionate Web3 enthusiast exploring the intersection of
-                  blockchain technology and community growth
+                  {userProfile.bio}
                 </p>
               </div>
 
@@ -115,7 +131,12 @@ const Page = () => {
                 <p className="font-normal text-[20px] mb-2 text-[#0D0E32]">
                   Referral
                 </p>
-                {!edit && <Referral setModalOpen={setModalOpen} />}
+                {!edit && (
+                  <Referral
+                    setModalOpen={setModalOpen}
+                    referalPoints={userProfile?.points?.referalPoints}
+                  />
+                )}
               </div>
 
               <div className="mt-10">
@@ -134,22 +155,25 @@ const Page = () => {
             <EditProfile />
           )}
         </div>
-        <div className="w-[40%] p-5">
+        <div className="w-[40%] p-5 hidden sm:block">
           <Points />
           <div className="flex justify-between items-center p-4 border rounded-xl border-[#222482] mt-6">
             <div className=" w-[50%]">
-              <p className="text-[13px]">Accumulated points</p>
+              <p className="text-[13px] xl:text-[16px]">Total points</p>
               <div className="flex justify-start">
-                <p className="font-semibold text-[20px]">0</p>
+                <p className="font-semibold text-[16px] md:text-[20px]">
+                  {/* {userProfile?.points?.totalPoints} */}
+                  1000
+                </p>
               </div>
             </div>
-            <Button name="claim rewards" outline className="" />
+            <Button name="claim rewards" outline className="px-[5px] text-[13px]" />
           </div>
           <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
             Badges
           </h2>
-          <div className="grid grid-cols-2 gap-8" >
-            <Badges img={EarlyAdopter}  />
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 justify-center items-center" >
+            <Badges img={EarlyAdopter} />
             <Badges img={Completionist} />
             <Badges img={Milestone} />
             <Badges img={Expert} />
@@ -160,7 +184,10 @@ const Page = () => {
               <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-10">
                 Referal
               </h2>
-              <Referral setModalOpen={setModalOpen} />
+              <Referral
+                setModalOpen={setModalOpen}
+                referalPoints={userProfile?.points?.referalPoints}
+              />
             </>
           )}
         </div>
