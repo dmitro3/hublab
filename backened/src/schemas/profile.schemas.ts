@@ -8,8 +8,7 @@ const profileSchema = Joi.object({
     imageUrl: Joi.string().optional().trim(),
     bio: Joi.string().optional().trim(),
     interests: Joi.array().items(Joi.string().valid(...INTERESTS)).optional(),
-    socials: Joi.optional(),
-    points: Joi.optional()
+    socials: Joi.optional()
 });
 
 export {

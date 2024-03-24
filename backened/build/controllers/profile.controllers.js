@@ -38,23 +38,10 @@ class ProfileController {
                     }
                 }
             }
-            let imageUrl;
-            if (req.file) {
-                // Upload file to Cloudinary
-                const result = yield cloudinary_configs_1.default.uploader.upload(req.file.path);
-                imageUrl = result.secure_url;
-                if (!imageUrl) {
-                    return res.status(409).send({
-                        success: false,
-                        message: "File Upload Failed"
-                    });
-                }
-            }
-            const code = yield (0, generateReferralCode_utils_1.default)();
-            req.body.referralCode = code;
-            req.body.imageUrl = imageUrl;
             const profileFromId = yield findOne({ _id: id });
             if (profileFromId) {
+                const code = yield (0, generateReferralCode_utils_1.default)();
+                req.body.referralCode = code;
                 const updatedProfile = yield editById(id, req.body);
                 return res.status(201)
                     .send({
@@ -78,6 +65,40 @@ class ProfileController {
                     success: true,
                     message: CREATED,
                     profile: createdProfile
+                });
+            }
+        });
+    }
+    uploadImage(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let imageUrl;
+                if (req.file) {
+                    // Upload file to Cloudinary
+                    const result = yield cloudinary_configs_1.default.uploader.upload(req.file.path);
+                    imageUrl = result.secure_url;
+                    if (!imageUrl) {
+                        return res.status(409).send({
+                            success: false,
+                            message: "File Upload Failed"
+                        });
+                    }
+                    return res.status(201)
+                        .send({
+                        success: true,
+                        message: "Image uploaded successfully",
+                        imageUrl
+                    });
+                }
+                return res.status(409).send({
+                    success: false,
+                    message: "Include an Image file"
+                });
+            }
+            catch (err) {
+                return res.status(409).send({
+                    success: false,
+                    message: "Error while uploading file"
                 });
             }
         });
