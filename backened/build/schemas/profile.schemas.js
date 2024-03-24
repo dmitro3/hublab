@@ -13,7 +13,6 @@ const profileSchema = joi_1.default.object({
     imageUrl: joi_1.default.string().optional().trim(),
     bio: joi_1.default.string().optional().trim(),
     interests: joi_1.default.array().items(joi_1.default.string().valid(...constants_configs_1.INTERESTS)).optional(),
-    socials: joi_1.default.optional(),
-    points: joi_1.default.optional()
+    socials: joi_1.default.optional()
 });
 exports.profileSchema = profileSchema;
