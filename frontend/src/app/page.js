@@ -1,4 +1,4 @@
-import { LandingPageHero, HowToEarn, Tasks } from "@/components";
+import { LandingPageHero, HowToEarn, Tasks, SliderSection } from "@/components";
 import Navbar from "../components/landingComponents/navbar";
 import Footer from "../components/landingComponents/footer";
 
@@ -8,6 +8,7 @@ export default function Home() {
       <Navbar />
       <LandingPageHero />
       <HowToEarn />
+      <SliderSection />
       <Tasks />
       <Footer />
     </main>

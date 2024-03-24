@@ -6,6 +6,8 @@ const Footer = () => {
   return (
     <footer className="w-full h-full max-w-[1440px] mx-auto px-[MIN(100px,8%)] flex flex-col gap-12 md:gap-24 bg-tertiary min-h-[568px] py-24">
       <div className="w-full flex flex-col items-start md:items-center md:flex-row md:justify-between justify-start gap-8 text-textColor">
+       
+       
         {/* Logo Container */}
         <div className="flex-2">
           <Link href="/">
@@ -17,6 +19,8 @@ const Footer = () => {
             />
           </Link>
         </div>
+
+
         {/* Footer Links */}
         <section className="flex-4 flex flex-col items-start justify-start md:flex-row gap-4 md:gap-24">
           <div className="flex flex-col items-start justify-start">
@@ -62,7 +66,8 @@ const Footer = () => {
           <div className="w-full flex flex-col md:flex-row justify-start items-start gap-3">
             <input
               type="text"
-              className="w-full bg-transparent border border-[#DFDFF7] rounded-lg py-[0.7rem] md:px-36 outline-none"
+              placeholder="Email Address"
+              className="w-full bg-transparent text-textColor border border-[#DFDFF7] rounded-lg py-[0.7rem] px-3 outline-none placeholder:text-inherit"
             />
             <button className="bg-lightBlue w-full md:w-auto py-3 px-8 rounded-lg text-white font-normal text-base">
               Subscribe
@@ -71,9 +76,9 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Copy Right */}
-      <div className="w-full flex flex-col items-center gap-6">
-        <div className="w-full hidden md:block  md:border-[0.5px] md:border-[#B6B8EC]"></div>
+      {/* Copy Right Text */}
+      <div className="w-full flex flex-col items-center gap-8">
+        <div className="w-full hidden md:block bg-[#B6B8EC] h-[1px]"></div>
 
         <p className="flex gap-3 items-center text-textColor font-normal font-base">
           <Copyright className="text-sm" />
@@ -82,7 +87,7 @@ const Footer = () => {
           </span>
         </p>
 
-        <div className="w-full hidden md:block md:border-[0.5px] md:border-[#B6B8EC]"></div>
+        <div className="w-full hidden md:block bg-[#B6B8EC] h-[1px]"></div>
       </div>
     </footer>
   );

@@ -1,8 +1,5 @@
-// import Link from "next/link";
+import { Image } from "iconsax-react";
 import { HowToEarnCards } from "@/components";
-// import { Image } from "iconsax-react";
-// import verxioPay from "../assets/verxioPlay.svg";
-// import verxioRefer from "../assets/verxioRefer.svg";
 
 const HowToEarn = () => {
   return (
@@ -56,13 +53,32 @@ const HowToEarn = () => {
           />
         </div>
 
-        {/* <div className="w-full min-h-6">
-          <div>
-            <Image src={verxioPay} alt="play" width={200} height={200} />
-          </div>
+        <section className="relative bg-[#F3F3FC]  isolate w-full h-full flex flex-col items-center md:flex-row border-2 border-primary rounded-full">
+          <div className="hidden z-[-1] border-2 rounded-full border-[#151751] h-full w-full md:absolute left-[5px] top-[5px]"></div>
 
-          <Image src={verxioRefer} alt="refer" width={200} height={200} />
-        </div> */}
+          <div className="w-full flex flex-col items-center gap-2 border-b md:border-r border-primary p-12 transition-all ease-in duration-600 cursor-pointer ">
+            <Image
+              src={"/images/verxioRefer.svg"}
+              width={100}
+              height={100}
+              alt="refer"
+            />
+            <p className="text-[#151751] font-normal text-2xl md:text-3xl">
+              Verxio Refer
+            </p>
+          </div>
+          <div className="w-full flex flex-col items-center gap-2 border-t md:border-l border-primary p-12 transition-all ease-in duration-600 cursor-pointer ">
+            <Image
+              src={"/images/verxioPlay.svg"}
+              width={100}
+              height={100}
+              alt="play"
+            />
+            <p className="text-[#151751] font-normal text-2xl md:text-3xl">
+              Verxio Play
+            </p>
+          </div>
+        </section>
       </section>
     </div>
   );

@@ -12,7 +12,7 @@ const HowToEarnCards = ({
   return (
     <div
       className={twMerge(
-        "flex flex-col md:flex-row items-center justify-center gap-8 p-10",
+        "flex flex-col md:flex-row items-center justify-center gap-8 p-10 transition-all ease-in duration-600 hover:scale-[1.07] cursor-pointer",
         className
       )}
     >
