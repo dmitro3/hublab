@@ -1,6 +1,10 @@
 import { Inter, Roboto_Slab } from "next/font/google";
 import "./globals.css";
 import PageConnectKit from "@/context/PageConnectKit";
+import ReduxProvider from "@/providers/reduxProvider";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import WalletContextProvider from "@/context/WalletContextProvider";
 import Navbar from "@/components/landingComponents/navbar";
 import { Footer } from "@/components";
@@ -17,11 +21,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={roboto_Slab.className}>
         {/* <WalletContextProvider> */}
-        <PageConnectKit>
-          {/* <Navbar /> */}
-          {children}
-          {/* <Footer /> */}
-        </PageConnectKit>
+        <ReduxProvider>
+          <PageConnectKit>{children}</PageConnectKit>
+        </ReduxProvider>
+        <ToastContainer />
         {/* </WalletContextProvider> */}
       </body>
     </html>
