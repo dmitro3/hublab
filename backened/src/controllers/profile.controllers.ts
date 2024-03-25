@@ -38,8 +38,6 @@ export default class ProfileController {
 
     const profileFromId = await findOne({_id: id});
     if (profileFromId) {
-      const code = await generateReferralCode();
-      req.body.referralCode = code;
   
       const updatedProfile = await editById(id, req.body);
       return res.status(201)
@@ -49,6 +47,9 @@ export default class ProfileController {
         profile: updatedProfile
       });
     } else {
+      const code = await generateReferralCode();
+      req.body.referralCode = code;
+
       const bonus = await getBonus();
       //creates a profile if the email and id doesn't exist
       const createdProfile = await create({_id: id, points: {totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp}, ...req.body});

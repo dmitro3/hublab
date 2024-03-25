@@ -40,8 +40,6 @@ class ProfileController {
             }
             const profileFromId = yield findOne({ _id: id });
             if (profileFromId) {
-                const code = yield (0, generateReferralCode_utils_1.default)();
-                req.body.referralCode = code;
                 const updatedProfile = yield editById(id, req.body);
                 return res.status(201)
                     .send({
@@ -51,6 +49,8 @@ class ProfileController {
                 });
             }
             else {
+                const code = yield (0, generateReferralCode_utils_1.default)();
+                req.body.referralCode = code;
                 const bonus = yield (0, getBonus_utils_1.default)();
                 //creates a profile if the email and id doesn't exist
                 const createdProfile = yield create(Object.assign({ _id: id, points: { totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp } }, req.body));
