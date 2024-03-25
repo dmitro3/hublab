@@ -8,19 +8,7 @@ const profileSchema = Joi.object({
     imageUrl: Joi.string().optional().trim(),
     bio: Joi.string().optional().trim(),
     interests: Joi.array().items(Joi.string().valid(...INTERESTS)).optional(),
-    socials: Joi.object({
-        twitter: Joi.string().optional().trim(),
-        linkedIn: Joi.string().optional().trim(),
-        discord: Joi.string().optional().trim(),
-        gitHub: Joi.string().optional().trim(),
-        instagram: Joi.string().optional().trim(),
-        website: Joi.string().optional().trim()
-    }),
-    points: Joi.object({
-        totalPoints: Joi.number().optional(),
-        referalPoints: Joi.number().optional(),
-        rewardPoints: Joi.number().optional()
-    })
+    socials: Joi.optional()
 });
 
 export {

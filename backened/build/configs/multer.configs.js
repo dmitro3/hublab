@@ -31,9 +31,9 @@ function checkFileType(file, cb) {
 // Initialize upload variable
 const upload = (0, multer_1.default)({
     storage: storage,
-    limits: { fileSize: 1000000 },
-    fileFilter: function (req, file, cb) {
-        checkFileType(file, cb);
-    }
+    // limits: { fileSize: 1000000 },
+    // fileFilter: function (req, file, cb) {
+    //   checkFileType(file, cb);
+    // }
 });
 exports.default = upload;

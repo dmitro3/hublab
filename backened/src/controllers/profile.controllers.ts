@@ -35,26 +35,10 @@ export default class ProfileController {
         }
       }
     }
-    
-    let imageUrl;
-    if (req.file) {
-      // Upload file to Cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path);
-      imageUrl = result.secure_url;
-      if(!imageUrl) {
-        return res.status(409).send({
-          success: false,
-          message: "File Upload Failed"
-        });
-      }
-    }
 
-    const code = await generateReferralCode();
-    
-    req.body.referralCode = code;
-    req.body.imageUrl = imageUrl;
     const profileFromId = await findOne({_id: id});
     if (profileFromId) {
+  
       const updatedProfile = await editById(id, req.body);
       return res.status(201)
       .send({
@@ -63,6 +47,9 @@ export default class ProfileController {
         profile: updatedProfile
       });
     } else {
+      const code = await generateReferralCode();
+      req.body.referralCode = code;
+
       const bonus = await getBonus();
       //creates a profile if the email and id doesn't exist
       const createdProfile = await create({_id: id, points: {totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp}, ...req.body});
@@ -80,6 +67,38 @@ export default class ProfileController {
         success: true,
         message: CREATED,
         profile: createdProfile
+      });
+    }
+  }
+
+  async uploadImage(req: Request, res: Response) {
+    try {
+      let imageUrl;
+      if (req.file) {
+        // Upload file to Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path);
+        imageUrl = result.secure_url;
+        if(!imageUrl) {
+          return res.status(409).send({
+            success: false,
+            message: "File Upload Failed"
+          });
+        }
+        return res.status(201)
+        .send({
+          success: true,
+          message: "Image uploaded successfully",
+          imageUrl
+        });
+      }
+      return res.status(409).send({
+        success: false,
+        message: "Include an Image file"
+      });  
+    } catch(err) {
+      return res.status(409).send({
+        success: false,
+        message: "Error while uploading file"
       });
     }
   }

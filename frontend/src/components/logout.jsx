@@ -11,19 +11,19 @@ const LogoutButton = () => {
 const { disconnect } = useParticleConnect();
     const onDisconnect = () => disconnect({ hideLoading: true });
     // const dispatch = useDispatch(); 
-    // const router = useRouter();
+    const router = useRouter();
 
     const handleLogout = () => {
 
         onDisconnect()
         // dispatch(resetState());
-        // router.push("/");
+        router.push("/");
     };
 
   return (
     <div
       onClick={handleLogout}
-      className="flex items-center justify-center w-[100%] gap-3 cursor-pointer border"
+      className="flex items-center justify-center w-[100%] gap-3 cursor-pointer"
     >
       <Image src={SignOut} alt="" />
       <p className="text-white">Logout</p>

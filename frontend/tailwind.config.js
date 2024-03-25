@@ -21,9 +21,36 @@ const config = {
         task2: "url('/images/taskTwoImage.svg')",
         task3: "url('/images/taskThreeImage.svg')",
         task4: "url('/images/taskFourImage.svg')",
+        heroDoddle: "url('/images/heroDoddles.svg')",
         // "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops)",
         // "post-hero-img": "url('/src/assets/post-bg-img.png')",
         // 'settings-hero-img': "url('/src/assets/settings-hero.png')",
+      },
+      animation: {
+        custombounce: "custombounce 2s ease infinite",
+        customrotate: "customrotate 4s ease infinite",
+      },
+      keyframes: {
+        custombounce: {
+          "0%, 100%": {
+            transform: "translate(-50%,-25%)",
+            "animation-timing-function": "cubic-bezier(0.8, 0, 1, 1)",
+          },
+          "50%": {
+            transform: "translate(-50%,0%)",
+            "animation-timing-function": "cubic-bezier(0, 0, 0.2, 1)",
+          },
+        },
+        customrotate: {
+          "0%, 100%": {
+            transform: "translate(-50%,-25%)",
+            "animation-timing-function": "cubic-bezier(0.8, 0, 1, 1)",
+          },
+          "50%": {
+            transform: "translate(-50%,0%)",
+            "animation-timing-function": "cubic-bezier(0, 0, 0.2, 1)",
+          },
+        },
       },
       fontFamily: {
         // lato: "var(--lato)",
