@@ -4,7 +4,9 @@ import Button from "./Button";
 import Footer from "./landingComponents/footer";
 import HowToEarn from "./landingComponents/howToEarn";
 import LandingPageHero from "./landingComponents/landingHero";
+import SliderSection from "./landingComponents/sliderSection";
 import HowToEarnCards from "./howToEarnCards";
+import Welcome from "./landingComponents/welcome";
 
 export {
   NavBar,
@@ -14,4 +16,6 @@ export {
   HowToEarn,
   Tasks,
   LandingPageHero,
+  SliderSection,
+  Welcome,
 };

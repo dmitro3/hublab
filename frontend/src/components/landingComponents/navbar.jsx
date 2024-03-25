@@ -60,16 +60,18 @@ const Navbar = () => {
           >
             {isOpen && (
               <div className=" relative top-[100px] flex flex-col justify-center items-center gap-4 my-6 md:hidden">
-                <Button href="/dashboard/profile" name="Start Campaign" />
-                <Button name="Start Earning" outline className="bg-primary" />
+                {/* <Button href="/dashboard/profile" name="Start Campaign" />
+                <Button name="Start Earning" outline className="bg-primary" /> */}
+                <Button name="Start Campaign" />
               </div>
             )}
           </ul>
         </div>
 
-        <div className="hidden gap-4 md:flex ">
-          <Button href="/dashboard/profile" name="Start Campaign" />
-          <Button name="Start Earning" outline className="bg-primary" />
+        <div className="hidden md:block gap-4">
+          {/* <Button href="/dashboard/profile" name="Start Campaign" />
+          <Button name="Start Earning" outline className="bg-primary" /> */}
+          <Button name="Start Campaign" />
         </div>
 
         <button
