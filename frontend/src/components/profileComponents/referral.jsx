@@ -19,7 +19,7 @@ const Referral = ({ setModalOpen, referalPoints }) => {
               onClick={() => setModalOpen(true)}
             />
           </div>
-          <div className="flex gap-2 border border-[#222482] rounded-lg w-full  xl:w-[60%] mt-5 justify-around p-2 text-[#0D0E32] text-[13px]">
+          <div className="flex gap-2 border border-[#222482] rounded-lg w-full  xl:w-[70%] mt-5 justify-around p-2 text-[#0D0E32] text-[13px]">
             <div className="flex gap-3 w-[50%] items-center border-r border-[#222482] flex-col xl:flex-row">
               <Image alt="check icon" src={Check} />
               <p>0 referrals</p>
