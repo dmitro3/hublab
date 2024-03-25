@@ -25,7 +25,7 @@ const userWalletSigner = createSignerFromKeypair(umi, userWallet);
 const metadata = {
     name: 'VERXIO',
     symbol: 'VERXIO',
-    uri: 'URI',
+    uri: 'https://ibb.co/qpZdTHm',
 };
 
 const mint = generateSigner(umi);
