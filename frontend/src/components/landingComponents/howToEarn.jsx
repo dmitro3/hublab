@@ -9,7 +9,7 @@ const HowToEarn = () => {
           How To Earn on Verxio
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-5"> 
           <HowToEarnCards
             headingText={"Quest"}
             description={
