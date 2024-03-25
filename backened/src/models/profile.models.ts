@@ -88,7 +88,7 @@ const profileSchema = new Schema({
     unique: true
   }
 }, {
-  strict: true,
+  strict: false,
   timestamps: true
 });
 

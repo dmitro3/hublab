@@ -30,10 +30,10 @@ function checkFileType(file: Express.Multer.File, cb: multer.FileFilterCallback)
 // Initialize upload variable
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 1000000 },
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
-  }
+  // limits: { fileSize: 1000000 },
+  // fileFilter: function (req, file, cb) {
+  //   checkFileType(file, cb);
+  // }
 });
 
 export default upload;
