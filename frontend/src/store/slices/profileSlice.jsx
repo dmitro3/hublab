@@ -32,7 +32,7 @@ export const createProfile = createAsyncThunk(
   }
 );
 
-export const getProfile = createAsyncThunk("profile/getProfile", async (id) => {
+export const getProfile = createAsyncThunk("profile/getProfile", async ({id}) => {
   try {
     const response = await axios.get(
       `https://backend-verxio.vercel.app/api/v1/profiles/${id}` // Assuming apiUrl is defined somewhere in your code

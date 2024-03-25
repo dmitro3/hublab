@@ -40,11 +40,11 @@ const Page = () => {
 
     const getUserProfile = async () => {
       try {
-        const response = await dispatch(getProfile(1));
+        const response = await dispatch(getProfile({ id: 1 }));
         console.log(response);
         if (response.payload.success === true) {
           console.log("success");
-          // toast.success(response?.payload.message);
+          toast.success(response?.payload.message);
           setUserProfile(response?.payload.profile);
         } else {
           toast.error(response?.payload.message);
@@ -162,17 +162,20 @@ const Page = () => {
               <p className="text-[13px] xl:text-[16px]">Total points</p>
               <div className="flex justify-start">
                 <p className="font-semibold text-[16px] md:text-[20px]">
-                  {/* {userProfile?.points?.totalPoints} */}
-                  1000
+                  {userProfile?.points?.totalPoints}
                 </p>
               </div>
             </div>
-            <Button name="claim rewards" outline className="px-[5px] text-[13px]" />
+            <Button
+              name="claim rewards"
+              outline
+              className="px-[5px] text-[13px]"
+            />
           </div>
           <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
             Badges
           </h2>
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 justify-center items-center" >
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8  justify-center items-center">
             <Badges img={EarlyAdopter} />
             <Badges img={Completionist} />
             <Badges img={Milestone} />
