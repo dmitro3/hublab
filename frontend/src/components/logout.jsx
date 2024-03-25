@@ -11,13 +11,13 @@ const LogoutButton = () => {
 const { disconnect } = useParticleConnect();
     const onDisconnect = () => disconnect({ hideLoading: true });
     // const dispatch = useDispatch(); 
-    // const router = useRouter();
+    const router = useRouter();
 
     const handleLogout = () => {
 
         onDisconnect()
         // dispatch(resetState());
-        // router.push("/");
+        router.push("/");
     };
 
   return (
