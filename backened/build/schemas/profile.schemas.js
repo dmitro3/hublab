@@ -13,18 +13,6 @@ const profileSchema = joi_1.default.object({
     imageUrl: joi_1.default.string().optional().trim(),
     bio: joi_1.default.string().optional().trim(),
     interests: joi_1.default.array().items(joi_1.default.string().valid(...constants_configs_1.INTERESTS)).optional(),
-    socials: joi_1.default.object({
-        twitter: joi_1.default.string().optional().trim(),
-        linkedIn: joi_1.default.string().optional().trim(),
-        discord: joi_1.default.string().optional().trim(),
-        gitHub: joi_1.default.string().optional().trim(),
-        instagram: joi_1.default.string().optional().trim(),
-        website: joi_1.default.string().optional().trim()
-    }),
-    points: joi_1.default.object({
-        totalPoints: joi_1.default.number().optional(),
-        referalPoints: joi_1.default.number().optional(),
-        rewardPoints: joi_1.default.number().optional()
-    })
+    socials: joi_1.default.optional()
 });
 exports.profileSchema = profileSchema;
