@@ -6,7 +6,6 @@ import HowToEarn from "./landingComponents/howToEarn";
 import LandingPageHero from "./landingComponents/landingHero";
 import SliderSection from "./landingComponents/sliderSection";
 import HowToEarnCards from "./howToEarnCards";
-import Welcome from "./landingComponents/welcome";
 import VideoPlayer from "./video";
 
 export {
@@ -18,6 +17,5 @@ export {
   Tasks,
   LandingPageHero,
   SliderSection,
-  Welcome,
   VideoPlayer,
 };

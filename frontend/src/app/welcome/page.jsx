@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Button, VideoPlayer } from "@/components";
 
-const Welcome = () => {
+const page = () => {
   return (
     <section className="w-screen h-screen flex flex-col-reverse md:flex-row items-center">
       <div className="relative w-full h-full md:w-1/2">
@@ -32,4 +32,4 @@ const Welcome = () => {
   );
 };
 
-export default Welcome;
+export default page;
