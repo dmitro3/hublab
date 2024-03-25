@@ -7,6 +7,7 @@ import LandingPageHero from "./landingComponents/landingHero";
 import SliderSection from "./landingComponents/sliderSection";
 import HowToEarnCards from "./howToEarnCards";
 import Welcome from "./landingComponents/welcome";
+import VideoPlayer from "./video";
 
 export {
   NavBar,
@@ -18,4 +19,5 @@ export {
   LandingPageHero,
   SliderSection,
   Welcome,
+  VideoPlayer,
 };
