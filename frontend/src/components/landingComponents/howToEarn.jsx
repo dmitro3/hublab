@@ -17,7 +17,7 @@ const HowToEarn = () => {
             }
             imageURL={"/images/questImage.svg"}
             className={
-              "border-2 rounded-tr-[60px] rounded-bl-[60px] bg-[#91DBF8] border-[#00ADEF]"
+              "border-2 rounded-tr-[60px] rounded-bl-[20px] md:rounded-bl-[60px] bg-[#91DBF8] border-[#00ADEF]"
             }
             headingTextColor={"text-[#fff]"}
             descriptionColor="#212121"
@@ -29,7 +29,7 @@ const HowToEarn = () => {
             }
             imageURL={"/images/bountiesImage.svg"}
             className={
-              "border-2 rounded-tl-[60px] rounded-br-[60px] bg-[#FF8ADF] border-[#EF00AD]"
+              "border-2 rounded-tl-[60px] rounded-br-[20px] md:rounded-br-[60px] bg-[#FF8ADF] border-[#EF00AD]"
             }
           />
 
@@ -38,7 +38,7 @@ const HowToEarn = () => {
             description={"Showcase your skills, creativity, and expertise."}
             imageURL={"/images/contestImage.svg"}
             className={
-              "border-2 rounded-tl-[60px] rounded-br-[60px] bg-[#DFFF8A] border-[#89BD00]"
+              "border-2 rounded-tl-[60px] rounded-br-[20px] md:rounded-br-[60px] bg-[#DFFF8A] border-[#89BD00]"
             }
           />
           <HowToEarnCards
@@ -48,7 +48,7 @@ const HowToEarn = () => {
             }
             imageURL={"/images/projectsImage.svg"}
             className={
-              "border-2 rounded-tr-[60px] rounded-bl-[60px] bg-[#A2A4E7] border-[#2E31AC]"
+              "border-2 rounded-tr-[60px] rounded-bl-[20px] md:rounded-bl-[60px] bg-[#A2A4E7] border-[#2E31AC]"
             }
           />
         </div>
