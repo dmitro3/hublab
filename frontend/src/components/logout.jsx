@@ -23,7 +23,7 @@ const { disconnect } = useParticleConnect();
   return (
     <div
       onClick={handleLogout}
-      className="flex items-center justify-center w-[100%] gap-3 cursor-pointer border"
+      className="flex items-center justify-center w-[100%] gap-3 cursor-pointer"
     >
       <Image src={SignOut} alt="" />
       <p className="text-white">Logout</p>

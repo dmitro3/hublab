@@ -1,5 +1,7 @@
+import React from "react";
 import Image from "next/image";
 import { Button, VideoPlayer } from "@/components";
+// import { ConnectButton } from "@particle-network/connect-react-ui";
 
 const page = () => {
   return (
@@ -26,7 +28,23 @@ const page = () => {
             <br className="hidden md:block" /> and get this thing rolling....
           </p>
         </div>
-        <Button name="Connect Wallet" href={"/profile"} className={"px-24"} />
+        <Button name="Connect Wallet" href={"dashboard/profile"} className={"px-24"} />
+        {/* <ConnectButton /> */}
+
+        {/* --------JUST FOR TESTING ------ */}
+        
+        {/* <ConnectButton.Custom>
+            {({ account, openAccountModal, openConnectModal }) => {
+                const handleClick = account ? openAccountModal : openConnectModal;
+                return (
+                    <div>
+                      <Button name={account? 'See Details' : 'Connect'} onClick={handleClick}/>
+                    </div>
+                );
+            }}
+        </ConnectButton.Custom> */}
+
+      {/* --------JUST FOR TESTING ------ */}
       </div>
     </section>
   );
