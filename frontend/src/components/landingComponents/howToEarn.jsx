@@ -53,10 +53,10 @@ const HowToEarn = () => {
           />
         </div>
 
-        <section className="relative bg-[#F3F3FC]  isolate w-full h-full flex flex-col items-center md:flex-row border-2 border-primary rounded-full">
-          <div className="hidden z-[-1] border-2 rounded-full border-[#151751] h-full w-full md:absolute left-[5px] top-[5px]"></div>
+        <section className="relative bg-[#F3F3FC] w-full h-full flex flex-col items-center md:flex-row border-2 border-primary rounded-full">
+          <div className="absolute z-[-1] right-[5px] bottom-[5px] border-2 rounded-full border-[#151751] h-full w-full"></div>
 
-          <div className="w-full flex flex-col items-center gap-2 border-b md:border-r border-primary p-12 transition-all ease-in duration-600 cursor-pointer ">
+          <div className="w-full flex flex-col items-center gap-2 border-b md:border-b-0 md:border-r border-primary p-12 transition-all ease-in duration-600 cursor-pointer hover:scale-[1.02] hover:-skew-y-3">
             <Image
               src={"/images/verxioRefer.svg"}
               width={100}
@@ -67,7 +67,7 @@ const HowToEarn = () => {
               Verxio Refer
             </p>
           </div>
-          <div className="w-full flex flex-col items-center gap-2 border-t md:border-l border-primary p-12 transition-all ease-in duration-600 cursor-pointer ">
+          <div className="w-full flex flex-col items-center gap-2 border-t md:border-t-0 md:border-l border-primary p-12 transition-all ease-in duration-600 cursor-pointer hover:scale-[1.02] hover:skew-y-3">
             <Image
               src={"/images/verxioPlay.svg"}
               width={100}
