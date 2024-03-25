@@ -31,7 +31,7 @@ const Button = ({
             outline
               ? "bg-white text-[#00ADEF] border border-[#00ADEF]"
               : "bg-[#00ADEF] text-[#FCFCFC]"
-          } rounded-[4px] transition-all leading-none duration-500 text-[14px] font-medium ${
+          } rounded-[4px] transition-all leading-none ease-in duration-500 text-[14px] font-medium ${
             !props.disabled
               ? "hover:scale-[1.02] active:scale-[0.95] hover:top-1 hover:left-1"
               : ""
@@ -57,7 +57,7 @@ const Button = ({
             outline
               ? "bg-white text-[#00ADEF] border border-[#00ADEF]"
               : "bg-[#00ADEF] text-[#FCFCFC]"
-          } rounded-[4px] transition-all leading-none duration-500 text-[14px] font-medium ${
+          } rounded-[4px] transition-all leading-none ease-in duration-500 text-[14px] font-medium ${
             !props.disabled
               ? "hover:scale-[1.02] active:scale-[0.95] hover:top-1 hover:left-1"
               : ""
