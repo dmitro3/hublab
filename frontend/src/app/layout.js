@@ -1,7 +1,11 @@
-import { Inter } from "next/font/google";
+import { Inter, Roboto_Slab } from "next/font/google";
 import "./globals.css";
+import PageConnectKit from "@/context/PageConnectKit";
+import WalletContextProvider from "@/context/WalletContextProvider";
+import Navbar from "@/components/landingComponents/navbar";
+import { Footer } from "@/components";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto_Slab = Roboto_Slab({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +15,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={roboto_Slab.className}>
+        {/* <WalletContextProvider> */}
+        <PageConnectKit>
+          {/* <Navbar /> */}
+          {children}
+          {/* <Footer /> */}
+        </PageConnectKit>
+        {/* </WalletContextProvider> */}
+      </body>
     </html>
   );
 }

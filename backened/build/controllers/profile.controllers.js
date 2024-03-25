@@ -40,8 +40,6 @@ class ProfileController {
             }
             const profileFromId = yield findOne({ _id: id });
             if (profileFromId) {
-                const code = yield (0, generateReferralCode_utils_1.default)();
-                req.body.referralCode = code;
                 const updatedProfile = yield editById(id, req.body);
                 return res.status(201)
                     .send({
@@ -51,6 +49,8 @@ class ProfileController {
                 });
             }
             else {
+                const code = yield (0, generateReferralCode_utils_1.default)();
+                req.body.referralCode = code;
                 const bonus = yield (0, getBonus_utils_1.default)();
                 //creates a profile if the email and id doesn't exist
                 const createdProfile = yield create(Object.assign({ _id: id, points: { totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp } }, req.body));
@@ -58,7 +58,7 @@ class ProfileController {
                 const referredUser = yield findOne(referralCode);
                 if (referredUser && referredUser.points) {
                     const totalReferralPoints = referredUser.points.referalPoints + 1000;
-                    const updatedProfile = yield editById(referredUser._id, { points: { totalPoints: referredUser.points.totalPoints, referalPoints: 0, rewardPoints: referredUser.points.rewardPoints } });
+                    const updatedProfile = yield editById(referredUser._id, { points: { totalPoints: referredUser.points.totalPoints, referalPoints: totalReferralPoints, rewardPoints: referredUser.points.rewardPoints } });
                 }
                 return res.status(201)
                     .send({
@@ -161,7 +161,7 @@ class ProfileController {
             return res.status(200)
                 .send({
                 success: true,
-                message: "Points successfully claimed",
+                message: "Referral link successfully fetched",
                 profile: `${constants_configs_1.FRONTEND_SIGNUP_LINK}?referral=${profile.referralCode}`
             });
         });
