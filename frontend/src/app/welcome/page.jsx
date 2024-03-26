@@ -3,8 +3,12 @@ import React from "react";
 import Image from "next/image";
 import { Button, VideoPlayer } from "@/components";
 import { ConnectButton } from "@particle-network/connect-react-ui";
+import { useAccount } from '@particle-network/connect-react-ui';
+
 
 const page = () => {
+  const account = useAccount();
+  console.log("check account", account)
   return (
     <section className="w-screen h-screen flex flex-col-reverse md:flex-row items-center">
       <div className="relative w-full h-full md:w-1/2">
@@ -30,7 +34,7 @@ const page = () => {
           </p>
         </div>
         <ConnectButton />
-        <Button name="Continue" href={"dashboard/profile"} className={"px-24"} />
+        {account && <Button name="Continue" href={"dashboard/profile"} className={"px-24"} />}
       </div>
     </section>
   );
