@@ -159,7 +159,7 @@ const Page = () => {
           <Points />
           <div className="flex justify-between items-center p-4 border rounded-xl border-[#222482] mt-6">
             <div className=" w-[50%]">
-              <p className="text-[13px] xl:text-[16px]">Total points</p>
+              <p className="text-[11px] xl:text-[14px]">Accumulated Points</p>
               <div className="flex justify-start">
                 <p className="font-semibold text-[16px] md:text-[20px]">
                   {userProfile?.points?.totalPoints}
@@ -169,7 +169,7 @@ const Page = () => {
             <Button
               name="claim rewards"
               outline
-              className="px-[5px] text-[13px]"
+              className="px-[8px] text-[9px] xl:text-[14px]"
             />
           </div>
           <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
