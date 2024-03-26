@@ -8,6 +8,8 @@ import { useNav } from "../context/nav_context";
 import { NavigationItems } from "../components/atoms/sideBarData";
 import Button from "./Button";
 import LogoutButton from "./logout";
+import { ConnectButton } from "@particle-network/connect-react-ui";
+
 
 const Sidebar = () => {
   const { isOpen, setUser } = useNav();
@@ -32,7 +34,7 @@ const Sidebar = () => {
               <SidebarMenuItem key={`sidebar-item-${index}`} {...item} />
             ))}
           </ul>
-              
+              {/* <ConnectButton /> */}
               <LogoutButton />
             <div className="flex justify-center items-center gap-3">
               <p className="text-white text-[12px]">Powered by</p>

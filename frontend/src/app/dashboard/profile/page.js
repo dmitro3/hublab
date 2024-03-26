@@ -24,19 +24,20 @@ import Referral from "@/components/profileComponents/referral";
 import { getProfile } from "@/store/slices/profileSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { generateAvatarUrl } from "@/utils/verxioAvatar";
+import { useAccount } from '@particle-network/connect-react-ui';
+
 
 const Page = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
   const [edit, setEdit] = useState(false);
   const [userProfile, setUserProfile] = useState({});
-
+  const account = useAccount();
+  
   const dispatch = useDispatch();
 
-  const interests = ["Development", "Content", "Earning", "Trading"];
-
   useEffect(() => {
-    // getUserProfile()
 
     const getUserProfile = async () => {
       try {
@@ -74,20 +75,20 @@ const Page = () => {
               />
             )}
           </div>
-
+          
           {!edit ? (
             <>
               <div className="relative">
                 <div className="flex text-center border border-[#222482] rounded-lg relative z-50 bg-white hover:top-2 hover:left-[7px]">
                   <div className="border-r w-[50%] p-5 flex flex-col justify-end">
                     <div className="flex relative justify-center ">
-                      <div className="w-[115px] h-[115spx] bg-slate-500   rounded-full">
+                      <div className="w-[115px] h-[115spx]  rounded-full">
                         {/* {!selectedImage && ( */}
-                        <Image
-                          src={ProfileImg}
+                        <img
+                          src={generateAvatarUrl(account)}
                           alt="profile picture"
-                          width={200}
-                          height={200}
+                          // width={200}
+                          // height={200}
                           className="w-full h-full rounded-full bg-cover"
                         />
                         {/* )} */}
@@ -159,7 +160,7 @@ const Page = () => {
           <Points />
           <div className="flex justify-between items-center p-4 border rounded-xl border-[#222482] mt-6">
             <div className=" w-[50%]">
-              <p className="text-[13px] xl:text-[16px]">Total points</p>
+              <p className="text-[11px] xl:text-[14px]">Accumulated Points</p>
               <div className="flex justify-start">
                 <p className="font-semibold text-[16px] md:text-[20px]">
                   {userProfile?.points?.totalPoints}
@@ -169,7 +170,7 @@ const Page = () => {
             <Button
               name="claim rewards"
               outline
-              className="px-[5px] text-[13px]"
+              className="px-[8px] text-[9px] xl:text-[14px]"
             />
           </div>
           <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
