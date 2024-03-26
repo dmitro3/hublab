@@ -24,6 +24,7 @@ import Referral from "@/components/profileComponents/referral";
 import { getProfile } from "@/store/slices/profileSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 const Page = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -33,30 +34,59 @@ const Page = () => {
 
   const dispatch = useDispatch();
 
-  const interests = ["Development", "Content", "Earning", "Trading"];
-
   useEffect(() => {
-    // getUserProfile()
-
-    const getUserProfile = async () => {
-      try {
-        const response = await dispatch(getProfile({ id: 1 }));
-        console.log(response);
-        if (response.payload.success === true) {
-          console.log("success");
-          toast.success(response?.payload.message);
-          setUserProfile(response?.payload.profile);
-        } else {
-          toast.error(response?.payload.message);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
     getUserProfile();
-  }, [dispatch]);
+  }, []);
+
+  const getUserProfile = async () => {
+    try {
+      const response = await dispatch(getProfile({ id: 1 }));
+      console.log(response);
+      if (response.payload.success === true) {
+        console.log("success");
+        toast.success(response?.payload.message);
+        setUserProfile(response?.payload.profile);
+      } else {
+        toast.info("Create a profile");
+        setEdit(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   console.log(userProfile);
+  const socialAccounts =
+    userProfile && userProfile.socials
+      ? Object.keys(userProfile.socials).map((item) => item)
+      : [];
+
+  console.log(socialAccounts[1]);
+
+  const socials = userProfile.socials || {};
+
+  const nonEmptySocials = Object.entries(socials)
+    .filter(([key, value]) => value.trim() !== "")
+    .reduce((acc, [key, value]) => {
+      acc[key] = value;
+      return acc;
+    }, {});
+
+  console.log(nonEmptySocials);
+
+  const logo = (value) => {
+    if (value === "twitter") {
+      return XLogo;
+    } else if (value === "linkedIn") {
+      return Linkedin;
+    } else if (value === "discord") {
+      return Discord;
+    } else if (value === "gitHub") {
+      return Github;
+    } else if (value === "website") {
+      return Website;
+    }
+  };
 
   return (
     <>
@@ -143,16 +173,26 @@ const Page = () => {
                 <p className="font-normal text-[20px] mb-2 text-[#0D0E32]">
                   Socials
                 </p>
-                <div className="flex gap-6">
-                  <Image alt="logo" src={XLogo} className="w-[50px]" />
-                  <Image alt="logo" src={Linkedin} className="w-[50px]" />
-                  <Image alt="logo" src={Discord} className="w-[50px]" />
-                  <Image alt="logo" src={Github} className="w-[50px]" />
+
+                <div className="flex gap-3">
+                  {Object.entries(nonEmptySocials).map(([key, value]) => (
+                    <Link
+                      className="flex gap-6 cursor-pointer"
+                      href={`${value}`} 
+                      target="_blank"
+                    >
+                      <Image
+                        alt="logo"
+                        src={logo(key)}
+                        className="w-[40px] hover:scale-110"
+                      />
+                    </Link>
+                  ))}
                 </div>
               </div>
             </>
           ) : (
-            <EditProfile />
+            <EditProfile setEdit={setEdit} getUserProfile={getUserProfile} />
           )}
         </div>
         <div className="w-[40%] p-5 hidden sm:block">
@@ -195,7 +235,12 @@ const Page = () => {
           )}
         </div>
       </div>
-      {modalOpen && <Referralmodal setModalOpen={setModalOpen} />}
+      {modalOpen && (
+        <Referralmodal
+          setModalOpen={setModalOpen}
+          referralCode={userProfile.referralCode}
+        />
+      )}
     </>
   );
 };

@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 import Error from "../../components/formikerror";
 import Button from "../Button";
 
-const EditProfile = () => {
+const EditProfile = ({setEdit, getUserProfile}) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -107,13 +107,15 @@ const EditProfile = () => {
             interests: values.interests,
             socials: values.socials,
           },
-          id: 3,
+          id: 1,
         })
       );
       console.log(response);
       if (response.payload.success === true) {
         console.log("success");
+        getUserProfile()
         toast.success(response.payload.message);
+        setEdit(false)
       } else {
         toast.error(response.payload.message);
       }
