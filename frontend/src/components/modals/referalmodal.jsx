@@ -5,7 +5,7 @@ import Image from "next/image";
 import Check from "../../assets/check-icon.svg";
 import { CloseCircle } from "iconsax-react";
 
-const Referralmodal = ({ setModalOpen }) => {
+const Referralmodal = ({ setModalOpen, referralCode }) => {
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleCopy = () => {
@@ -43,7 +43,7 @@ const Referralmodal = ({ setModalOpen }) => {
         </p>
         <div className="bg-[#DFDFF7] p-5 rounded-md flex justify-between items-center gap-6">
           <p className="p-2 rounded-lg bg-white text-[12px]" id="text-to-copy">
-            https://verxio.xyz/?ref=0x5465cB5cOAdD53efbC60000644AA70204B20576
+            {`http://localhost:3000/dashboard/profile?ref=${referralCode}`}
           </p>
           <div className="-top-3">
             <Button name="copy link" onClick={handleCopy} />

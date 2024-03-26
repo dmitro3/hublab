@@ -5,7 +5,6 @@ import Check from "../../assets/check-icon.svg";
 
 const Referral = ({ setModalOpen, referalPoints }) => {
 
-  console.log(referalPoints)
   return (
     <div className="mt-3">
       {/* <p className="font-normal text-[20px] mb-2 text-[#0D0E32]">Referral</p> */}

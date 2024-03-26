@@ -1,6 +1,6 @@
 "use client";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-// import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage";
 import {
   persistReducer,
   persistStore,
@@ -11,7 +11,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import profileReducer from "./slices/profileSlice";
+import profileReducer from "../store/slices/profileSlice";
 
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
@@ -29,17 +29,16 @@ const createNoopStorage = () => {
   };
 };
 
-const storage =
-  typeof window !== "undefined"
-    ? createWebStorage("local")
-    : createNoopStorage();
+// const storage =
+//   typeof window !== "undefined"
+//     ? createWebStorage("local")
+//     : createNoopStorage();
 
-// export default storage;
 
 const persistConfig = {
   key: "root",
   storage,
-  blackList: ["profile"]
+  // blackList: []
 };
 
 const rootReducer = combineReducers({

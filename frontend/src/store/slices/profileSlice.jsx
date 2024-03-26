@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { PURGE } from "redux-persist";
 
 const apiUrl = process.env.BASE_URL;
 
-
 const initialState = {
+  userProfile: {},
+  userId: "",
+  edit: false,
   profile: {
     status: "idle",
     error: null,
@@ -20,7 +23,6 @@ export const createProfile = createAsyncThunk(
         `https://backend-verxio.vercel.app/api/v1/profiles/${id}`, // Assuming apiUrl is defined somewhere in your code
         data
       );
-      // console.log(response);
       return response.data;
     } catch (err) {
       console.log(err.response.data);
@@ -32,26 +34,38 @@ export const createProfile = createAsyncThunk(
   }
 );
 
-export const getProfile = createAsyncThunk("profile/getProfile", async ({id}) => {
-  try {
-    const response = await axios.get(
-      `https://backend-verxio.vercel.app/api/v1/profiles/${id}` // Assuming apiUrl is defined somewhere in your code
-    );
-    // console.log(response);
-    return response.data;
-  } catch (err) {
-    console.log(err.response.data);
-    if (!err.response) {
-      throw err.message;
+export const getProfile = createAsyncThunk(
+  "profile/getProfile",
+  async ({ id }) => {
+    try {
+      const response = await axios.get(
+        `https://backend-verxio.vercel.app/api/v1/profiles/${id}` // Assuming apiUrl is defined somewhere in your code
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err.response.data);
+      if (!err.response) {
+        throw err.message;
+      }
+      return err.response.data;
     }
-    return err.response.data;
   }
-});
+);
 
 const profileSlice = createSlice({
   name: "profile",
   initialState,
-  reducers: {},
+  reducers: {
+    setUserProfile: (state, action) => {
+      state.userProfile = action.payload;
+    },
+    setUserId: (state, action) => {
+      state.userId = action.payload;
+    },
+    setEdit: (state, action) => {
+      state.edit = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       //add Profile
@@ -96,10 +110,15 @@ const profileSlice = createSlice({
       .addCase(getProfile.rejected, (state, action) => {
         state.profile.error = action.payload;
         state.profile.status = "failed";
+      })
+
+      //purge all state
+      .addCase(PURGE, () => {
+        return initialState;
       });
   },
 });
 
 export const profileActions = profileSlice.actions;
-// export const {} = profileSlice.actions;
+export const { setUserId, setUserProfile, setEdit } = profileSlice.actions;
 export default profileSlice.reducer;

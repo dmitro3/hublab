@@ -21,43 +21,80 @@ import Badges from "@/components/badges";
 import Referralmodal from "@/components/modals/referalmodal";
 import EditProfile from "@/components/profileComponents/editProfile";
 import Referral from "@/components/profileComponents/referral";
-import { getProfile } from "@/store/slices/profileSlice";
-import { useDispatch } from "react-redux";
+import {
+  getProfile,
+  setUserProfile,
+  setEdit,
+} from "@/store/slices/profileSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { generateAvatarUrl } from "@/utils/verxioAvatar";
-import { useAccount } from '@particle-network/connect-react-ui';
+import { useAccount } from "@particle-network/connect-react-ui";
+import { root } from "@/store/store";
 
+import Link from "next/link";
 
 const Page = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
-  const [edit, setEdit] = useState(false);
-  const [userProfile, setUserProfile] = useState({});
+  // const [edit, setEdit] = useState(false);
+  // const [userProfile, setUserProfile] = useState({});
   const account = useAccount();
-  
+
   const dispatch = useDispatch();
 
+  const userProfile = useSelector((state) => state.profile.userProfile);
+  const edit = useSelector((state) => state.profile.edit);
+  const userId = useSelector((state) => state.profile.userId);
+
   useEffect(() => {
+    // getUserProfile();
+  }, []);
 
-    const getUserProfile = async () => {
-      try {
-        const response = await dispatch(getProfile({ id: 1 }));
-        console.log(response);
-        if (response.payload.success === true) {
-          console.log("success");
-          toast.success(response?.payload.message);
-          setUserProfile(response?.payload.profile);
-        } else {
-          toast.error(response?.payload.message);
-        }
-      } catch (error) {
-        console.error(error);
+  const getUserProfile = async () => {
+    try {
+      const response = await dispatch(getProfile({ id: userId }));
+      if (response.payload.success === true) {
+        toast.success(response?.payload.message);
+        dispatch(setUserProfile(response?.payload?.profile));
+      } else {
+        toast.info("Create a profile");
+        dispatch(setEdit(true));
       }
-    };
-    getUserProfile();
-  }, [dispatch]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  console.log(userProfile);
+  const socialAccounts =
+    userProfile && userProfile.socials
+      ? Object.keys(userProfile.socials).map((item) => item)
+      : [];
+
+
+  const socials = userProfile?.socials || {};
+
+  const nonEmptySocials = Object.entries(socials)
+    .filter(([key, value]) => value.trim() !== "")
+    .reduce((acc, [key, value]) => {
+      acc[key] = value;
+      return acc;
+    }, {});
+
+
+  const logo = (value) => {
+    if (value === "twitter") {
+      return XLogo;
+    } else if (value === "linkedIn") {
+      return Linkedin;
+    } else if (value === "discord") {
+      return Discord;
+    } else if (value === "gitHub") {
+      return Github;
+    } else if (value === "website") {
+      return Website;
+    }
+  };
 
   return (
     <>
@@ -71,11 +108,11 @@ const Page = () => {
               <Button
                 name="Edit Profile"
                 outline
-                onClick={() => setEdit(true)}
+                onClick={() => dispatch(setEdit(true))}
               />
             )}
           </div>
-          
+
           {!edit ? (
             <>
               <div className="relative">
@@ -95,10 +132,10 @@ const Page = () => {
                       </div>
                     </div>
                     <p className="text-[16px] font-semibold capitalize">
-                      {userProfile.firstName} {userProfile.lastName}
+                      {userProfile?.firstName} {userProfile?.lastName}
                     </p>
                     <p className="text-[12px] font-normal">
-                      {userProfile.email}
+                      {userProfile?.email}
                     </p>
                   </div>
                   <div className="text-center w-[50%] p-5 flex flex-col justify-center items-center">
@@ -124,7 +161,7 @@ const Page = () => {
                   Bio
                 </p>
                 <p className="border rounded-lg p-3 text-[#757575] text-[16px] border-[#222482] shadow-md">
-                  {userProfile.bio}
+                  {userProfile?.bio}
                 </p>
               </div>
 
@@ -144,16 +181,27 @@ const Page = () => {
                 <p className="font-normal text-[20px] mb-2 text-[#0D0E32]">
                   Socials
                 </p>
-                <div className="flex gap-6">
-                  <Image alt="logo" src={XLogo} className="w-[50px]" />
-                  <Image alt="logo" src={Linkedin} className="w-[50px]" />
-                  <Image alt="logo" src={Discord} className="w-[50px]" />
-                  <Image alt="logo" src={Github} className="w-[50px]" />
+
+                <div className="flex gap-3">
+                  {Object.entries(nonEmptySocials).map(([key, value], index) => (
+                    <Link
+                    key={index}
+                      className="flex gap-6 cursor-pointer"
+                      href={`${value}`}
+                      target="_blank"
+                    >
+                      <Image
+                        alt="logo"
+                        src={logo(key)}
+                        className="w-[40px] hover:scale-110"
+                      />
+                    </Link>
+                  ))}
                 </div>
               </div>
             </>
           ) : (
-            <EditProfile />
+            <EditProfile setEdit={setEdit} getUserProfile={getUserProfile} />
           )}
         </div>
         <div className="w-[40%] p-5 hidden sm:block">
@@ -196,7 +244,12 @@ const Page = () => {
           )}
         </div>
       </div>
-      {modalOpen && <Referralmodal setModalOpen={setModalOpen} />}
+      {modalOpen && (
+        <Referralmodal
+          setModalOpen={setModalOpen}
+          referralCode={userProfile?.referralCode}
+        />
+      )}
     </>
   );
 };
