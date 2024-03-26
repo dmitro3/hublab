@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Edit from "../../assets/edit.svg";
 import ProfileImg from "../../assets/profileImg.png";
 import XLogo from "../../assets/X-logo.svg";
@@ -18,16 +18,26 @@ import { toast } from "react-toastify";
 import Error from "../../components/formikerror";
 import Button from "../Button";
 import { generateAvatarUrl } from "@/utils/verxioAvatar";
-import { useAccount } from '@particle-network/connect-react-ui';
+import { useAccount } from "@particle-network/connect-react-ui";
+import { root } from "@/store/store";
 
-const EditProfile = ({setEdit, getUserProfile}) => {
+const EditProfile = ({ setEdit, getUserProfile }) => {
   const [selectedImage, setSelectedImage] = useState("");
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState([]);
   const account = useAccount();
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
 
+  const userProfile = useSelector((state) => state.profile.userProfile);
+  const edit = useSelector((state) => state.profile.edit);
+  const userId = useSelector((state) => state.profile.userId);
+
+  // console.log(userProfile.interests)
+  // console.log(selectedOption)
+
+
+  console.log(userId)
   const handleImageChange = (event) => {
     const file = event.target.files[0];
 
@@ -47,13 +57,13 @@ const EditProfile = ({setEdit, getUserProfile}) => {
   };
 
   const initialValue = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    bio: "",
+    firstName: userProfile?.firstName || "",
+    lastName: userProfile?.lastName || "",
+    email: userProfile?.email || "",
+    bio: userProfile?.bio || "",
     interests: [],
     socials: {
-      twitter: "",
+      twitter: userProfile?.socials?.twitter || "",
       linkedIn: "",
       discord: "",
       gitHub: "",
@@ -97,6 +107,14 @@ const EditProfile = ({setEdit, getUserProfile}) => {
     { value: "bounty", label: "Bounty" },
   ];
 
+   const backendSelectedOptions = userProfile?.interests?.map((item) => ({
+     value: item.toLowerCase(),
+     label: item,
+   }));
+
+   console.log(backendSelectedOptions)
+
+
   const createNewProfile = async (values) => {
     try {
       const response = await dispatch(
@@ -109,17 +127,17 @@ const EditProfile = ({setEdit, getUserProfile}) => {
             interests: values.interests,
             socials: values.socials,
           },
-          id: 1,
+          id: userId,
         })
       );
-      console.log(response);
       if (response.payload.success === true) {
-        console.log("success");
-        getUserProfile()
+        getUserProfile();
         toast.success(response.payload.message);
-        setEdit(false)
+        dispatch(setEdit(false));
+        console.log(response);
       } else {
         toast.error(response.payload.message);
+        console.log(response)
       }
     } catch (error) {
       console.error(error);
@@ -128,20 +146,19 @@ const EditProfile = ({setEdit, getUserProfile}) => {
 
   const addStatus = useSelector((state) => state.profile.profile.status);
 
-  console.log(addStatus);
-
   return (
     <div>
       <div>
         <div className="w-[115px] h-[115px] relative rounded-full">
-
           <img
-              src={selectedImage === "" ? generateAvatarUrl(account) : selectedImage}
-              alt="profile picture"
-              // width={200}
-              // height={200}
-               className="w-full h-full rounded-full bg-cover"
-            />
+            src={
+              selectedImage === "" ? generateAvatarUrl(account) : selectedImage
+            }
+            alt="profile picture"
+            // width={200}
+            // height={200}
+            className="w-full h-full rounded-full bg-cover"
+          />
           {/* )} */}
           <div
             className="bg-white p-[10px] rounded-full z-20 absolute -right-3 shadow-md top-[70px] cursor-pointer "
@@ -207,7 +224,7 @@ const EditProfile = ({setEdit, getUserProfile}) => {
             <div>
               <p className="mb-2">Interests</p>
               <Select
-                defaultValue={selectedOption}
+                defaultValue={backendSelectedOptions}
                 onChange={(selectedOptions) => {
                   setSelectedOption(selectedOptions);
                   setFieldValue(
@@ -253,6 +270,7 @@ const EditProfile = ({setEdit, getUserProfile}) => {
                 <Socials
                   name="twitter"
                   value="socials.twitter"
+                  userProfile={userProfile}
                   logo={XLogo}
                   setFieldValue={setFieldValue}
                   values={values}
@@ -260,30 +278,35 @@ const EditProfile = ({setEdit, getUserProfile}) => {
                 <Socials
                   name="linkedIn"
                   value="socials.linkedIn"
+                  userProfile={userProfile}
                   logo={linkedIn}
                   setFieldValue={setFieldValue}
                 />
                 <Socials
                   name="discord"
                   value="socials.discord"
+                  userProfile={userProfile}
                   logo={Discord}
                   setFieldValue={setFieldValue}
                 />
                 <Socials
                   name="gitHub"
                   value="socials.gitHub"
+                  userProfile={userProfile}
                   logo={Github}
                   setFieldValue={setFieldValue}
                 />
                 <Socials
                   name="instagram"
                   value="socials.instagram"
+                  userProfile={userProfile}
                   logo={XLogo}
                   setFieldValue={setFieldValue}
                 />
                 <Socials
                   name="website"
                   value="socials.website"
+                  userProfile={userProfile}
                   logo={Website}
                   setFieldValue={setFieldValue}
                 />
@@ -293,6 +316,7 @@ const EditProfile = ({setEdit, getUserProfile}) => {
             <Button
               name="Save Profile"
               outline
+              isLoading={addStatus === "loading"}
               // onClick={() => setEdit(false)}
               onClick={() => {
                 console.log(values);

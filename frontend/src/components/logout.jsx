@@ -4,6 +4,7 @@ import SignOut from "../assets/SignOut.svg";
 // import { useDispatch } from "react-redux";
 import { useParticleConnect } from '@particle-network/connect-react-ui';
 import { useRouter } from "next/navigation";
+import { persistor } from "@/store/store";
 
 
 const LogoutButton = () => {
@@ -17,6 +18,7 @@ const { disconnect } = useParticleConnect();
 
         onDisconnect()
         // dispatch(resetState());
+        persistor.purge();
         router.push("/");
     };
 
