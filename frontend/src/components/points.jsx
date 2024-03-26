@@ -14,7 +14,7 @@ const Points = () => {
         </div>
         <div className="flex justify-end mt-3 lg:mt-4">
           <p className="text-[13px]">
-            Today's earnings:{" "}
+            Today's Earnings:{" "}
             <span className="font-semibold text-[15px]">0</span>
           </p>
         </div>

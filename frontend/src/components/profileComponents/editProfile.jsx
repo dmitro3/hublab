@@ -17,11 +17,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Error from "../../components/formikerror";
 import Button from "../Button";
+import { generateAvatarUrl } from "@/utils/verxioAvatar";
+import { useAccount } from '@particle-network/connect-react-ui';
 
 const EditProfile = ({setEdit, getUserProfile}) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
-
+  const account = useAccount();
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -131,15 +133,15 @@ const EditProfile = ({setEdit, getUserProfile}) => {
   return (
     <div>
       <div>
-        <div className="w-[115px] h-[115px] bg-slate-500 relative rounded-full">
-          {/* {selectedImage && ( */}
-          <Image
-            src={selectedImage === "" ? ProfileImg : selectedImage}
-            alt="profile picture"
-            width={200}
-            height={200}
-            className="w-full h-full rounded-full bg-cover"
-          />
+        <div className="w-[115px] h-[115px] relative rounded-full">
+
+          <img
+              src={selectedImage === "" ? generateAvatarUrl(account) : selectedImage}
+              alt="profile picture"
+              // width={200}
+              // height={200}
+               className="w-full h-full rounded-full bg-cover"
+            />
           {/* )} */}
           <div
             className="bg-white p-[10px] rounded-full z-20 absolute -right-3 shadow-md top-[70px] cursor-pointer "
