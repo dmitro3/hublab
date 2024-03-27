@@ -16,6 +16,7 @@ const Button = ({
   icon,
   isLoading,
   type,
+  shade,
   ...props
 }) => {
   return href ? (
@@ -47,7 +48,11 @@ const Button = ({
     </div>
   ) : (
     <div className="relative mr-">
-      <div className="rounded border border-[#00ADEF] h-full absolute w-full top-[4px] left-[3px]"></div>
+      <div
+        className={twMerge(
+          `rounded border border-[#00ADEF] h-full absolute w-full top-[4px] left-[3px] ${shade}`
+        )}
+      ></div>
       <button
         disabled={isLoading}
         type={type}
