@@ -5,7 +5,7 @@ import Footer from "./landingComponents/footer";
 import HowToEarn from "./landingComponents/howToEarn";
 import LandingPageHero from "./landingComponents/landingHero";
 import SliderSection from "./landingComponents/sliderSection";
-import HowToEarnCards from "./howToEarnCards";
+import HowToEarnCards from "./landingComponents/howToEarnCards";
 import VideoPlayer from "./video";
 
 export {

@@ -1,8 +1,8 @@
 import {
-  LandingPageHero,
-  HowToEarn,
   Tasks,
+  HowToEarn,
   SliderSection,
+  LandingPageHero,
 } from "@/components";
 import Navbar from "../components/landingComponents/navbar";
 import Footer from "../components/landingComponents/footer";
