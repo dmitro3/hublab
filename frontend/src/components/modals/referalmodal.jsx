@@ -23,25 +23,27 @@ const Referralmodal = ({ setModalOpen, referralCode }) => {
   };
 
   return (
-    <div className="bg-[#000]/40  absolute w-full h-full top-0 left-0 z-50 flex justify-center items-center">
+    <div className="bg-[#000]/40  absolute w-full h-full top-0 left-0 z-50 flex justify-center items-center px-28">
       <div className="bg-white p-5 rounded-lg">
-        <div className="flex items-center justify-between">
-          <h2 className="text-[25px] font-medium text-[#484851]">
-            Refer a friend and get 500 points
-          </h2>
+        <div className="flex justify-end mb-2">
           <CloseCircle
             size={32}
             onClick={() => {
               setModalOpen(false);
               setCopySuccess(false);
             }}
-            className="cursor-pointer"
+            className="cursor-pointer w-7 sm:w-10"
           />
         </div>
-        <p className="mb-8 text-[13px]">
+        <div className="flex items-center justify-between">
+          <h2 className=" text-[17px] sm:text-[25px] font-medium text-[#484851]">
+            Refer a friend and get 500 points
+          </h2>
+        </div>
+        <p className="mb-8 text-[12px]">
           Explore Verxio and earn daily with your friends.
         </p>
-        <div className="bg-[#DFDFF7] p-5 rounded-md flex justify-between items-center gap-6">
+        <div className="bg-[#DFDFF7] p-5 rounded-md flex flex-col sm:flex-row justify-between items-center gap-6">
           <p className="p-2 rounded-lg bg-white text-[12px]" id="text-to-copy">
             {`http://localhost:3000/dashboard/profile?ref=${referralCode}`}
           </p>

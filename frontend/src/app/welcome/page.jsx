@@ -11,7 +11,7 @@ import {
   setUserId,
   setUserProfile,
   setEdit,
-} from "@/store/slices/profileSlice";
+} from "@/store/slices/statesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { root } from "@/store/store";
 
@@ -22,9 +22,9 @@ const page = () => {
   const dispatch = useDispatch();
 
   const status = useSelector((state) => state.profile.profile.status);
-  const id = useSelector((state) => state.profile.userId);
-  console.log(id);
-  console.log(account);
+  const id2 = useSelector((state) => state);
+
+  console.log(id2);
 
   const getUserProfile = async () => {
     try {

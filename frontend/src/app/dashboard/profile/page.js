@@ -21,11 +21,8 @@ import Badges from "@/components/badges";
 import Referralmodal from "@/components/modals/referalmodal";
 import EditProfile from "@/components/profileComponents/editProfile";
 import Referral from "@/components/profileComponents/referral";
-import {
-  getProfile,
-  setUserProfile,
-  setEdit,
-} from "@/store/slices/profileSlice";
+import { setUserProfile, setEdit } from "@/store/slices/statesSlice";
+import { getProfile } from "@/store/slices/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { generateAvatarUrl } from "@/utils/verxioAvatar";
@@ -37,15 +34,13 @@ import Link from "next/link";
 const Page = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
-  // const [edit, setEdit] = useState(false);
-  // const [userProfile, setUserProfile] = useState({});
   const account = useAccount();
 
   const dispatch = useDispatch();
 
-  const userProfile = useSelector((state) => state.profile.userProfile);
-  const edit = useSelector((state) => state.profile.edit);
-  const userId = useSelector((state) => state.profile.userId);
+  const userProfile = useSelector((state) => state.generalStates.userProfile);
+  const edit = useSelector((state) => state.generalStates.edit);
+  const userId = useSelector((state) => state.generalStates.userId);
 
   useEffect(() => {
     // getUserProfile();
@@ -71,7 +66,6 @@ const Page = () => {
       ? Object.keys(userProfile.socials).map((item) => item)
       : [];
 
-
   const socials = userProfile?.socials || {};
 
   const nonEmptySocials = Object.entries(socials)
@@ -80,7 +74,6 @@ const Page = () => {
       acc[key] = value;
       return acc;
     }, {});
-
 
   const logo = (value) => {
     if (value === "twitter") {
@@ -101,14 +94,22 @@ const Page = () => {
       <div className="border m-3 sm:m-7 flex rounded-xl ">
         <div className=" border-r w-[100%] sm:w-[70%] p-3 sm:p-5">
           <div className="flex justify-between items-center mb-6 mt-1">
-            <h2 className="text-[28px] font-semibold text-[#0D0E32]">
+            <h2 className="text-[23px] sm:text-[28px] font-semibold text-[#0D0E32]">
               My Profile
             </h2>
-            {edit ? null : ( // /> //   onClick={() => setEdit(false)} //   outline //   name="Save Profile" // <Button
+            {edit ? (
+              <Button
+                name="cancel"
+                outline
+                onClick={() => dispatch(setEdit(false))}
+                className="text-[12px] sm:text-[14px]"
+              />
+            ) : (
               <Button
                 name="Edit Profile"
                 outline
                 onClick={() => dispatch(setEdit(true))}
+                className="text-[12px] sm:text-[14px]"
               />
             )}
           </div>
@@ -119,7 +120,7 @@ const Page = () => {
                 <div className="flex text-center border border-[#222482] rounded-lg relative z-50 bg-white hover:top-2 hover:left-[7px]">
                   <div className="border-r w-[50%] p-5 flex flex-col justify-end">
                     <div className="flex relative justify-center ">
-                      <div className="w-[115px] h-[115spx]  rounded-full">
+                      <div className="w-[90px] h-[90px]  sm:w-[115px] sm:h-[115px] rounded-full">
                         {/* {!selectedImage && ( */}
                         <img
                           src={generateAvatarUrl(account)}
@@ -131,10 +132,10 @@ const Page = () => {
                         {/* )} */}
                       </div>
                     </div>
-                    <p className="text-[16px] font-semibold capitalize">
+                    <p className="text-[13px] font-semibold capitalize">
                       {userProfile?.firstName} {userProfile?.lastName}
                     </p>
-                    <p className="text-[12px] font-normal">
+                    <p className="text-[12px] font-normal max-sm:truncate">
                       {userProfile?.email}
                     </p>
                   </div>
@@ -165,17 +166,59 @@ const Page = () => {
                 </p>
               </div>
 
-              <div className="mt-10">
-                <p className="font-normal text-[20px] mb-2 text-[#0D0E32]">
-                  Referral
-                </p>
-                {!edit && (
+              <div className="w-[100%] p-5 sm:hidden">
+                <Points />
+                <div className="flex justify-between items-center p-4 border rounded-xl border-[#222482] mt-6">
+                  <div className=" w-[50%]">
+                    <p className="text-[11px] xl:text-[14px]">
+                      Accumulated Points
+                    </p>
+                    <div className="flex justify-start">
+                      <p className="font-semibold text-[16px] md:text-[20px]">
+                        {userProfile?.points?.totalPoints}
+                      </p>
+                    </div>
+                  </div>
+                  <Button
+                    name="claim rewards"
+                    outline
+                    className="px-[8px] text-[9px] xl:text-[14px]"
+                  />
+                </div>
+                <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
+                  Badges
+                </h2>
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8  justify-center items-center">
+                  <Badges img={EarlyAdopter} />
+                  <Badges img={Completionist} />
+                  <Badges img={Milestone} />
+                  <Badges img={Expert} />
+                </div>
+
+                {edit && (
+                  <>
+                    <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-10">
+                      Referal
+                    </h2>
+                    <Referral
+                      setModalOpen={setModalOpen}
+                      referalPoints={userProfile?.points?.referalPoints}
+                    />
+                  </>
+                )}
+              </div>
+
+              {!edit && (
+                <div className="mt-10">
+                  <p className="font-normal text-[20px] mb-2 text-[#0D0E32]">
+                    Referral
+                  </p>
                   <Referral
                     setModalOpen={setModalOpen}
                     referalPoints={userProfile?.points?.referalPoints}
                   />
-                )}
-              </div>
+                </div>
+              )}
 
               <div className="mt-10">
                 <p className="font-normal text-[20px] mb-2 text-[#0D0E32]">
@@ -183,20 +226,22 @@ const Page = () => {
                 </p>
 
                 <div className="flex gap-3">
-                  {Object.entries(nonEmptySocials).map(([key, value], index) => (
-                    <Link
-                    key={index}
-                      className="flex gap-6 cursor-pointer"
-                      href={`${value}`}
-                      target="_blank"
-                    >
-                      <Image
-                        alt="logo"
-                        src={logo(key)}
-                        className="w-[40px] hover:scale-110"
-                      />
-                    </Link>
-                  ))}
+                  {Object.entries(nonEmptySocials).map(
+                    ([key, value], index) => (
+                      <Link
+                        key={index}
+                        className="flex gap-6 cursor-pointer"
+                        href={`${value}`}
+                        target="_blank"
+                      >
+                        <Image
+                          alt="logo"
+                          src={logo(key)}
+                          className="w-[40px] hover:scale-110"
+                        />
+                      </Link>
+                    )
+                  )}
                 </div>
               </div>
             </>
