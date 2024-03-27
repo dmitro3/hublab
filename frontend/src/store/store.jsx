@@ -11,7 +11,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import profileReducer from "./slices/profileSlice";
+import profileReducer from "../store/slices/profileSlice";
+import stateReducer from "../store/slices/statesSlice";
 
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
@@ -34,16 +35,15 @@ const storage =
     ? createWebStorage("local")
     : createNoopStorage();
 
-// export default storage;
-
 const persistConfig = {
   key: "root",
   storage,
-  blackList: ["profile"]
+  blackList: ["profile"],
 };
 
 const rootReducer = combineReducers({
   profile: profileReducer,
+  generalStates: stateReducer,
 });
 
 const persistedReducers = persistReducer(persistConfig, rootReducer);

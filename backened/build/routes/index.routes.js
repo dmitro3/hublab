@@ -9,4 +9,7 @@ const constants_configs_1 = require("../configs/constants.configs");
 exports.default = (app) => {
     app.use(`${constants_configs_1.basePath}/profiles`, profile_routes_1.default);
     app.use(`${constants_configs_1.basePath}/docs`, doc_routes_1.default);
+    app.use(`${constants_configs_1.basePath}/`, (req, res) => {
+        res.send("Welcome to Verxio API");
+    });
 };

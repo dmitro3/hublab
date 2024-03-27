@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Edit from "../../assets/edit.svg";
 import ProfileImg from "../../assets/profileImg.png";
 import XLogo from "../../assets/X-logo.svg";
@@ -17,14 +17,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Error from "../../components/formikerror";
 import Button from "../Button";
+import { generateAvatarUrl } from "@/utils/verxioAvatar";
+import { useAccount } from "@particle-network/connect-react-ui";
+import { root } from "@/store/store";
 
-const EditProfile = () => {
+const EditProfile = ({ setEdit, getUserProfile }) => {
   const [selectedImage, setSelectedImage] = useState("");
-  const [selectedOption, setSelectedOption] = useState(null);
-
+  const [selectedOption, setSelectedOption] = useState([]);
+  const account = useAccount();
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
+
+  const userProfile = useSelector((state) => state.generalStates.userProfile);
+  const edit = useSelector((state) => state.generalStates.edit);
+  const userId = useSelector((state) => state.generalStates.userId);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -45,13 +52,13 @@ const EditProfile = () => {
   };
 
   const initialValue = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    bio: "",
+    firstName: userProfile?.firstName || "",
+    lastName: userProfile?.lastName || "",
+    email: userProfile?.email || "",
+    bio: userProfile?.bio || "",
     interests: [],
     socials: {
-      twitter: "",
+      twitter: userProfile?.socials?.twitter || "",
       linkedIn: "",
       discord: "",
       gitHub: "",
@@ -95,6 +102,13 @@ const EditProfile = () => {
     { value: "bounty", label: "Bounty" },
   ];
 
+  const backendSelectedOptions = userProfile?.interests?.map((item) => ({
+    value: item.toLowerCase(),
+    label: item,
+  }));
+
+  console.log(backendSelectedOptions);
+
   const createNewProfile = async (values) => {
     try {
       const response = await dispatch(
@@ -107,15 +121,17 @@ const EditProfile = () => {
             interests: values.interests,
             socials: values.socials,
           },
-          id: 3,
+          id: userId,
         })
       );
-      console.log(response);
       if (response.payload.success === true) {
-        console.log("success");
+        getUserProfile();
         toast.success(response.payload.message);
+        dispatch(setEdit(false));
+        console.log(response);
       } else {
         toast.error(response.payload.message);
+        console.log(response);
       }
     } catch (error) {
       console.error(error);
@@ -124,18 +140,17 @@ const EditProfile = () => {
 
   const addStatus = useSelector((state) => state.profile.profile.status);
 
-  console.log(addStatus);
-
   return (
     <div>
       <div>
-        <div className="w-[115px] h-[115px] bg-slate-500 relative rounded-full">
-          {/* {selectedImage && ( */}
-          <Image
-            src={selectedImage === "" ? ProfileImg : selectedImage}
+        <div className="w-[115px] h-[115px] relative rounded-full">
+          <img
+            src={
+              selectedImage === "" ? generateAvatarUrl(account) : selectedImage
+            }
             alt="profile picture"
-            width={200}
-            height={200}
+            // width={200}
+            // height={200}
             className="w-full h-full rounded-full bg-cover"
           />
           {/* )} */}
@@ -203,7 +218,7 @@ const EditProfile = () => {
             <div>
               <p className="mb-2">Interests</p>
               <Select
-                defaultValue={selectedOption}
+                defaultValue={backendSelectedOptions}
                 onChange={(selectedOptions) => {
                   setSelectedOption(selectedOptions);
                   setFieldValue(
@@ -249,6 +264,7 @@ const EditProfile = () => {
                 <Socials
                   name="twitter"
                   value="socials.twitter"
+                  userProfile={userProfile}
                   logo={XLogo}
                   setFieldValue={setFieldValue}
                   values={values}
@@ -256,30 +272,35 @@ const EditProfile = () => {
                 <Socials
                   name="linkedIn"
                   value="socials.linkedIn"
+                  userProfile={userProfile}
                   logo={linkedIn}
                   setFieldValue={setFieldValue}
                 />
                 <Socials
                   name="discord"
                   value="socials.discord"
+                  userProfile={userProfile}
                   logo={Discord}
                   setFieldValue={setFieldValue}
                 />
                 <Socials
                   name="gitHub"
                   value="socials.gitHub"
+                  userProfile={userProfile}
                   logo={Github}
                   setFieldValue={setFieldValue}
                 />
                 <Socials
                   name="instagram"
                   value="socials.instagram"
+                  userProfile={userProfile}
                   logo={XLogo}
                   setFieldValue={setFieldValue}
                 />
                 <Socials
                   name="website"
                   value="socials.website"
+                  userProfile={userProfile}
                   logo={Website}
                   setFieldValue={setFieldValue}
                 />
@@ -289,6 +310,7 @@ const EditProfile = () => {
             <Button
               name="Save Profile"
               outline
+              isLoading={addStatus === "loading"}
               // onClick={() => setEdit(false)}
               onClick={() => {
                 console.log(values);

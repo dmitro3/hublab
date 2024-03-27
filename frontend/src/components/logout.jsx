@@ -4,6 +4,7 @@ import SignOut from "../assets/SignOut.svg";
 // import { useDispatch } from "react-redux";
 import { useParticleConnect } from '@particle-network/connect-react-ui';
 import { useRouter } from "next/navigation";
+import { persistor } from "@/store/store";
 
 
 const LogoutButton = () => {
@@ -11,19 +12,20 @@ const LogoutButton = () => {
 const { disconnect } = useParticleConnect();
     const onDisconnect = () => disconnect({ hideLoading: true });
     // const dispatch = useDispatch(); 
-    // const router = useRouter();
+    const router = useRouter();
 
     const handleLogout = () => {
 
         onDisconnect()
         // dispatch(resetState());
-        // router.push("/");
+        persistor.purge();
+        router.push("/");
     };
 
   return (
     <div
       onClick={handleLogout}
-      className="flex items-center justify-center w-[100%] gap-3 cursor-pointer border"
+      className="flex items-center justify-center w-[100%] gap-3 cursor-pointer"
     >
       <Image src={SignOut} alt="" />
       <p className="text-white">Logout</p>

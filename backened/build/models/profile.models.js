@@ -89,7 +89,7 @@ const profileSchema = new mongoose_1.Schema({
         unique: true
     }
 }, {
-    strict: true,
+    strict: false,
     timestamps: true
 });
 const Profile = (0, mongoose_1.model)(constants_configs_1.DATABASES.PROFILE, profileSchema);
