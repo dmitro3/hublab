@@ -32,7 +32,7 @@ const layout = ({ children }) => {
       </div>
       <div className="border rounded-lg p-6">
         <div>
-          <p className="font-semibold text-[24px]">
+          <p className="font-semibold text-[24px] mb-5">
             <span className="mr-3 text-">*</span>Campaign Category
           </p>
           <div className="flex gap-4">

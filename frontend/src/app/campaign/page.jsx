@@ -7,8 +7,8 @@ import React from "react";
 const page = () => {
   return (
     <>
-      {/* <Start /> */}
-      <InputCampaign/>
+      <Start />
+      {/* <InputCampaign/> */}
       {/* <Criterion/> */}
       {/* <Reward/> */}
     </>
