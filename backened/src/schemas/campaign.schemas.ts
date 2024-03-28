@@ -7,7 +7,7 @@ const campaignSchema = Joi.object({
     description: Joi.string().required().trim(),
     startDate: Joi.string().required().trim(),
     endDate: Joi.string().required().trim(),
-    questions: Joi.object().required(),
+    questions: Joi.array().required(),
     eligibility: Joi.required(),
     participants: Joi.number().required(),
     reward: Joi.string().required().trim()

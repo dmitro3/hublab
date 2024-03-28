@@ -20,6 +20,6 @@ router.get("/:id", getCampaign);
 router.get("/", getAllCampaign);
 
 //get all user's campaign
-router.get("/:id", getAllUsersCampaign);
+router.get("/profile/:profileId", getAllUsersCampaign);
 
 export default router;

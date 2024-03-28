@@ -1,7 +1,8 @@
-import { model, Schema } from "mongoose";
-import { DATABASES } from "../configs/constants.configs";
-
-const campaignSchema = new Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = require("mongoose");
+const constants_configs_1 = require("../configs/constants.configs");
+const campaignSchema = new mongoose_1.Schema({
     title: {
         type: String,
         unique: true,
@@ -10,7 +11,7 @@ const campaignSchema = new Schema({
     },
     profileId: {
         type: String,
-        ref: DATABASES.PROFILE,
+        ref: constants_configs_1.DATABASES.PROFILE,
         required: true,
         unique: false
     },
@@ -35,15 +36,15 @@ const campaignSchema = new Schema({
         trim: true
     },
     questions: [{
-        question: String,
-        optionA: String,
-        optionB: String,
-        optionC: String,
-        optionD: String,
-        correctAnswer: String
-    }],
+            question: String,
+            optionA: String,
+            optionB: String,
+            optionC: String,
+            optionD: String,
+            correctAnswer: String
+        }],
     eligibility: {
-        type: Schema.Types.Mixed,
+        type: mongoose_1.Schema.Types.Mixed,
         required: true,
         trim: true
     },
@@ -61,6 +62,5 @@ const campaignSchema = new Schema({
     strict: false,
     timestamps: true
 });
-
-const Campaign = model(DATABASES.CAMPAIGN, campaignSchema);
-export default Campaign;
+const Campaign = (0, mongoose_1.model)(constants_configs_1.DATABASES.CAMPAIGN, campaignSchema);
+exports.default = Campaign;

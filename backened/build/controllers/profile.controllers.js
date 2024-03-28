@@ -18,7 +18,7 @@ const cloudinary_configs_1 = __importDefault(require("../configs/cloudinary.conf
 const generateReferralCode_utils_1 = __importDefault(require("../utils/generateReferralCode.utils"));
 const getBonus_utils_1 = __importDefault(require("../utils/getBonus.utils"));
 const { create, findOne, editById } = new profile_services_1.default();
-const { DUPLICATE_EMAIL, CREATED, UPDATED, NOT_FOUND } = constants_configs_1.MESSAGES.PROFILE;
+const { DUPLICATE_EMAIL, CREATED, FETCHED, UPDATED, NOT_FOUND } = constants_configs_1.MESSAGES.PROFILE;
 class ProfileController {
     createProfile(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -55,7 +55,7 @@ class ProfileController {
                 //creates a profile if the email and id doesn't exist
                 const createdProfile = yield create(Object.assign({ _id: id, points: { totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp } }, req.body));
                 const { referralCode } = req.query;
-                const referredUser = yield findOne(referralCode);
+                const referredUser = yield findOne({ referralCode: referralCode });
                 if (referredUser && referredUser.points) {
                     const totalReferralPoints = referredUser.points.referalPoints + 1000;
                     const updatedProfile = yield editById(referredUser._id, { points: { totalPoints: referredUser.points.totalPoints, referalPoints: totalReferralPoints, rewardPoints: referredUser.points.rewardPoints } });
@@ -110,7 +110,7 @@ class ProfileController {
                 return res.status(200)
                     .send({
                     success: true,
-                    message: "Profile fetched successfully",
+                    message: FETCHED,
                     profile: profile
                 });
             }

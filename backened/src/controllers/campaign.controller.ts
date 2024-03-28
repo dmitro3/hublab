@@ -77,7 +77,7 @@ export default class CampaignController {
 
     async getAllUsersCampaign(req: Request, res: Response) {
         //checks if profile exists
-        const profile = await findProfile({_id: req.params.id})
+        const profile = await findProfile({_id: req.params.profileId})
         if(!profile) {
             return res.status(409)
             .send({
@@ -86,7 +86,7 @@ export default class CampaignController {
             });
         }
         
-        const capmaigns = await findOne({profileId: req.params.id});
+        const capmaigns = await find({profileId: req.params.profileId});
         if (capmaigns) {
             return res.status(200)
             .send({
@@ -99,7 +99,6 @@ export default class CampaignController {
             .send({
                 success: false,
                 message: NOT_FOUND
-        });    
-
+        });
     }
 }
