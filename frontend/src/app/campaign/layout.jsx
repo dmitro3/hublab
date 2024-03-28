@@ -31,14 +31,29 @@ const layout = ({ children }) => {
         </div>
       </div>
       <div className="border rounded-lg p-6">
-        <div>
+        <div className="space-y-3">
           <p className="font-semibold text-[24px]">
             <span className="mr-3 text-">*</span>Campaign Category
           </p>
           <div className="flex gap-4">
-            <Button name="engagement" outline shade="hidden"  className='rounded-xl'/>
-            <Button name="awareness" outline shade="hidden" className='rounded-xl' />
-            <Button name="interaction" outline shade="hidden"className='rounded-xl' />
+            <Button
+              name="engagement"
+              outline
+              shade="hidden"
+              className="rounded-xl"
+            />
+            <Button
+              name="awareness"
+              outline
+              shade="hidden"
+              className="rounded-xl"
+            />
+            <Button
+              name="interaction"
+              outline
+              shade="hidden"
+              className="rounded-xl"
+            />
           </div>
         </div>
         {children}

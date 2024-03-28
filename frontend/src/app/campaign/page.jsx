@@ -8,8 +8,8 @@ const page = () => {
   return (
     <>
       {/* <Start /> */}
-      <InputCampaign/>
-      {/* <Criterion/> */}
+      {/* <InputCampaign /> */}
+      <Criterion/>
       {/* <Reward/> */}
     </>
   );
