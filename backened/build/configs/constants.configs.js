@@ -8,7 +8,8 @@ exports.SECRET = SECRET;
 const basePath = "/api/v1";
 exports.basePath = basePath;
 const DATABASES = {
-    PROFILE: "profile"
+    PROFILE: "profile",
+    CAMPAIGN: "campaign"
 };
 exports.DATABASES = DATABASES;
 const MESSAGES = {
@@ -18,9 +19,17 @@ const MESSAGES = {
     },
     PROFILE: {
         CREATED: "Profile created successfully.",
+        FETCHED: "Profile fetched successfully.",
         DUPLICATE_EMAIL: "Email already exist.",
         UPDATED: "Profile details updated successfully.",
         NOT_FOUND: "Profile not found."
+    },
+    CAMPAIGN: {
+        DUPLICATE_TITLE: "Title already exist.",
+        CREATED: "Campaign created successfully.",
+        FETCHED: "Campaign fetched successfully.",
+        NOT_FOUND: "Campaign not found.",
+        // UPDATED: "Profile details updated successfully.",
     },
 };
 exports.MESSAGES = MESSAGES;

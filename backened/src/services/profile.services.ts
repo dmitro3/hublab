@@ -7,7 +7,7 @@ export default class ProfileService {
         return await Profile.findOne({ _id: createdProfile.id}, "-__v");
     }
 
-    async findOne(param: any) {
+    async findOne(param: {}) {
         return await Profile.findOne(param, "-__v");
     }
 
