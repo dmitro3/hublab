@@ -2,7 +2,8 @@ const PORT = process.env.PORT || 9871;
 const SECRET = process.env.SECRET!;
 const basePath = "/api/v1"
 const DATABASES = {
-    PROFILE: "profile"
+    PROFILE: "profile",
+    CAMPAIGN: "campaign"
 };
 const MESSAGES = {
     DATABASE: {
@@ -11,9 +12,17 @@ const MESSAGES = {
     },
     PROFILE: {
         CREATED: "Profile created successfully.",
+        FETCHED: "Profile fetched successfully.",
         DUPLICATE_EMAIL: "Email already exist.",
         UPDATED: "Profile details updated successfully.",
         NOT_FOUND: "Profile not found."
+    },
+    CAMPAIGN: {
+        DUPLICATE_TITLE: "Title already exist.",
+        CREATED: "Campaign created successfully.",
+        FETCHED: "Campaign fetched successfully.",
+        NOT_FOUND: "Campaign not found.",
+        // UPDATED: "Profile details updated successfully.",
     },
 };
 const INTERESTS: string[] = ["Content", "Development", "Trading", "Earning", "Blockchain", "Bounty"];
