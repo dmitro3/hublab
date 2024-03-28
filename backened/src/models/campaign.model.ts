@@ -56,6 +56,12 @@ const campaignSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    status: {
+        type: String,
+        required: true,
+        default: "Ongoing",
+        trim: true
     }
 }, {
     strict: false,
