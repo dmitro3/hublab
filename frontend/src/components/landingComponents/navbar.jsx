@@ -72,7 +72,7 @@ const Navbar = () => {
         <div className="hidden md:block gap-4">
           {/* <Button href="/dashboard/profile" name="Start Campaign" />
           <Button name="Start Earning" outline className="bg-primary" /> */}
-          <Button href='/campaign' name="Start Campaign" />
+          <Button href="/campaign?tab=start" name="Start Campaign" />
           {/* <ConnectButton /> */}
         </div>
 

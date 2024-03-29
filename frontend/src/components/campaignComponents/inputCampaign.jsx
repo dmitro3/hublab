@@ -34,20 +34,20 @@ const questionFormatData = [
 const InputCampaign = () => {
   return (
     <>
-      <section className="w-full space-y-3">
+      <section className="w-full space-y-3 mt-10 text-[#484851]">
         <div className="my-3">
           <p className="font-semibold text-[24px]">
-            <span className="mr-3 text-">*</span>Choose a question format
+            <span className="mr-3 text-">*</span>Choose a campaign template
           </p>
         </div>
 
-        <div className="border border-primary rounded-lg p-6 flex flex-col items-center gap-5">
+        <div className="border border-primary rounded-lg p-6 flex flex-col items-cente gap-5">
           {questionFormatData.map((data, index) => (
             <QuestionFormat key={`question-number-${index}`} {...data} />
           ))}
         </div>
 
-        <section className="w-full pt-6 md:pt-24">
+        {/* <section className="w-full pt-6 md:pt-24">
           <div className="my-3">
             <p className="font-semibold text-[24px]">
               <span className="mr-3 text-">*</span>Pick an answer
@@ -74,10 +74,14 @@ const InputCampaign = () => {
               className="w-full bg-white"
             />
           </div>
-        </section>
+        </section> */}
 
         <div className="w-full my-8">
-          <Button name="Continue" className="w-full" />
+          <Button
+            name="Continue"
+            href="/campaign?tab=criterion"
+            className="w-full text-[20px] mt-12"
+          />
         </div>
       </section>
     </>
