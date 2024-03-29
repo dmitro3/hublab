@@ -4,7 +4,7 @@ import PageConnectKit from "@/context/PageConnectKit";
 import ReduxProvider from "@/providers/reduxProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import DatePickerProvider from "@/providers/datePickerProvider";
+import { NavProvider } from "@/context/nav_context";import DatePickerProvider from "@/providers/datePickerProvider";
 
 
 const roboto_Slab = Roboto_Slab({ subsets: ["latin"] });
@@ -21,7 +21,9 @@ export default function RootLayout({ children }) {
       <body className={roboto_Slab.className}>
         <DatePickerProvider>
           <ReduxProvider>
-            <PageConnectKit>{children}</PageConnectKit>
+          <NavProvider>
+              <PageConnectKit>{children}</PageConnectKit>
+          </NavProvider>
           </ReduxProvider>
           <ToastContainer />
         </DatePickerProvider>

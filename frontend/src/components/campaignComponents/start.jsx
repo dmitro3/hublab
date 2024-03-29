@@ -48,7 +48,7 @@ const Start = () => {
   };
 
   return (
-    <div className="mt-10 w-[60%]">
+    <div className="mt-10 w-[60%] text-[#484851]">
       <Formik onSubmit={() => {}} initialValues={initialValues}>
         {({ isValid, handleSubmit, values, dirty, setFieldValue }) => (
           <Form className="flex flex-col gap-8">
@@ -131,7 +131,10 @@ const Start = () => {
                       // value={selectedDate}
                       onChange={(date) => {
                         handleDateChange(date);
-                        setFieldValue("startDate", dayjs(date).format("DD/MM/YYYY"));
+                        setFieldValue(
+                          "startDate",
+                          dayjs(date).format("DD/MM/YYYY")
+                        );
                       }}
                     />
                   </div>
@@ -150,7 +153,10 @@ const Start = () => {
                       // value={selectedDate}
                       onChange={(date) => {
                         handleDateChange(date);
-                        setFieldValue("endDate", dayjs(date).format("DD/MM/YYYY"));
+                        setFieldValue(
+                          "endDate",
+                          dayjs(date).format("DD/MM/YYYY")
+                        );
                       }}
                     />
                   </div>
@@ -159,7 +165,13 @@ const Start = () => {
               </div>
             </div>
             <div className="mt-5">
-              <Button type='button' name="continue" onClick={() => console.log(values)} />
+              <Button
+                type="button"
+                href="/campaign?tab=inputs"
+                name="continue"
+                className="text-[20px]"
+                onClick={() => console.log(values)}
+              />
             </div>
           </Form>
         )}

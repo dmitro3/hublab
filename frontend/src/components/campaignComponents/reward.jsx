@@ -48,7 +48,7 @@ const Reward = () => {
   };
 
   return (
-    <div className="mt-10 w-[60%]">
+    <div className="mt-10 w-[60%] text-[#484851]">
       <Formik onSubmit={() => {}} initialValues={initialValues}>
         {({ isValid, handleSubmit, values, dirty, setFieldValue }) => (
           <Form className="flex flex-col gap-11">
@@ -114,18 +114,18 @@ const Reward = () => {
               </div>
             </div>
 
-            <div className="mt-5 flex flex-col gap-10">
+            <div className="mt-5 flex flex-col gap-8">
               <Button
                 type="button"
                 name="publish"
-                className="border border-primary font-medium text-[16px]"
+                className="border border-primary font-medium text-[20px]"
                 shade="border-primary"
                 onClick={() => console.log(values)}
               />
               <Button
                 type="button"
                 name="preview"
-                className="font-medium text-[16px]"
+                className="font-medium text-[20px] bg-white"
                 outline
                 onClick={() => console.log(values)}
               />
