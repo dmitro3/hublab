@@ -24,7 +24,6 @@ import { root } from "@/store/store";
 const EditProfile = ({ setEdit, getUserProfile }) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedOption, setSelectedOption] = useState([]);
-  const account = useAccount();
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -33,11 +32,6 @@ const EditProfile = ({ setEdit, getUserProfile }) => {
   const edit = useSelector((state) => state.profile.edit);
   const userId = useSelector((state) => state.profile.userId);
 
-  // console.log(userProfile.interests)
-  // console.log(selectedOption)
-
-
-  console.log(userId)
   const handleImageChange = (event) => {
     const file = event.target.files[0];
 
@@ -112,8 +106,6 @@ const EditProfile = ({ setEdit, getUserProfile }) => {
      label: item,
    }));
 
-   console.log(backendSelectedOptions)
-
 
   const createNewProfile = async (values) => {
     try {
@@ -152,7 +144,7 @@ const EditProfile = ({ setEdit, getUserProfile }) => {
         <div className="w-[115px] h-[115px] relative rounded-full">
           <img
             src={
-              selectedImage === "" ? generateAvatarUrl(account) : selectedImage
+              selectedImage === "" ? generateAvatarUrl(userId) : selectedImage
             }
             alt="profile picture"
             // width={200}

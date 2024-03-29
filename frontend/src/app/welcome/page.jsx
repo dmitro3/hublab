@@ -23,8 +23,6 @@ const page = () => {
 
   const status = useSelector((state) => state.profile.profile.status);
   const id = useSelector((state) => state.profile.userId);
-  console.log(id);
-  console.log(account);
 
   const getUserProfile = async () => {
     try {

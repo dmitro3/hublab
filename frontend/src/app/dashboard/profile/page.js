@@ -31,14 +31,11 @@ import { toast } from "react-toastify";
 import { generateAvatarUrl } from "@/utils/verxioAvatar";
 import { useAccount } from "@particle-network/connect-react-ui";
 import { root } from "@/store/store";
-
 import Link from "next/link";
 
 const Page = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
-  // const [edit, setEdit] = useState(false);
-  // const [userProfile, setUserProfile] = useState({});
   const account = useAccount();
 
   const dispatch = useDispatch();
@@ -46,6 +43,7 @@ const Page = () => {
   const userProfile = useSelector((state) => state.profile.userProfile);
   const edit = useSelector((state) => state.profile.edit);
   const userId = useSelector((state) => state.profile.userId);
+
 
   useEffect(() => {
     // getUserProfile();
@@ -122,7 +120,7 @@ const Page = () => {
                       <div className="w-[115px] h-[115spx]  rounded-full">
                         {/* {!selectedImage && ( */}
                         <img
-                          src={generateAvatarUrl(account)}
+                          src={generateAvatarUrl(userId)}
                           alt="profile picture"
                           // width={200}
                           // height={200}
