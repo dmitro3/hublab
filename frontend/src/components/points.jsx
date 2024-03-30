@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react'
-import VerxioCoin from "../assets/verxio-coin.svg";
+import VerxioCoin from "../assets/verxioCoin.svg";
 
 const Points = () => {
   return (
