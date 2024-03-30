@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { useEffect, useState } from "react";
 import { Logo, SidebarMenuItem } from "./atoms";
 import Image from "next/image";
 import AxiosLogo from "../assets/AxiosLogo.svg";
@@ -8,7 +7,6 @@ import { useNav } from "../context/nav_context";
 import { NavigationItems } from "../components/atoms/sideBarData";
 import Button from "./Button";
 import LogoutButton from "./logout";
-import { ConnectButton } from "@particle-network/connect-react-ui";
 
 
 const Sidebar = () => {
@@ -34,7 +32,6 @@ const Sidebar = () => {
               <SidebarMenuItem key={`sidebar-item-${index}`} {...item} />
             ))}
           </ul>
-              {/* <ConnectButton /> */}
               <LogoutButton />
             <div className="flex justify-center items-center gap-3">
               <p className="text-white text-[12px]">Powered by</p>
