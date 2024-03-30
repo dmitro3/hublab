@@ -77,7 +77,7 @@ export default class ProfileController {
       let imageUrl;
       if (req.file) {
         // Upload file to Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path);
+        const result = await cloudinary.uploader.upload(req.file.path, {folder: "Verxio"});
         imageUrl = result.secure_url;
         if(!imageUrl) {
           return res.status(409).send({
