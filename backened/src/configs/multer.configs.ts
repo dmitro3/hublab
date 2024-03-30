@@ -1,14 +1,7 @@
 import multer from "multer";
 import path from "path";
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
-  }
-});
+const storage = multer.diskStorage({});
 
 // Check file type
 function checkFileType(file: Express.Multer.File, cb: multer.FileFilterCallback) {
@@ -30,10 +23,9 @@ function checkFileType(file: Express.Multer.File, cb: multer.FileFilterCallback)
 // Initialize upload variable
 const upload = multer({
   storage: storage,
-  // limits: { fileSize: 1000000 },
-  // fileFilter: function (req, file, cb) {
-  //   checkFileType(file, cb);
-  // }
+  fileFilter: function (_req, file, cb) {
+    checkFileType(file, cb);
+  }
 });
 
 export default upload;
