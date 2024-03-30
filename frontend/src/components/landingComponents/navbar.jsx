@@ -7,7 +7,6 @@ import { useScroll } from "@/hooks/useScroll";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { twMerge } from "tailwind-merge";
 import { Button } from "@/components";
-import { ConnectButton } from "@particle-network/connect-react-ui";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -61,9 +60,7 @@ const Navbar = () => {
           >
             {isOpen && (
               <div className=" relative top-[100px] flex flex-col justify-center items-center gap-4 my-6 md:hidden">
-                {/* <Button href="/dashboard/profile" name="Start Campaign" />
-                <Button name="Start Earning" outline className="bg-primary" /> */}
-                <Button name="Start Campaign" />
+                <Button name="Read Whitepaper" />
               </div>
             )}
           </ul>
@@ -72,7 +69,7 @@ const Navbar = () => {
         <div className="hidden md:block gap-4">
           {/* <Button href="/dashboard/profile" name="Start Campaign" />
           <Button name="Start Earning" outline className="bg-primary" /> */}
-          <Button href='/campaign' name="Start Campaign" />
+          <Button href="/campaign?tab=start" name="Start Campaign" />
           {/* <ConnectButton /> */}
         </div>
 

@@ -146,7 +146,7 @@ const EditProfile = ({ setEdit, getUserProfile }) => {
         <div className="w-[115px] h-[115px] relative rounded-full">
           <img
             src={
-              selectedImage === "" ? generateAvatarUrl(account) : selectedImage
+              selectedImage === "" ? generateAvatarUrl(userId) : selectedImage
             }
             alt="profile picture"
             // width={200}
