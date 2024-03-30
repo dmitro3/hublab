@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Image from "next/image";
-import UploadIcon from "../../assets/upload-icon.svg";
+import UploadIcon from "../../assets/uploadIcon.svg";
 import Calender from "../../assets/calender.svg";
 import Button from "../Button";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
