@@ -8,7 +8,7 @@ const Badges = ({ img }) => {
     toast.info("cNFT Badge claim is not yet live!", { theme: "light" });
 
   return (
-    <div className="relative w-[160px] h-full flex flex-col " onClick={notify}>
+    <div className="relative w-[160px] h-full flex flex-col mx-au" onClick={notify}>
       <div className="relative flex justify-center hover:top-[6px] hover:left-[5px]">
         <Image alt="badge" src={img} className="rounded-lg z-40 relative " />
       </div>

@@ -5,9 +5,6 @@ import { PURGE } from "redux-persist";
 const apiUrl = process.env.BASE_URL;
 
 const initialState = {
-  userProfile: {},
-  userId: "",
-  edit: false,
   profile: {
     status: "idle",
     error: null,
@@ -55,17 +52,7 @@ export const getProfile = createAsyncThunk(
 const profileSlice = createSlice({
   name: "profile",
   initialState,
-  reducers: {
-    setUserProfile: (state, action) => {
-      state.userProfile = action.payload;
-    },
-    setUserId: (state, action) => {
-      state.userId = action.payload;
-    },
-    setEdit: (state, action) => {
-      state.edit = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       //add Profile
@@ -120,5 +107,5 @@ const profileSlice = createSlice({
 });
 
 export const profileActions = profileSlice.actions;
-export const { setUserId, setUserProfile, setEdit } = profileSlice.actions;
+export const {} = profileSlice.actions;
 export default profileSlice.reducer;

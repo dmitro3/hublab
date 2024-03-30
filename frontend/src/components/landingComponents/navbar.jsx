@@ -67,7 +67,10 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:block gap-4">
-          <Button name="Read Whitepaper" />
+          {/* <Button href="/dashboard/profile" name="Start Campaign" />
+          <Button name="Start Earning" outline className="bg-primary" /> */}
+          <Button href="/campaign?tab=start" name="Start Campaign" />
+          {/* <ConnectButton /> */}
         </div>
 
         <button

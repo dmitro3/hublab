@@ -24,13 +24,14 @@ import { root } from "@/store/store";
 const EditProfile = ({ setEdit, getUserProfile }) => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedOption, setSelectedOption] = useState([]);
+  const account = useAccount();
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
 
-  const userProfile = useSelector((state) => state.profile.userProfile);
-  const edit = useSelector((state) => state.profile.edit);
-  const userId = useSelector((state) => state.profile.userId);
+  const userProfile = useSelector((state) => state.generalStates.userProfile);
+  const edit = useSelector((state) => state.generalStates.edit);
+  const userId = useSelector((state) => state.generalStates.userId);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -101,11 +102,12 @@ const EditProfile = ({ setEdit, getUserProfile }) => {
     { value: "bounty", label: "Bounty" },
   ];
 
-   const backendSelectedOptions = userProfile?.interests?.map((item) => ({
-     value: item.toLowerCase(),
-     label: item,
-   }));
+  const backendSelectedOptions = userProfile?.interests?.map((item) => ({
+    value: item.toLowerCase(),
+    label: item,
+  }));
 
+  console.log(backendSelectedOptions);
 
   const createNewProfile = async (values) => {
     try {
@@ -129,7 +131,7 @@ const EditProfile = ({ setEdit, getUserProfile }) => {
         console.log(response);
       } else {
         toast.error(response.payload.message);
-        console.log(response)
+        console.log(response);
       }
     } catch (error) {
       console.error(error);
@@ -144,7 +146,7 @@ const EditProfile = ({ setEdit, getUserProfile }) => {
         <div className="w-[115px] h-[115px] relative rounded-full">
           <img
             src={
-              selectedImage === "" ? generateAvatarUrl(userId) : selectedImage
+              selectedImage === "" ? generateAvatarUrl(account) : selectedImage
             }
             alt="profile picture"
             // width={200}

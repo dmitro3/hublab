@@ -16,11 +16,14 @@ const Button = ({
   icon,
   isLoading,
   type,
+  shade,
   ...props
 }) => {
   return href ? (
     <div className="relative mr-">
-      <div className="rounded border border-[#00ADEF] h-full absolute w-full top-[4px] left-[3px]"></div>
+      <div
+        className={`rounded border border-[#00ADEF] h-full absolute w-full top-[4px] left-[3px] ${shade}`}
+      ></div>
       <Link
         href={href}
         // disabled={isLoading}
@@ -29,7 +32,7 @@ const Button = ({
         className={twMerge(
           `${
             outline
-              ? "bg-white text-[#00ADEF] border border-[#00ADEF]"
+              ? "bg-transparent text-[#00ADEF] border border-[#00ADEF]"
               : "bg-[#00ADEF] text-[#FCFCFC]"
           } rounded-[4px] transition-all leading-none ease-in duration-500 text-[14px] font-medium ${
             !props.disabled
@@ -47,7 +50,11 @@ const Button = ({
     </div>
   ) : (
     <div className="relative mr-">
-      <div className="rounded border border-[#00ADEF] h-full absolute w-full top-[4px] left-[3px]"></div>
+      <div
+        className={twMerge(
+          `rounded border border-[#00ADEF] h-full absolute w-full top-[4px] left-[3px] ${shade}`
+        )}
+      ></div>
       <button
         disabled={isLoading}
         type={type}
@@ -55,7 +62,7 @@ const Button = ({
         className={twMerge(
           `${
             outline
-              ? "bg-white text-[#00ADEF] border border-[#00ADEF]"
+              ? "bg-transparent text-[#00ADEF] border border-[#00ADEF]"
               : "bg-[#00ADEF] text-[#FCFCFC]"
           } rounded-[4px] transition-all leading-none ease-in duration-500 text-[14px] font-medium ${
             !props.disabled
