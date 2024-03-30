@@ -36,6 +36,8 @@ import bs58 from 'bs58';
         TOKEN_2022_PROGRAM_ID
       )
 
+    const balance =  Number(tokenAccount.amount) / LAMPORTS_PER_SOL
+
     const burnTxn = await burn(
       connection,
       payer, // Transaction fee payer
@@ -52,4 +54,5 @@ import bs58 from 'bs58';
       "\nBurn Tokens:",
       `https://solana.fm/tx/${burnTxn}?cluster=devnet-solana`,
     );
+    
 })();
