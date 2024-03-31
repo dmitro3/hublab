@@ -35,21 +35,31 @@ const campaignSchema = new mongoose_1.Schema({
         required: true,
         trim: true
     },
-    questions: [{
-            question: String,
-            optionA: String,
-            optionB: String,
-            optionC: String,
-            optionD: String,
-            correctAnswer: String
-        }],
+    questions: {
+        type: [{
+                question: String,
+                options: {
+                    a: String,
+                    b: String,
+                    c: String,
+                    d: String
+                },
+                answer: String
+            }],
+        required: false
+    },
     eligibility: {
-        type: mongoose_1.Schema.Types.Mixed,
+        type: String,
         required: true,
         trim: true
     },
     participants: {
         type: Number,
+        required: true,
+        trim: true
+    },
+    methodOfReward: {
+        type: String,
         required: true,
         trim: true
     },
