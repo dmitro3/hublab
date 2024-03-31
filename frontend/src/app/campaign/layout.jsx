@@ -6,9 +6,6 @@ import { useSearchParams, permanentRedirect, redirect } from "next/navigation";
 const layout = ({ children }) => {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab");
-
- 
-
   return (
     <div className="px-10 py-8">
       <div className="flex flex-col gap-10 justify-center items-center border rounded-lg bg-lightBlue py-6 mb-10 ">

@@ -6,7 +6,7 @@ import { PointsModal } from "../../components";
 const QuestionFormat = ({ headerText, description }) => {
   return (
     <div className="relative">
-      <section className="z-4 bg-white relative w-full h-full border border-primary  p-3 rounded-lg flex items justify-between">
+      <section className="z-4 bg-white relative w-full h-full border border-primary p-3 rounded-lg flex items-center justify-between">
         <div className="rounded-lg border border-primary z-[-1] h-full absolute w-full top-[6px] left-[6px]"></div>
 
         <div>

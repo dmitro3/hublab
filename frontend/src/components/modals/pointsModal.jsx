@@ -39,7 +39,7 @@ const PointsModal = () => {
 
       {openPoints && (
         <div
-          className={`w-[250px]  absolute border right-[40px]  bg-white rounded-lg z-[999] shadow-sm ${
+          className={`w-[250px] absolute border right-[40px] bg-white rounded-lg z-[999] shadow-sm ${
             openPoints ? "block" : "hidden"
           }`}
         >

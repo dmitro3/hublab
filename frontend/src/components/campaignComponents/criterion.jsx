@@ -16,7 +16,7 @@ const Criterion = () => {
     {
       name: "Everyone on Verxio",
       subName: " All verxio earners can participate",
-      choice:'everone'
+      choice:'everyone'
     },
     {
       name: "Point Specific",
@@ -73,7 +73,7 @@ const Criterion = () => {
                 setIndex(index);
                 setShowOptions(false);
               }}
-              className="w-full bg-white border border-primary rounded-lg p-2 flex flex-col items-start cursor-pointer  hover:shadow-sm hover:border-[3px]"
+              className="w-full bg-white border border-primary rounded-lg p-2 flex flex-col items-start cursor-pointer hover:shadow-sm hover:border-[3px]"
             >
               <h2 className="semibold text-[18px]">{items.name}</h2>
               <p className="normal text-[14px]">{items.subName}</p>
