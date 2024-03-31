@@ -1,12 +1,16 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import UploadIcon from "../../assets/upload-icon.svg";
 import Calender from "../../assets/calender.svg";
 import Button from "../Button";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
+import { useDispatch, useSelector } from "react-redux";
+import { setStart } from "@/store/slices/statesSlice";
+import { root } from "@/store/store";
 
 const Start = () => {
   const [selectedImage, setSelectedImage] = useState("");
@@ -15,6 +19,13 @@ const Start = () => {
   console.log(selectedDate);
 
   const fileInputRef = useRef(null);
+
+  const dispatch = useDispatch();
+  const router = useRouter()
+
+  const start = useSelector((state)=> state.generalStates.start)
+
+
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -41,10 +52,11 @@ const Start = () => {
   };
 
   const initialValues = {
-    title: "",
-    description:'',
-    startDate: "",
-    endDate: "",
+    title: start?.title || "",
+    description: start?.description || "",
+    startDate: start?.startDate || "",
+    endDate: start?.endDate || "",
+    bannerImg: start?.bannerImg || "",
   };
 
   return (
@@ -118,19 +130,13 @@ const Start = () => {
                 <div className="flex gap-10 items-center px-6 py-4 border border-primary rounded-lg w-full relative z-40 bg-white">
                   <div className="flex gap-2 items-center">
                     <p className="text-[#484851]">Start</p>
-                    {/* <div className="border rounded-lg px-3 py-2 flex items-center ">
-                    <Field
-                      className="outline-none bg-transparent w-full"
-                      name="startDate"
-                      placeholder="DD/MM"
-                    />
-                    <Image src={Calender} />
-                  </div> */}
                     <DatePicker
                       format="DD/MM/YYYY"
+                      // defaultValue={start?.startDate} 
                       // value={selectedDate}
                       onChange={(date) => {
                         handleDateChange(date);
+                        console.log(date)
                         setFieldValue(
                           "startDate",
                           dayjs(date).format("DD/MM/YYYY")
@@ -140,16 +146,9 @@ const Start = () => {
                   </div>
                   <div className="flex gap-2 items-center">
                     <p className="text-[#484851] text-[14px]">End</p>
-                    {/* <div className="border rounded-lg px-3 py-2 flex items-center ">
-                    <Field
-                      className="outline-none bg-transparent w-full"
-                      name="endDate"
-                      placeholder="DD/MM"
-                    />
-                    <Image src={Calender} />
-                  </div> */}
                     <DatePicker
                       format="DD/MM/YYYY"
+                      // defaultValue={start?.endDate}
                       // value={selectedDate}
                       onChange={(date) => {
                         handleDateChange(date);
@@ -167,10 +166,14 @@ const Start = () => {
             <div className="mt-5">
               <Button
                 type="button"
-                href="/campaign?tab=inputs"
+                // href="/campaign?tab=inputs"
                 name="continue"
                 className="text-[20px]"
-                onClick={() => console.log(values)}
+                onClick={() => {
+                  console.log(values);
+                  dispatch(setStart(values));
+                  router.push("/campaign?tab=inputs");
+                }}
               />
             </div>
           </Form>

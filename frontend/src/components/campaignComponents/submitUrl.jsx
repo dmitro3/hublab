@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, InputOptions } from "..";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { IoClose } from "react-icons/io5";
 
-const SubmitUrl = ({ showQuestions, setShowQuestions }) => {
+const SubmitUrl = ({ showQuestions, setShowQuestions, setSubmitUrlTotal }) => {
   const initialValue = {
     question: "",
   };
@@ -17,6 +17,21 @@ const SubmitUrl = ({ showQuestions, setShowQuestions }) => {
       },
     }));
   };
+
+  console.log(showQuestions?.submitURL?.points);
+  console.log((showQuestions?.submitURL?.value).length);
+
+  const totalPoint =
+    showQuestions?.submitURL?.points *
+    (showQuestions?.submitURL?.value?.length === 0
+      ? 1
+      : showQuestions?.submitURL?.value?.length);
+
+  console.log("SUBMITURL", totalPoint);
+
+  useEffect(()=>{
+    setSubmitUrlTotal(totalPoint)
+  },[totalPoint])
 
   return (
     <section className="w-full pt-6 md:pt-24">

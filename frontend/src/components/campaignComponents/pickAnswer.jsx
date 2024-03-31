@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, InputOptions } from "..";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { IoClose } from "react-icons/io5";
 
-const PickAnswer = ({ showQuestions, setShowQuestions }) => {
+const PickAnswer = ({
+  showQuestions,
+  setShowQuestions,
+  value,
+  setPickAnswerTotal,
+}) => {
+  
   const initialValue = {
     question: "",
     options: {
@@ -24,6 +30,20 @@ const PickAnswer = ({ showQuestions, setShowQuestions }) => {
       },
     }));
   };
+  console.log(showQuestions?.pickAnswer?.points);
+  console.log((showQuestions?.pickAnswer?.value).length);
+
+  const totalPoint =
+    showQuestions?.pickAnswer?.points *
+    (showQuestions?.pickAnswer?.value?.length === 0
+      ? 1
+      : showQuestions?.pickAnswer?.value?.length);
+
+  console.log("Pickanswer", totalPoint);
+
+  useEffect(() => {
+    setPickAnswerTotal(totalPoint);
+  }, [totalPoint]);
 
   return (
     <section className="w-full pt-6 md:pt-24">
@@ -40,12 +60,12 @@ const PickAnswer = ({ showQuestions, setShowQuestions }) => {
               <span>{index + 1}.</span>
               <p>{item.question}</p>
             </div>
-              <ol className="list-[lower-alpha] list-inside flex flex-col sm:flex-row gap-3 flex-wrap">
-                <li>{item?.options?.a}</li>
-                <li>{item?.options?.b}</li>
-                <li>{item?.options?.c}</li>
-                <li>{item?.options?.d}</li>
-              </ol>
+            <ol className="list-[lower-alpha] list-inside flex flex-col sm:flex-row gap-3 flex-wrap">
+              <li>{item?.options?.a}</li>
+              <li>{item?.options?.b}</li>
+              <li>{item?.options?.c}</li>
+              <li>{item?.options?.d}</li>
+            </ol>
           </div>
         ))}
         {/* </div> */}
@@ -139,7 +159,15 @@ const PickAnswer = ({ showQuestions, setShowQuestions }) => {
                 onClick={() => {
                   console.log(values);
                   pushToPickAnswer(values);
-                  resetForm()
+                  console.log(value);
+                  // setShowQuestions((prevState) => ({
+                  //   ...prevState,
+                  //   [value]: {
+                  //     ...prevState[value],
+                  //     points: totalPoint,
+                  //   },
+                  // }));
+                  resetForm();
                 }}
                 className="w-full bg-white"
               />
