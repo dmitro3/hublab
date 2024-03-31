@@ -20,22 +20,25 @@ const Criterion = () => {
   const data = [
     {
       name: "Everyone on Verxio",
-      subName: " All verxio earners can participate",
+      subName: " All verxio users can participate in the campaign",
+      choice:'everone'
+    },
+    {
+      name: "Custom List",
+      subName: "Upload a list of addresses who will participate in the campaign",
       choice:'everone'
     },
     {
       name: "Point Specific",
-      subName: "Those with a specific point balance can participate",
+      subName: "Those with a specific token point balance can participate",
       choice:'point specific'
     },
     {
       name: "New Earners",
-      subName: "Those that have never participated in any quest before",
+      subName: "Those that have never participated in any campaign before",
       choice: 'new earners'
     },
   ];
-
-//  console.log(data[1]) 
 
   return (
     <section className="relative w-full space-y-3 text-[#484851] mt-10">

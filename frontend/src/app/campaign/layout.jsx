@@ -78,7 +78,7 @@ const layout = ({ children }) => {
               shade="hidden"
               className="rounded-xl"
             />
-            <Button
+            {/* <Button
               name="awareness"
               outline
               shade="hidden"
@@ -89,7 +89,7 @@ const layout = ({ children }) => {
               outline
               shade="hidden"
               className="rounded-xl"
-            />
+            /> */}
           </div>
         </div>
         {children}

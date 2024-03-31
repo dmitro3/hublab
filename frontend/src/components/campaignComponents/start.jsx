@@ -16,8 +16,6 @@ const Start = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
 
-  console.log(selectedDate);
-
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -66,7 +64,7 @@ const Start = () => {
           <Form className="flex flex-col gap-8">
             <div>
               <p className="font-semibold text-[24px] mb-5">
-                <span className="mr-3 text-">*</span>Title
+                <span className="mr-3 text-">*</span>Canpaign Title
               </p>
               <Field
                 className="border outline-none bg-transparent font-normal text-[14px] rounded-lg w-full px-5 py-3 border-[#0D0E32]"
