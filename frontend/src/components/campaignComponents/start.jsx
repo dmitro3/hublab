@@ -11,21 +11,34 @@ import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { setStart } from "@/store/slices/statesSlice";
 import { root } from "@/store/store";
+import RichTextEditor from "react-rte/lib/RichTextEditor";
 
 const Start = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
+  // const [editorState, setEditorState] = React.useState(() =>
+  //   EditorState.createEmpty()
+  // );
+
+  const [value, setValue] = useState(RichTextEditor.createEmptyValue());
+
+  const handleOnChange = (newValue) => {
+    setValue(newValue);
+    if (onChange) {
+      onChange(newValue.toString("html"));
+    }
+  };
+
+
 
   console.log(selectedDate);
 
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
-  const start = useSelector((state)=> state.generalStates.start)
-
-
+  const start = useSelector((state) => state.generalStates.start);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -120,6 +133,7 @@ const Start = () => {
                   placeholder="Enter a name"
                 />
               </div>
+              {/* <RichTextEditor value={value} onChange={handleOnChange} /> */}
             </div>
 
             <div>
@@ -132,11 +146,11 @@ const Start = () => {
                     <p className="text-[#484851]">Start</p>
                     <DatePicker
                       format="DD/MM/YYYY"
-                      // defaultValue={start?.startDate} 
+                      // defaultValue={start?.startDate}
                       // value={selectedDate}
                       onChange={(date) => {
                         handleDateChange(date);
-                        console.log(date)
+                        console.log(date);
                         setFieldValue(
                           "startDate",
                           dayjs(date).format("DD/MM/YYYY")
