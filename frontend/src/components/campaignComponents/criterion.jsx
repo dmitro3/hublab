@@ -2,11 +2,16 @@
 import { useState } from "react";
 import { Button } from "@/components";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useSelector, useDispatch } from "react-redux";
+import { setCriterion } from "@/store/slices/statesSlice";
 
 const Criterion = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [index, setIndex] = useState(0);
+
+
+  const dispatch = useDispatch()
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -72,6 +77,7 @@ const Criterion = () => {
               onClick={() => {
                 setIndex(index);
                 setShowOptions(false);
+                dispatch(setCriterion(items.choice))
               }}
               className="w-full bg-white border border-primary rounded-lg p-2 flex flex-col items-start cursor-pointer  hover:shadow-sm hover:border-[3px]"
             >

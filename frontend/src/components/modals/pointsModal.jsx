@@ -4,7 +4,7 @@ import { useRef, useEffect, useState } from "react";
 import { Button } from "../../components";
 import VerxioToken from "../../assets/verxioToken.svg";
 
-const PointsModal = () => {
+const PointsModal = ({ setShowQuestions, value }) => {
   const [openPoints, setOpenPoints] = useState(false);
   const [points, setPoints] = useState(0);
 
@@ -71,7 +71,16 @@ const PointsModal = () => {
                 name="Enter"
                 className={"w-full bg-white rounded-xl"}
                 shade="rounded-xl"
-                onClick={() => setOpenPoints(false)}
+                onClick={() => {
+                  setOpenPoints(false);
+                  setShowQuestions((prevState) => ({
+                    ...prevState,
+                    [value]: {
+                      ...prevState[value],
+                      points: Number(points),
+                    },
+                  }));
+                }}
               />
             </div>
           </div>
