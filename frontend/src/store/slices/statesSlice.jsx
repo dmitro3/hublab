@@ -5,6 +5,11 @@ const initialState = {
   userProfile: {},
   userId: "",
   edit: false,
+  start:{}, 
+  input:{},
+  totalCampaignPoint:{},
+  criterion:'',
+  rewards:{}
 };
 
 const statesSlice = createSlice({
@@ -20,6 +25,21 @@ const statesSlice = createSlice({
     setEdit: (state, action) => {
       state.edit = action.payload;
     },
+    setStart: (state, action) => {
+      state.start = action.payload;
+    },
+    setInput: (state, action) => {
+      state.input = action.payload;
+    },
+    setTotalCampaignPoint: (state, action) => {
+      state.totalCampaignPoint = action.payload;
+    },
+    setCriterion: (state, action) => {
+      state.criterion = action.payload;
+    },
+    setRewards: (state, action) => {
+      state.rewards = action.payload;
+    },
   },
   extraReducers: (builder)=> {
     builder.addCase(PURGE, () => {
@@ -29,5 +49,5 @@ const statesSlice = createSlice({
 });
 
 export const statesActions = statesSlice.actions;
-export const { setUserId, setUserProfile, setEdit } = statesSlice.actions;
+export const { setUserId, setUserProfile, setEdit, setStart, setInput, setTotalCampaignPoint , setCriterion, setRewards} = statesSlice.actions;
 export default statesSlice.reducer;

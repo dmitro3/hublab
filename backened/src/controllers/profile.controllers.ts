@@ -12,6 +12,7 @@ const {
 const {
   DUPLICATE_EMAIL,
   CREATED,
+  FETCHED,
   UPDATED,
   NOT_FOUND
 } = MESSAGES.PROFILE;
@@ -55,7 +56,7 @@ export default class ProfileController {
       const createdProfile = await create({_id: id, points: {totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp}, ...req.body});
 
       const {referralCode} = req.query;
-      const referredUser = await findOne(referralCode);
+      const referredUser = await findOne({referralCode: referralCode});
 
       if (referredUser && referredUser.points) {
         const totalReferralPoints = referredUser.points.referalPoints + 1000;
@@ -76,7 +77,7 @@ export default class ProfileController {
       let imageUrl;
       if (req.file) {
         // Upload file to Cloudinary
-        const result = await cloudinary.uploader.upload(req.file.path);
+        const result = await cloudinary.uploader.upload(req.file.path, {folder: "Verxio"});
         imageUrl = result.secure_url;
         if(!imageUrl) {
           return res.status(409).send({
@@ -109,7 +110,7 @@ export default class ProfileController {
       return res.status(200)
       .send({
         success: true,
-        message: "Profile fetched successfully",
+        message: FETCHED,
         profile: profile
       });
     }

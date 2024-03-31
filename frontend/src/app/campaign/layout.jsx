@@ -7,7 +7,7 @@ const layout = ({ children }) => {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab");
   return (
-    <div className="px-10 py-8">
+    <div className="px-10 py-8 relative">
       <div className="flex flex-col gap-10 justify-center items-center border rounded-lg bg-lightBlue py-6 mb-10 ">
         <h2 className="text-4xl text-white font-extrabold">CREATE CAMPAIGN</h2>
         <div className="flex gap-10 items-center justify-center">
@@ -24,7 +24,7 @@ const layout = ({ children }) => {
           />
           <Button
             name="inputs"
-            href="/campaign?tab=inputs"
+            // href="/campaign?tab=inputs"
             className={`${
               tab === "inputs"
                 ? "bg-white text-primary"
@@ -37,7 +37,7 @@ const layout = ({ children }) => {
           />
           <Button
             name="criterion"
-            href="/campaign?tab=criterion"
+            // href="/campaign?tab=criterion"
             className={`${
               tab === "criterion"
                 ? "bg-white text-primary"
@@ -50,7 +50,7 @@ const layout = ({ children }) => {
           />
           <Button
             name="rewards"
-            href="/campaign?tab=rewards"
+            // href="/campaign?tab=rewards"
             className={`${
               tab === "rewards"
                 ? "bg-white text-primary"
@@ -75,7 +75,7 @@ const layout = ({ children }) => {
               shade="hidden"
               className="rounded-xl"
             />
-            <Button
+            {/* <Button
               name="awareness"
               outline
               shade="hidden"
@@ -86,7 +86,7 @@ const layout = ({ children }) => {
               outline
               shade="hidden"
               className="rounded-xl"
-            />
+            /> */}
           </div>
         </div>
         {children}

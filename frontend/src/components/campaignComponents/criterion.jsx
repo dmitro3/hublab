@@ -2,11 +2,16 @@
 import { useState } from "react";
 import { Button } from "@/components";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useSelector, useDispatch } from "react-redux";
+import { setCriterion } from "@/store/slices/statesSlice";
 
 const Criterion = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [index, setIndex] = useState(0);
+
+
+  const dispatch = useDispatch()
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -15,22 +20,25 @@ const Criterion = () => {
   const data = [
     {
       name: "Everyone on Verxio",
-      subName: " All verxio earners can participate",
-      choice:'everyone'
+      subName: " All verxio users can participate in the campaign",
+      choice:'everone'
+    },
+    {
+      name: "Custom List",
+      subName: "Upload a list of addresses who will participate in the campaign",
+      choice:'everone'
     },
     {
       name: "Point Specific",
-      subName: "Those with a specific point balance can participate",
+      subName: "Those with a specific token point balance can participate",
       choice:'point specific'
     },
     {
       name: "New Earners",
-      subName: "Those that have never participated in any quest before",
+      subName: "Those that have never participated in any campaign before",
       choice: 'new earners'
     },
   ];
-
-//  console.log(data[1]) 
 
   return (
     <section className="relative w-full space-y-3 text-[#484851] mt-10">
@@ -72,6 +80,7 @@ const Criterion = () => {
               onClick={() => {
                 setIndex(index);
                 setShowOptions(false);
+                dispatch(setCriterion(items.choice))
               }}
               className="w-full bg-white border border-primary rounded-lg p-2 flex flex-col items-start cursor-pointer hover:shadow-sm hover:border-[3px]"
             >
