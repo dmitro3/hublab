@@ -36,17 +36,68 @@ const campaignSchema = new mongoose_1.Schema({
         trim: true
     },
     questions: {
-        type: [{
-                question: String,
-                options: {
-                    a: String,
-                    b: String,
-                    c: String,
-                    d: String
+        type: {
+            pickAnswer: {
+                type: {
+                    value: [{
+                            question: String,
+                            options: {
+                                a: String,
+                                b: String,
+                                c: String,
+                                d: String
+                            },
+                            answer: String,
+                            points: Number
+                        }]
                 },
-                answer: String
-            }],
-        required: false
+                required: false
+            },
+            chooseImg: {
+                type: {
+                    value: [{
+                            question: String,
+                            options: {
+                                a: String,
+                                b: String,
+                                c: String,
+                                d: String
+                            },
+                            answer: String,
+                            points: Number
+                        }]
+                },
+                required: false
+            },
+            submitUrl: {
+                type: {
+                    value: [{
+                            question: String,
+                            points: Number
+                        }]
+                },
+                required: false
+            },
+            openEndedQuestion: {
+                type: {
+                    value: [{
+                            question: String,
+                            points: Number
+                        }]
+                },
+                required: false
+            },
+            action: {
+                type: {
+                    value: [{
+                            question: String,
+                            points: Number
+                        }]
+                },
+                required: false
+            }
+        },
+        required: true
     },
     eligibility: {
         type: String,
@@ -63,7 +114,16 @@ const campaignSchema = new mongoose_1.Schema({
         required: true,
         trim: true
     },
-    reward: {
+    rewardCoin: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    totalRewardPoint: {
+        type: Number,
+        required: true
+    },
+    rewardWith: {
         type: String,
         required: true,
         trim: true
