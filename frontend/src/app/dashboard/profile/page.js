@@ -27,12 +27,14 @@ import { root } from "@/store/store";
 import Link from "next/link";
 import mintVerxioTokens from "@/utils/claimVerxioToken";
 import { RiExternalLinkFill } from "react-icons/ri";
+import getBalance from "@/utils/getVerxioBalance";
 
 const Page = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState();
-  const [transactionUrl, setTransactionUrl] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [transactionUrl, setTransactionUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [balance, setBalance] = useState(0);
 
   const account = useAccount();
   const dispatch = useDispatch();
@@ -41,25 +43,33 @@ const Page = () => {
   const edit = useSelector((state) => state.generalStates.edit);
   const userId = useSelector((state) => state.generalStates.userId);
 
+  useEffect(() => {
+    if (userId !== undefined) {
+      getBalance(userId)
+        .then((newBalance) => setBalance(newBalance))
+        .catch((error) => console.error("Error fetching balance:", error));
+    }
+  }, [userId, balance]);
+
   const handleClaimRewards = async () => {
     const totalPoints = userProfile?.points?.totalPoints || 0;
     if (totalPoints > 0) {
-      setLoading(true)
-        try {
-            const destinationAddress = userId; 
-            const claimAmount = totalPoints;
-            const url = await mintVerxioTokens(destinationAddress, claimAmount);
-            setTransactionUrl(url);
-            await dispatch(claim({ id: userId }));
-            setLoading(false);
-            toast.success(`${claimAmount} Verxio soulbound token claimed 🎊`)
-        } catch (error) {
-            toast.error('Error claiming rewards:')
-            console.log("Error claiming rewards:", error);
-        }
-    } 
-};
-
+      setLoading(true);
+      try {
+        const destinationAddress = userId;
+        const claimAmount = totalPoints;
+        const url = await mintVerxioTokens(destinationAddress, claimAmount);
+        setTransactionUrl(url);
+        await dispatch(claim({ id: userId }));
+        setLoading(false);
+        getUserProfile();
+        toast.success(`${claimAmount} Verxio soulbound token claimed 🎊`);
+      } catch (error) {
+        toast.error("Error claiming rewards:");
+        console.log("Error claiming rewards:", error);
+      }
+    }
+  };
 
   useEffect(() => {
     // getUserProfile();
@@ -186,7 +196,7 @@ const Page = () => {
               </div>
 
               <div className="w-[100%] p-5 sm:hidden">
-                <Points />
+                <Points balance2={balance.toLocaleString()} />
                 <div className="flex justify-between items-center p-4 border rounded-xl border-[#222482] mt-6">
                   <div className=" w-[50%]">
                     <p className="text-[11px] xl:text-[14px]">
@@ -202,6 +212,9 @@ const Page = () => {
                     name="claim rewards"
                     outline
                     className="px-[8px] text-[9px] xl:text-[14px]"
+                    onClick={handleClaimRewards}
+                    isLoading={loading}
+                    disabled={userProfile?.points?.totalPoints <= 0}
                   />
                 </div>
                 <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
@@ -269,7 +282,8 @@ const Page = () => {
           )}
         </div>
         <div className="w-[40%] p-5 hidden sm:block">
-          <Points />
+          <Points balance2={balance.toLocaleString()} />
+
           <div className="flex justify-between items-center p-4 border rounded-xl border-[#222482] mt-6">
             <div className=" w-[50%]">
               <p className="text-[11px] xl:text-[14px]">Accumulated Points</p>
@@ -287,15 +301,21 @@ const Page = () => {
               disabled={userProfile?.points?.totalPoints <= 0}
               className="px-[8px] text-[9px] xl:text-[14px]"
             />
-
           </div>
           {transactionUrl && (
-              
-              <p>
-                  <a href={transactionUrl} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                      View Transaction <span className="text-red-500"><RiExternalLinkFill /></span>
-                  </a>
-              </p>
+            <p>
+              <a
+                href={transactionUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+              >
+                View Transaction{" "}
+                <span className="text-red-500">
+                  <RiExternalLinkFill />
+                </span>
+              </a>
+            </p>
           )}
           <h2 className="text-[28px] font-semibold text-[#0D0E32] mb-3 mt-9">
             Badges

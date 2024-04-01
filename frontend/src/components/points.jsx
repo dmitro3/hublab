@@ -4,7 +4,7 @@ import VerxioCoinBadge from "../assets/VerxioCoin.svg";
 import getBalance from '@/utils/getVerxioBalance';
 import { useSelector } from "react-redux";
 
-const Points = () => {
+const Points = ({balance2}) => {
 
   const userId = useSelector((state) => state.generalStates.userId);
   const [balance, setBalance] = useState(0);

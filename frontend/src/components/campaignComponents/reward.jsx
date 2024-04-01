@@ -26,7 +26,7 @@ const data = [
   },
 ];
 
-const Reward = () => {
+const Reward = ({account}) => {
   const [participants, setParticipants] = useState(0);
   const [showOptions, setShowOptions] = useState(false);
   // const [selectedOption, setSelectedOption] = useState("");
@@ -35,9 +35,6 @@ const Reward = () => {
 
   const dispatch = useDispatch();
 
-  const totalcampaignPoint = useSelector(
-    (state) => state.generalStates.totalCampaignPoint
-  );
   const title = useSelector((state) => state.generalStates?.start?.title);
   const description = useSelector(
     (state) => state.generalStates?.start?.description
@@ -48,10 +45,10 @@ const Reward = () => {
   const endDate = useSelector((state) => state.generalStates?.start?.endDate);
   const questions = useSelector((state) => state.generalStates?.input);
   const eligibility = useSelector((state) => state.generalStates?.criterion);
+  const userId = useSelector((state) => state.generalStates.userId);
+  const status = useSelector((state) => state.campaign.campaign.status);
 
-  console.log(totalcampaignPoint);
-
-  const totalReward = participants * totalcampaignPoint;
+  console.log(account);
 
   const initialValues = {
     title: title,
@@ -67,6 +64,36 @@ const Reward = () => {
     rewardWith: "spl token",
   };
 
+  console.log(questions);
+
+  function removeKeys(obj) {
+    for (let key in obj) {
+      if (typeof obj[key] === "object") {
+        removeKeys(obj[key]);
+      }
+      if (key === "show" || key === "point") {
+        delete obj[key];
+      }
+    }
+  }
+  removeKeys(questions);
+
+  // calculate total points*******************
+  let totalPoints = 0;
+
+  questions.pickAnswer?.value.forEach((question) => {
+    totalPoints += question.points;
+  });
+
+  questions.submitUrl?.value.forEach((question) => {
+    totalPoints += question.points;
+  });
+
+  console.log("Total number of points:", totalPoints);
+  // calculate total points*******************
+
+  const totalReward = participants * totalPoints;
+
   const createNewCampaign = async (values) => {
     try {
       const response = await dispatch(
@@ -76,16 +103,16 @@ const Reward = () => {
             description: description,
             coverBannerUrl:
               "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcondusiv.com%2Fsequential-io-always-outperforms-random-io-on-hard-disk-drives-or-ssds%2F&psig=AOvVaw0gIZMjG4dtsc3otXxWQgHx&ust=1711935077938000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPi7q6KtnYUDFQAAAAAdAAAAABAE",
-            profileId: "1",
+            profileId: userId,
             startDate: startDate,
             endDate: endDate,
             questions: questions,
             eligibility: eligibility,
             participants: values.participants,
-            methodofReward: values.method,
+            methodOfReward: values.method,
             rewardCoin: "verxio points",
             totalRewardPoint: totalReward,
-            reward: "spl token",
+            rewardWith: "spl token",
           },
           // id: 1,
         })
@@ -93,10 +120,10 @@ const Reward = () => {
       if (response.payload.success === true) {
         toast.success(response.payload.message);
         console.log(response);
-        setModalOpen(true)
-        setTimeout(()=>{
-          setModalOpen(false)
-        },3000)
+        setModalOpen(true);
+        setTimeout(() => {
+          setModalOpen(false);
+        }, 3000);
       } else {
         toast.error(response.payload.message);
         console.log(response);
@@ -193,7 +220,7 @@ const Reward = () => {
                     <p>
                       Number of points:{" "}
                       <span className="text-[32px] font-bold ml-2">
-                        {totalcampaignPoint} points
+                        {totalPoints} points
                       </span>
                     </p>
                     <div className="border my-3"></div>
@@ -215,11 +242,12 @@ const Reward = () => {
                   name="publish"
                   className="border border-primary font-medium text-[20px]"
                   shade="border-primary"
+                  isLoading={status === "loading"}
                   onClick={() => {
                     console.log(values);
                     setFieldValue("totalRewardPoint", totalReward);
                     dispatch(setRewards(values));
-                    createNewCampaign(values)
+                    createNewCampaign(values);
                   }}
                 />
                 <Button

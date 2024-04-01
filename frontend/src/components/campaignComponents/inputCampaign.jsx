@@ -7,6 +7,7 @@ import SubmitUrl from "./submitUrl";
 import { useSelector, useDispatch } from "react-redux";
 import { setInput, setTotalCampaignPoint } from "@/store/slices/statesSlice";
 import { useRouter } from "next/navigation";
+import { root } from "@/store/store";
 
 const questionFormatData = [
   {
@@ -20,7 +21,7 @@ const questionFormatData = [
     description:
       "Ask community to submit a url of a completed task. (It would be manually reviewed)",
     points: "50 Points",
-    value: "submitURL",
+    value: "submitUrl",
   },
   {
     headerText: "Choose an Image",
@@ -46,55 +47,40 @@ const InputCampaign = () => {
     pickAnswer: {
       show: false,
       value: [],
-      points: 0,
+      point: 0,
     },
-    submitURL: {
+    submitUrl: {
       show: false,
       value: [],
-      points: 0,
+      point: 0,
     },
-    chooseImg: {
-      show: false,
-      value: [],
-      points: 0,
-    },
-    openEndedQuestion: {
-      show: false,
-      value: [],
-      points: 0,
-    },
+    // chooseImg: {
+    //   show: false,
+    //   value: [],
+    //   points: 0,
+    // },
+    // openEndedQuestion: {
+    //   show: false,
+    //   value: [],
+    //   points: 0,
+    // },
   });
   const [pickAnswerTotal, setPickAnswerTotal] = useState(0);
   const [submitURLTotal, setSubmitUrlTotal] = useState(0);
 
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
 
   console.log(showQuestions);
 
-  const questions = {
-    pickAnswer: [
-      {
-        question: "",
-        options: {
-          a: "",
-          b: "",
-          c: "",
-          d: "",
-        },
-        answer: "",
-      },
-    ],
-    submitURL: [{}],
-    chooseImg: [{}],
-    openEndedQuestion: [{}],
-  };
+  const quest = useSelector((state)=>state.generalStates.input )
+  console.log(quest)
 
-  useEffect(() => {
-    dispatch(setTotalCampaignPoint( pickAnswerTotal  + submitURLTotal));
-  }, [pickAnswerTotal, submitURLTotal]);
 
-  // console.log(pickAnswerTotal, submitURLTotal);
+  // useEffect(() => {
+  //   dispatch(setTotalCampaignPoint(pickAnswerTotal + submitURLTotal));
+  // }, [pickAnswerTotal, submitURLTotal]);
+
 
   return (
     <>
@@ -124,12 +110,12 @@ const InputCampaign = () => {
             setPickAnswerTotal={setPickAnswerTotal}
           />
         )}
-        {showQuestions.submitURL.show && (
+        {showQuestions.submitUrl.show && (
           <SubmitUrl
             showQuestions={showQuestions}
             setShowQuestions={setShowQuestions}
-            value="submitURL"
-            setSubmitUrlTotal={setSubmitUrlTotal}
+            value="submitUrl"
+            setSubmitUrlTotal={setSubmitUrlTotal} 
           />
         )}
 
@@ -139,7 +125,6 @@ const InputCampaign = () => {
             // href="/campaign?tab=criterion"
             className="w-full text-[20px] mt-12"
             onClick={() => {
-              console.log(showQuestions);
               dispatch(setInput(showQuestions));
               router.push("/campaign?tab=criterion");
             }}
