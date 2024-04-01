@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setStart } from "@/store/slices/statesSlice";
 import { root } from "@/store/store";
 import RichTextEditor from "react-rte/lib/RichTextEditor";
+import Upload from "@/providers/cloudinaryProvider";
 
 const Start = () => {
   const [selectedImage, setSelectedImage] = useState("");
@@ -92,7 +93,7 @@ const Start = () => {
                 <span className="mr-3 text-">*</span>Cover Banner
               </p>
               <div className="w-[65%]">
-                <div className="px-28 py-24 rounded-lg border border-primary border-dashed bg-[#E7E7F9]">
+                {/* <div className="px-28 py-24 rounded-lg border border-primary border-dashed bg-[#E7E7F9]">
                   <div className="border rounded-lg px-2 py-1 border-[#0D0E32] ">
                     <div className="flex items-center gap-2 justify-center">
                       <Image alt="upload" src={UploadIcon} />
@@ -113,7 +114,8 @@ const Start = () => {
                       onChange={handleImageChange}
                     />
                   </div>
-                </div>
+                </div> */}
+                <Upload/>
                 <div className="flex justify-between items-center text-[13px] mt-2">
                   <p>PNG / SVG / JPEG / 120*804</p>
                   <p>Max 24MB</p>

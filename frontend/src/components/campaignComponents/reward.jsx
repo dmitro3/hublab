@@ -26,7 +26,7 @@ const data = [
   },
 ];
 
-const Reward = () => {
+const Reward = ({account}) => {
   const [participants, setParticipants] = useState(0);
   const [showOptions, setShowOptions] = useState(false);
   // const [selectedOption, setSelectedOption] = useState("");
@@ -35,9 +35,6 @@ const Reward = () => {
 
   const dispatch = useDispatch();
 
-  const totalcampaignPoint = useSelector(
-    (state) => state.generalStates.totalCampaignPoint
-  );
   const title = useSelector((state) => state.generalStates?.start?.title);
   const description = useSelector(
     (state) => state.generalStates?.start?.description
@@ -48,9 +45,10 @@ const Reward = () => {
   const endDate = useSelector((state) => state.generalStates?.start?.endDate);
   const questions = useSelector((state) => state.generalStates?.input);
   const eligibility = useSelector((state) => state.generalStates?.criterion);
+  const userId = useSelector((state) => state.generalStates.userId);
   const status = useSelector((state) => state.campaign.campaign.status);
 
-  console.log(totalcampaignPoint);
+  console.log(account);
 
   const initialValues = {
     title: title,
@@ -105,7 +103,7 @@ const Reward = () => {
             description: description,
             coverBannerUrl:
               "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcondusiv.com%2Fsequential-io-always-outperforms-random-io-on-hard-disk-drives-or-ssds%2F&psig=AOvVaw0gIZMjG4dtsc3otXxWQgHx&ust=1711935077938000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPi7q6KtnYUDFQAAAAAdAAAAABAE",
-            profileId: "1",
+            profileId: userId,
             startDate: startDate,
             endDate: endDate,
             questions: questions,
