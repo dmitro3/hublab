@@ -49,6 +49,24 @@ export const getProfile = createAsyncThunk(
   }
 );
 
+export const claim = createAsyncThunk(
+  "profile/claim",
+  async ({ id }) => {
+    try {
+      const response = await axios.patch(
+        `https://backend-verxio.vercel.app/api/v1/profiles/claim/${id}` 
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err.response.data);
+      if (!err.response) {
+        throw err.message;
+      }
+      return err.response.data;
+    }
+  }
+);
+
 const profileSlice = createSlice({
   name: "profile",
   initialState,
@@ -98,6 +116,28 @@ const profileSlice = createSlice({
         state.profile.error = action.payload;
         state.profile.status = "failed";
       })
+      
+        //claim user point
+        .addCase(claim.pending, (state) => {
+          state.profile.status = "loading";
+          state.profile.error = null;
+        })
+        .addCase(claim.fulfilled, (state, action) => {
+          if (
+            // action.payload === "Success" ||
+            action.payload.success === true
+          ) {
+            state.profile.data = action.payload;
+            state.profile.status = "succeeded";
+          } else {
+            state.profile.status = "failed";
+            state.profile.error = action.payload;
+          }
+        })
+        .addCase(claim.rejected, (state, action) => {
+          state.profile.error = action.payload;
+          state.profile.status = "failed";
+        })
 
       //purge all state
       .addCase(PURGE, () => {

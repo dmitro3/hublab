@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Image from "next/image";
-import UploadIcon from "../../assets/upload-icon.svg";
+import UploadIcon from "../../assets/uploadIcon.svg";
 import Calender from "../../assets/calender.svg";
 import Button from "../Button";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -194,11 +194,11 @@ const Reward = ({account}) => {
               </div>
               <div className="relative z-40 -right-[1px]">
                 <p className="font-semibold text-[24px] mb-5">
-                  <span className="mr-3 text-">*</span>Reward Coin
+                  <span className="mr-3 text-">*</span>Reward Token
                 </p>
                 <div className="flex justify-start">
                   <Button
-                    name="verxio point"
+                    name="Verxio Soulbound"
                     className="px-4 py-2 bg-white text-primary border rounded-[10px] border-primary text-[14px]"
                     shade="left-[4px] bg-[#0D0E32] border-none rounded-[10px]"
                   />

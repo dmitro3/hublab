@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import UploadIcon from "../../assets/upload-icon.svg";
+import UploadIcon from "../../assets/uploadIcon.svg";
 import Calender from "../../assets/calender.svg";
 import Button from "../Button";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -58,6 +58,8 @@ const Start = () => {
   const handleUploadButtonClick = () => {
     fileInputRef.current.click();
   };
+
+
 
   const handleDateChange = (date) => {
     const formattedDate = dayjs(date).format("DD/MM/YYYY");

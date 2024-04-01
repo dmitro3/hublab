@@ -25,6 +25,7 @@ const page = () => {
   const id2 = useSelector((state) => state);
 
   console.log(id2);
+  const id = useSelector((state) => state.profile.userId);
 
   const getUserProfile = async () => {
     try {

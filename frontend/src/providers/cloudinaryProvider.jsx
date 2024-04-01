@@ -1,7 +1,7 @@
 import { useState } from "react";
-import CloudinaryUploadWidget from "../providers/c";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
+// import Clo from '../providers/'
 
 import "./styles.css";
 
@@ -75,3 +75,4 @@ export default function Upload() {
     </div>
   );
 }
+

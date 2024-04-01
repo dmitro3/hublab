@@ -12,29 +12,29 @@ import { root } from "@/store/store";
 const questionFormatData = [
   {
     headerText: "Pick an answer",
-    description: "Ask candidates to choose an answer from your list of options",
+    description: "Ask community to choose an answer from your list of options",
     points: "40 Points",
     value: "pickAnswer",
   },
   {
     headerText: "Submit a URL",
     description:
-      "Ask candidates to submit a url of a completed task. (It would be manually reviewed)",
+      "Ask community to submit a url of a completed task. (It would be manually reviewed)",
     points: "50 Points",
     value: "submitUrl",
   },
-  // {
-  //   headerText: "Choose an Image",
-  //   description: "Ask candidates to choose an image from your list of options",
-  //   points: "10 Points",
-  //   value: "chooseImg",
-  // },
-  // {
-  //   headerText: "Open-ended questions",
-  //   description: "Ask candidates to give a detailed answer",
-  //   points: "40 Points",
-  //   value: "openEndedQuestion",
-  // },
+  {
+    headerText: "Choose an Image",
+    description: "Ask community to choose an image from your list of options",
+    points: "10 Points",
+    value: "chooseImg",
+  },
+  {
+    headerText: "Open-ended questions",
+    description: "Ask community to give a detailed answer about something",
+    points: "40 Points",
+    value: "openEndedQuestion",
+  },
   // {
   //   headerText: "Pick an answer",
   //   description: "Ask candidates to choose an answer from your list of options",
