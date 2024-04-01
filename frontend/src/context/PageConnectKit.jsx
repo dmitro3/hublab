@@ -8,10 +8,6 @@ import '@particle-network/connect-react-ui/dist/index.css';
 
 const PageConnectKit = ({ children }) => {
 
-//     projectId: process.env.REACT_APP_PROJECT_ID,
-//     clientKey: process.env.REACT_APP_CLIENT_KEY,
-//     appId: process.env.REACT_APP_APP_ID,
-
   const options = {
     projectId: "1b0f4491-a389-49bf-a531-351b2963a777",
     clientKey: "c2OxO6jcBaG5pDob4WS2veb5hSxsQHYnzcunudQ3",

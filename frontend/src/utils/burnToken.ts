@@ -52,7 +52,7 @@ import bs58 from 'bs58';
     
     console.log(
       "\nBurn Tokens:",
-      `https://solana.fm/tx/${burnTxn}?cluster=devnet-solana`,
+      `https://explorer.solana.com/tx/${burnTxn}?cluster=devnet`,
     );
     
 })();
