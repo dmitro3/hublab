@@ -12,6 +12,7 @@ import {
     TOKEN_2022_PROGRAM_ID,
     createInitializeMintInstruction,
     createInitializeMetadataPointerInstruction,
+    createInitializeInterestBearingMintInstruction,
     createInitializeNonTransferableMintInstruction,
     getMintLen,
     LENGTH_SIZE,
@@ -37,6 +38,8 @@ import bs58 from 'bs58';
         uri: 'https://raw.githubusercontent.com/Axio-Lab/hublab/dev/frontend/frontend/src/assets/verxiobg.png',
         additionalMetadata: [['new-field', 'new-value']],
       };
+
+    const rate = 10;
     
     const metadataLen = TYPE_SIZE + LENGTH_SIZE + pack(metadata).length;
     const lamports = await connection.getMinimumBalanceForRentExemption(mintLen + metadataLen);
@@ -52,6 +55,7 @@ import bs58 from 'bs58';
         
         createInitializeMetadataPointerInstruction(mint, payer.publicKey, mint, TOKEN_2022_PROGRAM_ID),
         createInitializeNonTransferableMintInstruction(mint, TOKEN_2022_PROGRAM_ID),
+        createInitializeInterestBearingMintInstruction(mint, payer.publicKey, rate, TOKEN_2022_PROGRAM_ID),        // 
         createInitializeMintInstruction(mint, decimals, payer.publicKey, null, TOKEN_2022_PROGRAM_ID),
         createInitializeInstruction({
             programId: TOKEN_2022_PROGRAM_ID,
@@ -68,7 +72,7 @@ import bs58 from 'bs58';
     const transactionSignature  = await sendAndConfirmTransaction(connection, transaction, [payer, mintKeypair], undefined);
     console.log(
         "\nCreate Mint Account:",
-        `https://solana.fm/tx/${transactionSignature}?cluster=devnet-solana`,
+        `https://explorer.solana.com/tx/${transactionSignature}?cluster=devnet`,
       )
 
 })();

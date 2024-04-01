@@ -6,7 +6,7 @@ import Reward from "@/components/campaignComponents/reward";
 import Start from "@/components/campaignComponents/start";
 import { useSearchParams } from "next/navigation";
 
-const page = () => {
+const page = ({account}) => {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab");
   return (
