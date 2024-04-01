@@ -62,6 +62,7 @@ const Page = () => {
         setTransactionUrl(url);
         await dispatch(claim({ id: userId }));
         setLoading(false);
+        getUserProfile();
         toast.success(`${claimAmount} Verxio soulbound token claimed 🎊`);
       } catch (error) {
         toast.error("Error claiming rewards:");
