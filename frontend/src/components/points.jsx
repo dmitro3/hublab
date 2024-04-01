@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-import VerxioCoinBadge from "../assets/verxioCoin.svg";
+import VerxioCoinBadge from "../assets/VerxioCoin.svg";
 import getBalance from '@/utils/getVerxioBalance';
 import { useSelector } from "react-redux";
 
