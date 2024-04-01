@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage, responsive, placeholder } from "@cloudinary/react";
-// import Clo from '../providers/'
+import CloudinaryUploadWidget from "./cloudinaryUploadWidget";
 
-import "./styles.css";
+// import "./styles.css";
 
 export default function Upload() {
   const [publicId, setPublicId] = useState("");
