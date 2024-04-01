@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { setStart } from "@/store/slices/statesSlice";
 import { root } from "@/store/store";
-import RichTextEditor from "react-rte/lib/RichTextEditor";
+// import RichTextEditor from "react-rte/lib/RichTextEditor";
 import Upload from "@/providers/cloudinaryProvider";
 
 const Start = () => {
@@ -21,7 +21,7 @@ const Start = () => {
   //   EditorState.createEmpty()
   // );
 
-  const [value, setValue] = useState(RichTextEditor.createEmptyValue());
+  // const [value, setValue] = useState(RichTextEditor.createEmptyValue());
 
   const handleOnChange = (newValue) => {
     setValue(newValue);
