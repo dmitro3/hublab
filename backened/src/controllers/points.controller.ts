@@ -19,12 +19,13 @@ export default class PointsController {
                 message: MESSAGES.PROFILE.NOT_FOUND
             });
         }
-        const createdPoints = await find(profileId);
+        const fetchedPoints = await find(profileId);
+        const sum = fetchedPoints.reduce((acc, point) => acc + point.point!, 0);
         return res.status(201)
         .send({
             success: true,
             message: "Today's points fetched successfully",
-            points: createdPoints
+            points: sum
         })
     }
 }
