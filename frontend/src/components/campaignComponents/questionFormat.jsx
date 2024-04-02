@@ -17,7 +17,7 @@ const QuestionFormat = ({
           onClick={() => {
             console.log(value);
 
-            if (showQuestions[value]?.points === 0) {
+            if (showQuestions[value]?.point === 0) {
               toast.info("input campaign point");
             } else {
               setShowQuestions((prevState) => ({
@@ -36,7 +36,7 @@ const QuestionFormat = ({
             <p className="normal text-[14px]">{description}</p>
           </div>
         </div>
-        <PointsModal setShowQuestions={setShowQuestions} value={value} />
+        <PointsModal setShowQuestions={setShowQuestions} value={value}/>
       </section>
     </div>
   );

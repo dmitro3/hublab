@@ -2,36 +2,46 @@ import React, { useEffect } from "react";
 import { Button, InputOptions } from "..";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { IoClose } from "react-icons/io5";
+import { setChoosePoint } from "@/store/slices/statesSlice";
+import { useDispatch } from "react-redux";
 
-const SubmitUrl = ({ showQuestions, setShowQuestions, setSubmitUrlTotal }) => {
+const SubmitUrl = ({ showQuestions, setShowQuestions, setSubmitUrlTotal, value }) => {
+
+
+  const dispatch = useDispatch()
+
+  
   const initialValue = {
     question: "",
+    points: showQuestions.submitUrl.point,
   };
+
+
 
   const pushToSubmitUrl = (newValue) => {
     setShowQuestions((prevState) => ({
       ...prevState,
-      submitURL: {
-        ...prevState.submitURL,
-        value: [...prevState.submitURL.value, newValue],
+      submitUrl: {
+        ...prevState.submitUrl,
+        value: [...prevState.submitUrl.value, newValue],
       },
     }));
   };
 
-  console.log(showQuestions?.submitURL?.points);
-  console.log((showQuestions?.submitURL?.value).length);
+  console.log(showQuestions?.submitUrl?.point);
+  console.log((showQuestions?.submitUrl?.value).length);
 
-  const totalPoint =
-    showQuestions?.submitURL?.points *
-    (showQuestions?.submitURL?.value?.length === 0
-      ? 1
-      : showQuestions?.submitURL?.value?.length);
+  // const totalPoint =
+  //   showQuestions?.submitUrl?.point *
+  //   (showQuestions?.submitUrl?.value?.length === 0
+  //     ? 1
+  //     : showQuestions?.submitUrl?.value?.length);
 
-  console.log("SUBMITURL", totalPoint);
+  // console.log("SUBMITURL", totalPoint);
 
-  useEffect(()=>{
-    setSubmitUrlTotal(totalPoint)
-  },[totalPoint])
+  // useEffect(() => {
+  //   setSubmitUrlTotal(totalPoint);
+  // }, [totalPoint]);
 
   return (
     <section className="w-full pt-6 md:pt-24">
@@ -42,7 +52,7 @@ const SubmitUrl = ({ showQuestions, setShowQuestions, setSubmitUrlTotal }) => {
       </div>
       <div className="border border-primary rounded-lg p-6 flex flex-col items-cente gap-3">
         {/* <div> */}
-        {showQuestions?.submitURL?.value?.map((item, index) => (
+        {showQuestions?.submitUrl?.value?.map((item, index) => (
           <div className="flex flex-col" key={index}>
             <div className="flex gap-3">
               <span>{index + 1}.</span>
@@ -68,6 +78,14 @@ const SubmitUrl = ({ showQuestions, setShowQuestions, setSubmitUrlTotal }) => {
                 onClick={() => {
                   console.log(values);
                   pushToSubmitUrl(values);
+                  setShowQuestions((prevState) => ({
+                    ...prevState,
+                    submitUrl: {
+                      ...prevState[value],
+                      show: false,
+                    },
+                  }));
+                  dispatch(setChoosePoint(0));
                   resetForm();
                 }}
                 className="w-full bg-white"

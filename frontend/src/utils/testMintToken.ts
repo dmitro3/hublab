@@ -47,7 +47,9 @@ import bs58 from 'bs58';
 
       console.log(
         "\nMint Tokens:",
-        `https://solana.fm/tx/${txn}?cluster=devnet-solana`,
+        `https://explorer.solana.com/tx/${txn}?cluster=devnet`,
       );
+
+      
 
 })();

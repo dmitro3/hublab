@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Button, InputOptions } from "..";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { IoClose } from "react-icons/io5";
+import { setChoosePoint } from "@/store/slices/statesSlice";
+import { useDispatch } from "react-redux";
 
 const PickAnswer = ({
   showQuestions,
@@ -9,7 +11,10 @@ const PickAnswer = ({
   value,
   setPickAnswerTotal,
 }) => {
-  
+
+const dispatch = useDispatch()
+
+
   const initialValue = {
     question: "",
     options: {
@@ -19,6 +24,7 @@ const PickAnswer = ({
       d: "",
     },
     answer: "",
+    points:showQuestions.pickAnswer.point
   };
 
   const pushToPickAnswer = (newValue) => {
@@ -30,21 +36,23 @@ const PickAnswer = ({
       },
     }));
   };
-  console.log(showQuestions?.pickAnswer?.points);
+  console.log(showQuestions?.pickAnswer?.point);
   console.log((showQuestions?.pickAnswer?.value).length);
 
-  const totalPoint =
-    showQuestions?.pickAnswer?.points *
-    (showQuestions?.pickAnswer?.value?.length === 0
-      ? 1
-      : showQuestions?.pickAnswer?.value?.length);
+  // const totalPoint =
+  //   showQuestions?.pickAnswer?.points *
+  //   (showQuestions?.pickAnswer?.value?.length === 0
+  //     ? 1
+  //     : showQuestions?.pickAnswer?.value?.length);
 
-  console.log("Pickanswer", totalPoint);
+  // console.log("Pickanswer", totalPoint);
 
-  useEffect(() => {
-    setPickAnswerTotal(totalPoint);
-  }, [totalPoint]);
+  // useEffect(() => {
+  //   setPickAnswerTotal(totalPoint);
+  // }, [totalPoint]);
 
+
+  
   return (
     <section className="w-full pt-6 md:pt-24">
       <div className="my-3">
@@ -159,15 +167,17 @@ const PickAnswer = ({
                 onClick={() => {
                   console.log(values);
                   pushToPickAnswer(values);
-                  console.log(value);
-                  // setShowQuestions((prevState) => ({
-                  //   ...prevState,
-                  //   [value]: {
-                  //     ...prevState[value],
-                  //     points: totalPoint,
-                  //   },
-                  // }));
-                  resetForm();
+                  // console.log(value);
+
+                  setShowQuestions((prevState) => ({
+                    ...prevState,
+                    pickAnswer: {
+                      ...prevState[value],
+                      show: false,
+                    },
+                  }));
+                  dispatch(setChoosePoint(0));
+                  // resetForm();
                 }}
                 className="w-full bg-white"
               />

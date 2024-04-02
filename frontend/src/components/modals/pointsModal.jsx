@@ -3,10 +3,19 @@ import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
 import { Button } from "../../components";
 import VerxioToken from "../../assets/verxioToken.svg";
+import { useSelector, useDispatch } from "react-redux";
+import { root } from "@/store/store";
+import { setChoosePoint } from "@/store/slices/statesSlice";
 
 const PointsModal = ({ setShowQuestions, value }) => {
   const [openPoints, setOpenPoints] = useState(false);
   const [points, setPoints] = useState(0);
+
+  const point = useSelector((state)=> state.generalStates.choosePoint)
+  const dispatch = useDispatch()
+
+  // console.log(point)
+
 
   const openPointsModal = () => {
     setOpenPoints(true);
@@ -58,10 +67,11 @@ const PointsModal = ({ setShowQuestions, value }) => {
               </div>
               <input
                 type="text"
-                defaultValue={points}
+                defaultValue={points || 0 }
                 className="outline-none bg-[#DFDFF7] rounded-lg py-2 px-2 text-[#484851] w-[60%]"
                 onChange={(e) => {
                   setPoints(e.target.value);
+                  dispatch(setChoosePoint(e.target.value))
                 }}
               />
             </div>
@@ -77,7 +87,7 @@ const PointsModal = ({ setShowQuestions, value }) => {
                     ...prevState,
                     [value]: {
                       ...prevState[value],
-                      points: Number(points),
+                      point: Number(point),
                     },
                   }));
                 }}
