@@ -27,7 +27,7 @@ const Points = ({balance2}) => {
         <div className="flex gap-2 xl:gap-4 items-center border rounded-xl px-4 xl:px-9 py- border-[#486006]">
           <Image alt="Verxio Point Icon" src={VerxioCoinBadge} className="w-10 mt-1" />
           <p className="font-semibold text-[20px] xl:text-[30px]">
-          {balance !== null ? balance.toLocaleString() : '0'}
+          {balance !== null ? balance.toLocaleString() : 0}
             </p>
         </div>
         <div className="flex justify-end mt-3 lg:mt-4">
