@@ -14,10 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_configs_1 = require("../configs/constants.configs");
 const profile_services_1 = __importDefault(require("../services/profile.services"));
+const points_service_1 = __importDefault(require("../services/points.service"));
 const cloudinary_configs_1 = __importDefault(require("../configs/cloudinary.configs"));
 const generateReferralCode_utils_1 = __importDefault(require("../utils/generateReferralCode.utils"));
 const getBonus_utils_1 = __importDefault(require("../utils/getBonus.utils"));
 const { create, findOne, editById } = new profile_services_1.default();
+const { create: createPoint } = new points_service_1.default();
 const { DUPLICATE_EMAIL, CREATED, FETCHED, UPDATED, NOT_FOUND } = constants_configs_1.MESSAGES.PROFILE;
 class ProfileController {
     createProfile(req, res) {
@@ -52,13 +54,17 @@ class ProfileController {
                 const code = yield (0, generateReferralCode_utils_1.default)();
                 req.body.referralCode = code;
                 const bonus = yield (0, getBonus_utils_1.default)();
+                yield createPoint({ point: bonus.signUp, profileId: req.body.id });
                 //creates a profile if the email and id doesn't exist
                 const createdProfile = yield create(Object.assign({ _id: id, points: { totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp } }, req.body));
-                const { referralCode } = req.query;
-                const referredUser = yield findOne({ referralCode: referralCode });
-                if (referredUser && referredUser.points) {
-                    const totalReferralPoints = referredUser.points.referalPoints + 1000;
-                    const updatedProfile = yield editById(referredUser._id, { points: { totalPoints: referredUser.points.totalPoints, referalPoints: totalReferralPoints, rewardPoints: referredUser.points.rewardPoints } });
+                if (req.query) {
+                    const { referralCode } = req.query;
+                    const referredUser = yield findOne({ referralCode: referralCode });
+                    if (referredUser && referredUser.points) {
+                        const totalReferralPoints = referredUser.points.referalPoints + bonus.referral;
+                        const updatedProfile = yield editById(referredUser._id, { points: { totalPoints: referredUser.points.totalPoints, referalPoints: totalReferralPoints, rewardPoints: referredUser.points.rewardPoints } });
+                        yield createPoint({ point: bonus.referral, profileId: referredUser._id });
+                    }
                 }
                 return res.status(201)
                     .send({
