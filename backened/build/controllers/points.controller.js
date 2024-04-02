@@ -32,7 +32,7 @@ class PointsController {
             }
             const fetchedPoints = yield find(profileId);
             const sum = fetchedPoints.reduce((acc, point) => acc + point.point, 0);
-            return res.status(201)
+            return res.status(200)
                 .send({
                 success: true,
                 message: "Today's points fetched successfully",
