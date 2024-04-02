@@ -1,6 +1,4 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from "react";
 import { PointsModal } from "../../components";
 import { toast } from "react-toastify";
 
@@ -15,7 +13,7 @@ const QuestionFormat = ({
     <div className="relative">
       <section className="z-4 bg-white relative w-full h-full border border-primary  p-3 rounded-lg flex items-center justify-between cursor-pointer">
         <div
-          className="border w-[94%]"
+          className="b-order w-[94%]"
           onClick={() => {
             console.log(value);
 
