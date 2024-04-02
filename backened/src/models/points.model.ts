@@ -21,5 +21,5 @@ const profileSchema = new Schema({
     timestamps: false
 });
 
-const Profile = model(DATABASES.PROFILE, profileSchema);
+const Profile = model(DATABASES.POINTS, profileSchema);
 export default Profile;
