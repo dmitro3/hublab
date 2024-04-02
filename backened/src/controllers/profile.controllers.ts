@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { FRONTEND_SIGNUP_LINK, MESSAGES } from "../configs/constants.configs";
 import ProfileService from "../services/profile.services";
+import PointsService from "../services/points.service";
 import cloudinary from "../configs/cloudinary.configs";
 import generateReferralCode from "../utils/generateReferralCode.utils";
 import getBonus from "../utils/getBonus.utils";
@@ -9,6 +10,9 @@ const {
   findOne,
   editById
 } = new ProfileService();
+const {
+  create: createPoint
+} = new PointsService();
 const {
   DUPLICATE_EMAIL,
   CREATED,
@@ -52,17 +56,19 @@ export default class ProfileController {
       req.body.referralCode = code;
 
       const bonus = await getBonus();
+      await createPoint({point: bonus.signUp, profileId: req.body.id})
       //creates a profile if the email and id doesn't exist
       const createdProfile = await create({_id: id, points: {totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp}, ...req.body});
 
-      const {referralCode} = req.query;
-      const referredUser = await findOne({referralCode: referralCode});
-
-      if (referredUser && referredUser.points) {
-        const totalReferralPoints = referredUser.points.referalPoints + 1000;
-        const updatedProfile = await editById(referredUser._id, {points: {totalPoints: referredUser.points.totalPoints, referalPoints: totalReferralPoints, rewardPoints: referredUser.points.rewardPoints}});
+      if(req.query) {
+        const {referralCode} = req.query;
+        const referredUser = await findOne({referralCode: referralCode});
+        if (referredUser && referredUser.points) {
+          const totalReferralPoints = referredUser.points.referalPoints + bonus.referral;
+          const updatedProfile = await editById(referredUser._id, {points: {totalPoints: referredUser.points.totalPoints, referalPoints: totalReferralPoints, rewardPoints: referredUser.points.rewardPoints}});
+          await createPoint({point: bonus.referral, profileId: referredUser._id})
+        }
       }
-
       return res.status(201)
       .send({
         success: true,
