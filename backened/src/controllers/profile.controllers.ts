@@ -56,7 +56,7 @@ export default class ProfileController {
       req.body.referralCode = code;
 
       const bonus = await getBonus();
-      await createPoint({point: bonus.signUp, profileId: req.body.id})
+      await createPoint({point: bonus.signUp, profileId: id})
       //creates a profile if the email and id doesn't exist
       const createdProfile = await create({_id: id, points: {totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp}, ...req.body});
 

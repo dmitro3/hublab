@@ -54,7 +54,7 @@ class ProfileController {
                 const code = yield (0, generateReferralCode_utils_1.default)();
                 req.body.referralCode = code;
                 const bonus = yield (0, getBonus_utils_1.default)();
-                yield createPoint({ point: bonus.signUp, profileId: req.body.id });
+                yield createPoint({ point: bonus.signUp, profileId: id });
                 //creates a profile if the email and id doesn't exist
                 const createdProfile = yield create(Object.assign({ _id: id, points: { totalPoints: bonus.signUp, referalPoints: 0, rewardPoints: bonus.signUp } }, req.body));
                 if (req.query) {
