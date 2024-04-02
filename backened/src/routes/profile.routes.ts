@@ -29,7 +29,7 @@ router.get("/:id", getProfile);
 router.patch("/claim/:id", claimPoints);
 
 //fetch today's points
-router.get("/points", getTodaysPoints);
+router.get("/points/:profileId", getTodaysPoints);
 
 //get referral link
 router.get("/referral/:id", getReferralLink);
