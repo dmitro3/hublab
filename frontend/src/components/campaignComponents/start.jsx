@@ -28,9 +28,10 @@ const Start = () => {
 
   const start = useSelector((state) => state.generalStates.start);
 
-  const handleImageChange = (event) => {
+  const handleImageChange = (event, setFieldValue) => {
     const file = event.target.files[0];
     console.log("file", file);
+    setFieldValue("bannerImg", file);
 
     if (file) {
       const reader = new FileReader();
@@ -40,8 +41,8 @@ const Start = () => {
         setSelectedImage(reader.result);
       };
 
-      const data =reader.readAsDataURL(file);
-      console.log(data)
+      const data = reader.readAsDataURL(file);
+      console.log(data);
     }
   };
   console.log(selectedImage);
@@ -56,9 +57,10 @@ const Start = () => {
     console.log(formattedDate);
   };
 
-    const handleDescriptionChange = (newContent) => {
-      setDescription(newContent);
-    };
+  const handleDescriptionChange = (newContent) => {
+    setDescription(newContent);
+    console.log(newContent);
+  };
 
   const initialValues = {
     title: start?.title || "",
@@ -115,12 +117,13 @@ const Start = () => {
                         className="hidden"
                         accept="image/*"
                         ref={fileInputRef}
-                        onChange={handleImageChange}
+                        onChange={(e) => {
+                          handleImageChange(e, setFieldValue);
+                        }}
                       />
                     </div>
                   )}
                 </div>
-                {/* <Upload/> */}
                 <div className="flex justify-between items-center text-[13px] mt-2">
                   <p>PNG / SVG / JPEG / 120*804</p>
                   <p>Max 24MB</p>
@@ -132,16 +135,10 @@ const Start = () => {
               <p className="font-semibold text-[24px] mb-5">
                 <span className="mr-3 text-">*</span>Description
               </p>
-              {/* <div className="h-[150px] border  bg-transparent font-normal text-[14px] rounded-lg w-full border-[#0D0E32]">
-                <Field
-                  className="w-full h-full min-h-full max-h-[150px] bg-transparent px-5 py-1 outline-none border"
-                  name="description"
-                  as="textarea"
-                  placeholder="Enter a name"
-                />
-              </div> */}
-              <Tiptap onChange={handleDescriptionChange}/>
-              {/* <RichTextEditor value={value} onChange={handleOnChange} /> */}
+              <Tiptap
+                onChange={handleDescriptionChange}
+                setFieldValue={setFieldValue}
+              />
             </div>
 
             <div>
@@ -154,8 +151,8 @@ const Start = () => {
                     <p className="text-[#484851]">Start</p>
                     <DatePicker
                       format="DD/MM/YYYY"
-                      // defaultValue={start?.startDate}
-                      // value={selectedDate}
+                      defaultValue={start?.startDate}
+                      value={selectedDate}
                       onChange={(date) => {
                         handleDateChange(date);
                         console.log(date);

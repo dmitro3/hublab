@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Image from "next/image";
 import UploadIcon from "../../assets/uploadIcon.svg";
@@ -28,12 +28,15 @@ const data = [
 ];
 
 const Reward = ({ account }) => {
+  const questions = useSelector((state) => state.generalStates?.input);
+
   const [participants, setParticipants] = useState(0);
   const [showOptions, setShowOptions] = useState(false);
   // const [selectedOption, setSelectedOption] = useState("");
   const [index, setIndex] = useState(0);
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const [campaignModalOpen, setCampaignModalOpen] = useState(false);
+  const [newQuestions, setNewQuestions] = useState(questions);
 
   const dispatch = useDispatch();
 
@@ -45,12 +48,12 @@ const Reward = ({ account }) => {
     (state) => state.generalStates?.start?.startDate
   );
   const endDate = useSelector((state) => state.generalStates?.start?.endDate);
-  const questions = useSelector((state) => state.generalStates?.input);
   const eligibility = useSelector((state) => state.generalStates?.criterion);
   const userId = useSelector((state) => state.generalStates.userId);
   const status = useSelector((state) => state.campaign.campaign.status);
+  const reward = useSelector((state) => state.generalStates.rewards);
 
-  console.log(account);
+  console.log(questions);
 
   const initialValues = {
     title: title,
@@ -247,8 +250,9 @@ const Reward = ({ account }) => {
                   outline
                   onClick={() => {
                     console.log(values);
-                    // setCampaignModalOpen(true);
-                    setModalOpen(true);
+                    setCampaignModalOpen(true);
+                    // setModalOpen(true);
+                    dispatch(setRewards(values));
                   }}
                 />
                 <Button
@@ -258,10 +262,14 @@ const Reward = ({ account }) => {
                   shade="border-primary"
                   isLoading={status === "loading"}
                   onClick={() => {
-                    console.log(values);
-                    setFieldValue("totalRewardPoint", totalReward);
-                    dispatch(setRewards(values));
-                    createNewCampaign(values);
+                    if (userId !== '') {
+                      console.log(values);
+                      setFieldValue("totalRewardPoint", totalReward);
+                      dispatch(setRewards(values));
+                      createNewCampaign(values);
+                    } else {
+                      toast.info("Connect your wallet to publish your campaign");
+                    }
                   }}
                 />
               </div>
@@ -301,7 +309,14 @@ const Reward = ({ account }) => {
         </div>
       )}
 
-      {campaignModalOpen && <CampaignPreview />}
+      {campaignModalOpen && (
+        <CampaignPreview
+          setCampaignModalOpen={setCampaignModalOpen}
+          reward={reward}
+          totalPoints={totalPoints}
+          totalReward={totalReward}
+        />
+      )}
     </section>
   );
 };
