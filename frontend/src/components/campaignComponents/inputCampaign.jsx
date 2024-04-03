@@ -23,18 +23,18 @@ const questionFormatData = [
     points: "50 Points",
     value: "submitUrl",
   },
-  {
-    headerText: "Choose an Image",
-    description: "Ask community to choose an image from your list of options",
-    points: "10 Points",
-    value: "chooseImg",
-  },
-  {
-    headerText: "Open-ended questions",
-    description: "Ask community to give a detailed answer about something",
-    points: "40 Points",
-    value: "openEndedQuestion",
-  },
+  // {
+  //   headerText: "Choose an Image",
+  //   description: "Ask community to choose an image from your list of options",
+  //   points: "10 Points",
+  //   value: "chooseImg",
+  // },
+  // {
+  //   headerText: "Open-ended questions",
+  //   description: "Ask community to give a detailed answer about something",
+  //   points: "40 Points",
+  //   value: "openEndedQuestion",
+  // },
   // {
   //   headerText: "Pick an answer",
   //   description: "Ask candidates to choose an answer from your list of options",
@@ -65,7 +65,7 @@ const InputCampaign = () => {
     //   points: 0,
     // },
   });
-  const [pickAnswerTotal, setPickAnswerTotal] = useState(0);
+  // const [pickAnswerTotal, setPickAnswerTotal] = useState(0);
   const [submitURLTotal, setSubmitUrlTotal] = useState(0);
 
   const dispatch = useDispatch();
@@ -107,7 +107,6 @@ const InputCampaign = () => {
             showQuestions={showQuestions}
             setShowQuestions={setShowQuestions}
             value="pickAnswer"
-            setPickAnswerTotal={setPickAnswerTotal}
           />
         )}
         {showQuestions.submitUrl.show && (
@@ -115,7 +114,6 @@ const InputCampaign = () => {
             showQuestions={showQuestions}
             setShowQuestions={setShowQuestions}
             value="submitUrl"
-            setSubmitUrlTotal={setSubmitUrlTotal} 
           />
         )}
 
@@ -127,6 +125,7 @@ const InputCampaign = () => {
             onClick={() => {
               dispatch(setInput(showQuestions));
               router.push("/campaign?tab=criterion");
+              console.log(showQuestions)
             }}
           />
         </div>

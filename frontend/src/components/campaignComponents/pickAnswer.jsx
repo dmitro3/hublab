@@ -9,7 +9,6 @@ const PickAnswer = ({
   showQuestions,
   setShowQuestions,
   value,
-  setPickAnswerTotal,
 }) => {
 
 const dispatch = useDispatch()
