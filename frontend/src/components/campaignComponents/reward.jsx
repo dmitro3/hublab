@@ -76,9 +76,10 @@ const Reward = ({ account }) => {
       if (typeof obj[key] === "object") {
         removeKeys(obj[key]);
       }
-      if (key === "show" || key === "point") {
-        delete obj[key];
-      }
+      // if (key === "show" || key === "point") {
+      //   delete obj[key];
+      // } 
+  
     }
   }
   removeKeys(questions);
