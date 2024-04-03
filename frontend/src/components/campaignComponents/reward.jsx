@@ -34,7 +34,7 @@ const Reward = ({ account }) => {
   const [showOptions, setShowOptions] = useState(false);
   // const [selectedOption, setSelectedOption] = useState("");
   const [index, setIndex] = useState(0);
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const [campaignModalOpen, setCampaignModalOpen] = useState(false);
   const [newQuestions, setNewQuestions] = useState(questions);
 
@@ -261,10 +261,14 @@ const Reward = ({ account }) => {
                   shade="border-primary"
                   isLoading={status === "loading"}
                   onClick={() => {
-                    console.log(values);
-                    setFieldValue("totalRewardPoint", totalReward);
-                    dispatch(setRewards(values));
-                    createNewCampaign(values);
+                    if (userId !== '') {
+                      console.log(values);
+                      setFieldValue("totalRewardPoint", totalReward);
+                      dispatch(setRewards(values));
+                      createNewCampaign(values);
+                    } else {
+                      toast.info("Connect your wallet to publish your campaign");
+                    }
                   }}
                 />
               </div>
