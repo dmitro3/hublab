@@ -10,7 +10,7 @@ import OrderedList from "@tiptap/extension-ordered-list";
 
 import Toolbar from "./toolbar";
 
-const Tiptap = ({ onChange }) => {
+const Tiptap = ({ onChange, setFieldValue }) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({}),
@@ -20,26 +20,26 @@ const Tiptap = ({ onChange }) => {
           levels: [1],
         },
       }),
-    //   Heading2.configure({
-    //     HTMLAttributes: {
-    //       class: "text-xl font-semibold", // Styling for H2
-    //       levels: [2],
-    //     },
-    //   }),
-    //   Heading3.configure({
-    //     HTMLAttributes: {
-    //       class: "text-lg font-medium", // Styling for H3
-    //       levels: [3],
-    //     },
-    //   }),
+      //   Heading2.configure({
+      //     HTMLAttributes: {
+      //       class: "text-xl font-semibold", // Styling for H2
+      //       levels: [2],
+      //     },
+      //   }),
+      //   Heading3.configure({
+      //     HTMLAttributes: {
+      //       class: "text-lg font-medium", // Styling for H3
+      //       levels: [3],
+      //     },
+      //   }),
       BulletList.configure({
         HTMLAttributes: {
-          class: "list-disc ", // Styling for H2
+          class: "list-disc list-outside px-8 ", // Styling for H2
         },
       }),
       OrderedList.configure({
         HTMLAttributes: {
-          class: "list-decimal ", // Styling for H2
+          class: "list-decimal list-outside px-8 ", // Styling for H2
         },
       }),
     ],
@@ -48,11 +48,11 @@ const Tiptap = ({ onChange }) => {
     editorProps: {
       attributes: {
         class:
-          "w-full h-full min-h-[200px] max-h-[150px bg-transparent px-5 py-1 outline-none border",
+          "w-full h-full min-h-[200px] max-h-[150px bg-transparent px-5 py-1 outline-none border border-primary",
       },
     },
     onUpdate({ editor }) {
-      onChange(editor.getHTML());
+      onChange(() => setFieldValue("description", editor.getHTML()));
       console.log(editor.getHTML());
     },
   });
