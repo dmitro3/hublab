@@ -45,7 +45,7 @@ const Referralmodal = ({ setModalOpen, referralCode }) => {
         </p>
         <div className="bg-[#DFDFF7] p-5 rounded-md flex flex-col sm:flex-row justify-between items-center gap-6">
           <p className="p-2 rounded-lg bg-white text-[12px]" id="text-to-copy">
-            {`http://localhost:3000/dashboard/profile?ref=${referralCode}`}
+            {`https://www.verxio.xyz/dashboard/profile?ref=${referralCode}`}
           </p>
           <div className="-top-3">
             <Button name="copy link" onClick={handleCopy} />

@@ -27,6 +27,8 @@
     "@solana/web3.js": "^1.91.1",
     "axios": "^1.6.8",
     "bs58": "^5.0.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
     "cloudinary": "^2.1.0",
     "dayjs": "^1.11.10",
     "formik": "^2.4.5",

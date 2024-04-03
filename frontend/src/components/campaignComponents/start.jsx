@@ -11,26 +11,12 @@ import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { setStart } from "@/store/slices/statesSlice";
 import { root } from "@/store/store";
-// import RichTextEditor from "react-rte/lib/RichTextEditor";
 import Upload from "@/providers/cloudinaryProvider";
 
 const Start = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  // const [editorState, setEditorState] = React.useState(() =>
-  //   EditorState.createEmpty()
-  // );
-
-  // const [value, setValue] = useState(RichTextEditor.createEmptyValue());
-
-  const handleOnChange = (newValue) => {
-    setValue(newValue);
-    if (onChange) {
-      onChange(newValue.toString("html"));
-    }
-  };
-
-
+  const [description, setDescription] = useState("");
 
   console.log(selectedDate);
 
