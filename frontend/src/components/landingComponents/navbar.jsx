@@ -60,7 +60,7 @@ const Navbar = () => {
           >
             {isOpen && (
               <div className=" relative top-[100px] flex flex-col justify-center items-center gap-4 my-6 md:hidden">
-                <Button name="Read Whitepaper" />
+                <Button href="/campaign?tab=start" name="Start Campaign"/>
               </div>
             )}
           </ul>
@@ -69,7 +69,12 @@ const Navbar = () => {
         <div className="hidden md:block gap-4">
           {/* <Button href="/dashboard/profile" name="Start Campaign" />
           <Button name="Start Earning" outline className="bg-primary" /> */}
-          <Button href="/campaign?tab=start" name="Start Campaign" />
+          <Button 
+          href="/campaign?tab=start" 
+          name="Start Campaign"
+          outline
+          className="bg-primary"
+           />
           {/* <ConnectButton /> */}
         </div>
 
