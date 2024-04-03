@@ -20,7 +20,7 @@ const layout = ({ children }) => {
   // });
 
   return (
-    <div>
+    <div className="relative">
       <div className="bg-primary flex justify-between items-center px-5 py-3">
         <Image src={logo} alt="Verxio Logo" className="w-[50px]" />
         <div className="flex items-center gap-3">
@@ -29,7 +29,7 @@ const layout = ({ children }) => {
           {/* <ConnectButton /> */}
         </div>
       </div>
-      <div className="px-10 py-8 relative">
+      <div className="px-10 py-8 relativ">
         <div className="flex flex-col gap-10 justify-center items-center border rounded-lg bg-lightBlue py-6 mb-10 ">
           <h2 className="text-4xl text-white font-extrabold">
             CREATE CAMPAIGN

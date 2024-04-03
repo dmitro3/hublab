@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { CloseCircle } from "iconsax-react";
 import CampaignSuccess from "../../assets/campaignSuccess.svg";
 import { createCampaign } from "@/store/slices/campaignSlice";
+import CampaignPreview from "../modals/campaignPreview";
 const data = [
   {
     name: "Random Selection",
@@ -26,12 +27,13 @@ const data = [
   },
 ];
 
-const Reward = ({account}) => {
+const Reward = ({ account }) => {
   const [participants, setParticipants] = useState(0);
   const [showOptions, setShowOptions] = useState(false);
   // const [selectedOption, setSelectedOption] = useState("");
   const [index, setIndex] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(true);
+  const [campaignModalOpen, setCampaignModalOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -71,9 +73,10 @@ const Reward = ({account}) => {
       if (typeof obj[key] === "object") {
         removeKeys(obj[key]);
       }
-      if (key === "show" || key === "point") {
-        delete obj[key];
-      }
+      // if (key === "show" || key === "point") {
+      //   delete obj[key];
+      // } 
+  
     }
   }
   removeKeys(questions);
@@ -239,6 +242,17 @@ const Reward = ({account}) => {
               <div className="mt-5 flex flex-col gap-8">
                 <Button
                   type="button"
+                  name="preview"
+                  className="font-medium text-[20px] bg-white"
+                  outline
+                  onClick={() => {
+                    console.log(values);
+                    // setCampaignModalOpen(true);
+                    setModalOpen(true);
+                  }}
+                />
+                <Button
+                  type="button"
                   name="publish"
                   className="border border-primary font-medium text-[20px]"
                   shade="border-primary"
@@ -249,13 +263,6 @@ const Reward = ({account}) => {
                     dispatch(setRewards(values));
                     createNewCampaign(values);
                   }}
-                />
-                <Button
-                  type="button"
-                  name="preview"
-                  className="font-medium text-[20px] bg-white"
-                  outline
-                  onClick={() => console.log(values)}
                 />
               </div>
             </Form>
@@ -293,6 +300,8 @@ const Reward = ({account}) => {
           </div>
         </div>
       )}
+
+      {campaignModalOpen && <CampaignPreview />}
     </section>
   );
 };
