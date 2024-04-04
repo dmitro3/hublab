@@ -45,12 +45,13 @@ const CampaignPreview = ({
           </div>
           <div className="flex flex-col gap-2 ">
             <div>
-              <p className="text-[32px]">
-                Launch Campaign:{" "}
-                <span className="font-bold">{reward?.title}</span>{" "}
+              <p className="text-[32px] font-bold">
+                {/* Launch Campaign:{" "} */}
+                {reward?.title}
+                {/* <span className="font-bold">{reward?.title}</span>{" "} */}
               </p>
               <p className="text-[32px] font-bold">
-                <span>{totalReward}</span> Vpoints
+                <span>{totalReward}</span> Points
               </p>
             </div>
             <div className="flex gap-2">
