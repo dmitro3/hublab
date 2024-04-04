@@ -53,9 +53,9 @@ const LandingPageHero = () => {
           <div className="relative h-full flex flex-col items-center justify-center text-center mx-auto gap-8 md:gap-12 px-[MIN(100px,8%)]">
             <div className="flex flex-col font-medium text-3xl md:text-6xl text-textColor leading-10 md:leading-[80px]">
               <h2>
-                Create and manage  <br className="hidden md:block" /> tokenized{" "}
-                ad campaigns <br className="hidden md:block" /> in
-                <span className="text-[#00ADEF]"> minutes</span>
+                Create and Manage  <br className="hidden md:block" /> Tokenized{" "}
+                ad Campaigns <br className="hidden md:block" /> in
+                <span className="text-[#00ADEF]"> Minutes</span>
               </h2>
             </div>
 
