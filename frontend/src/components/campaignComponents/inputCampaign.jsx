@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setInput, setTotalCampaignPoint } from "@/store/slices/statesSlice";
 import { useRouter } from "next/navigation";
 import { root } from "@/store/store";
+import PerformAction from "./performAction";
 
 const questionFormatData = [
   {
@@ -35,11 +36,13 @@ const questionFormatData = [
   //   points: "40 Points",
   //   value: "openEndedQuestion",
   // },
-  // {
-  //   headerText: "Pick an answer",
-  //   description: "Ask candidates to choose an answer from your list of options",
-  //   points: "40 Points",
-  // },
+  {
+    headerText: "Perform an action",
+    description:
+      "Ask participants to perform a specific action e.g follow your community",
+    points: "40 Points",
+    value: 'performAction'
+  },
 ];
 
 const InputCampaign = () => {
@@ -54,33 +57,34 @@ const InputCampaign = () => {
       value: [],
       point: 0,
     },
-    // chooseImg: {
-    //   show: false,
-    //   value: [],
-    //   points: 0,
-    // },
+    performAction: {
+      show: false,
+      value: [],
+      point: 0,
+    },
+    chooseImg: {
+      show: false,
+      value: [],
+      points: 0,
+    },
     // openEndedQuestion: {
     //   show: false,
     //   value: [],
     //   points: 0,
     // },
   });
-  // const [pickAnswerTotal, setPickAnswerTotal] = useState(0);
-  const [submitURLTotal, setSubmitUrlTotal] = useState(0);
 
   const dispatch = useDispatch();
   const router = useRouter();
 
   console.log(showQuestions);
 
-  const quest = useSelector((state)=>state.generalStates.input )
-  console.log(quest)
-
+  const quest = useSelector((state) => state.generalStates.input);
+  console.log(quest);
 
   // useEffect(() => {
   //   dispatch(setTotalCampaignPoint(pickAnswerTotal + submitURLTotal));
   // }, [pickAnswerTotal, submitURLTotal]);
-
 
   return (
     <>
@@ -116,6 +120,13 @@ const InputCampaign = () => {
             value="submitUrl"
           />
         )}
+        {showQuestions.performAction.show && (
+          <PerformAction
+            showQuestions={showQuestions}
+            setShowQuestions={setShowQuestions}
+            value="performAction"
+          />
+        )}
 
         <div className="w-full my-8">
           <Button
@@ -125,7 +136,7 @@ const InputCampaign = () => {
             onClick={() => {
               dispatch(setInput(showQuestions));
               router.push("/campaign?tab=criterion");
-              console.log(showQuestions)
+              console.log(showQuestions);
             }}
           />
         </div>

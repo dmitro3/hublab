@@ -151,8 +151,8 @@ const Start = () => {
                     <p className="text-[#484851]">Start</p>
                     <DatePicker
                       format="DD/MM/YYYY"
-                      defaultValue={start?.startDate}
-                      value={selectedDate}
+                      // defaultValue={start?.startDate}
+                      // value={selectedDate}
                       onChange={(date) => {
                         handleDateChange(date);
                         console.log(date);
