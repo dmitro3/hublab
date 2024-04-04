@@ -13,7 +13,7 @@ const QuestionFormat = ({
     <div className="relative">
       <section className="z-4 bg-white relative w-full h-full border border-primary  p-3 rounded-lg flex items-center justify-between cursor-pointer">
         <div
-          className="b-order w-[94%]"
+          className=" w-[94%]"
           onClick={() => {
             console.log(value);
 

@@ -11,26 +11,13 @@ import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { setStart } from "@/store/slices/statesSlice";
 import { root } from "@/store/store";
-// import RichTextEditor from "react-rte/lib/RichTextEditor";
 import Upload from "@/providers/cloudinaryProvider";
+import Tiptap from "../tiptap";
 
 const Start = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  // const [editorState, setEditorState] = React.useState(() =>
-  //   EditorState.createEmpty()
-  // );
-
-  // const [value, setValue] = useState(RichTextEditor.createEmptyValue());
-
-  const handleOnChange = (newValue) => {
-    setValue(newValue);
-    if (onChange) {
-      onChange(newValue.toString("html"));
-    }
-  };
-
-
+  const [description, setDescription] = useState("");
 
   console.log(selectedDate);
 
@@ -41,30 +28,38 @@ const Start = () => {
 
   const start = useSelector((state) => state.generalStates.start);
 
-  const handleImageChange = (event) => {
+  const handleImageChange = (event, setFieldValue) => {
     const file = event.target.files[0];
+    console.log("file", file);
+    setFieldValue("bannerImg", file);
 
     if (file) {
       const reader = new FileReader();
+      console.log("reader", reader);
 
       reader.onloadend = () => {
         setSelectedImage(reader.result);
       };
 
-      reader.readAsDataURL(file);
+      const data = reader.readAsDataURL(file);
+      console.log(data);
     }
   };
+  console.log(selectedImage);
 
   const handleUploadButtonClick = () => {
     fileInputRef.current.click();
   };
 
-
-
   const handleDateChange = (date) => {
     const formattedDate = dayjs(date).format("DD/MM/YYYY");
     // setSelectedDate(formattedDate)
     console.log(formattedDate);
+  };
+
+  const handleDescriptionChange = (newContent) => {
+    setDescription(newContent);
+    console.log(newContent);
   };
 
   const initialValues = {
@@ -95,29 +90,40 @@ const Start = () => {
                 <span className="mr-3 text-">*</span>Cover Banner
               </p>
               <div className="w-[65%]">
-                {/* <div className="px-28 py-24 rounded-lg border border-primary border-dashed bg-[#E7E7F9]">
-                  <div className="border rounded-lg px-2 py-1 border-[#0D0E32] ">
-                    <div className="flex items-center gap-2 justify-center">
-                      <Image alt="upload" src={UploadIcon} />
-                      <button
-                        className="text-[14px]"
-                        onClick={handleUploadButtonClick}
-                      >
-                        Upload Image
-                      </button>
-                    </div>
-                    <input
-                      name="profileImageDoc"
-                      type="file"
-                      capture="environment"
-                      className="hidden"
-                      accept="image/*"
-                      ref={fileInputRef}
-                      onChange={handleImageChange}
+                <div className=" rounded-lg border border-primary border-dashed bg-[#E7E7F9]">
+                  {selectedImage ? (
+                    <Image
+                      src={selectedImage}
+                      alt="cover Banner"
+                      className="w-full h-full bg-cover"
+                      width={500}
+                      height={400}
                     />
-                  </div>
-                </div> */}
-                <Upload/>
+                  ) : (
+                    <div className="mx-28 my-24 border rounded-lg px-2 py-1 border-[#0D0E32] ">
+                      <div className="flex items-center gap-2 justify-center">
+                        <Image alt="upload" src={UploadIcon} />
+                        <button
+                          className="text-[14px]"
+                          onClick={handleUploadButtonClick}
+                        >
+                          Upload Image
+                        </button>
+                      </div>
+                      <input
+                        name="profileImageDoc"
+                        type="file"
+                        capture="environment"
+                        className="hidden"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        onChange={(e) => {
+                          handleImageChange(e, setFieldValue);
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
                 <div className="flex justify-between items-center text-[13px] mt-2">
                   <p>PNG / SVG / JPEG / 120*804</p>
                   <p>Max 24MB</p>
@@ -129,15 +135,10 @@ const Start = () => {
               <p className="font-semibold text-[24px] mb-5">
                 <span className="mr-3 text-">*</span>Description
               </p>
-              <div className="h-[150px] border  bg-transparent font-normal text-[14px] rounded-lg w-full border-[#0D0E32]">
-                <Field
-                  className="w-full h-full min-h-full max-h-[150px] bg-transparent px-5 py-1 outline-none border"
-                  name="description"
-                  as="textarea"
-                  placeholder="Enter a name"
-                />
-              </div>
-              {/* <RichTextEditor value={value} onChange={handleOnChange} /> */}
+              <Tiptap
+                onChange={handleDescriptionChange}
+                setFieldValue={setFieldValue}
+              />
             </div>
 
             <div>
@@ -150,8 +151,8 @@ const Start = () => {
                     <p className="text-[#484851]">Start</p>
                     <DatePicker
                       format="DD/MM/YYYY"
-                      // defaultValue={start?.startDate}
-                      // value={selectedDate}
+                      defaultValue={start?.startDate}
+                      value={selectedDate}
                       onChange={(date) => {
                         handleDateChange(date);
                         console.log(date);

@@ -53,25 +53,23 @@ const LandingPageHero = () => {
           <div className="relative h-full flex flex-col items-center justify-center text-center mx-auto gap-8 md:gap-12 px-[MIN(100px,8%)]">
             <div className="flex flex-col font-medium text-3xl md:text-6xl text-textColor leading-10 md:leading-[80px]">
               <h2>
-                Embark on a Journey <br className="hidden md:block" /> Where{" "}
-                Rewards begin <br className="hidden md:block" /> from
-                <span className="text-[#00ADEF]"> day one</span>
+                Create and manage  <br className="hidden md:block" /> tokenized{" "}
+                ad campaigns <br className="hidden md:block" /> in
+                <span className="text-[#00ADEF]"> minutes</span>
               </h2>
             </div>
 
             <p className="font-normal text-lg text-[#DFDFF7]">
-              Earn crypto simply by engaging. Expand your reach and attract{" "}
-              <br className="hidden md:block" /> new audiences with our
-              protocols
+
+              Grow your business by rewarding community particpiation with  {" "}
+              <br className="hidden md:block" />  tokenized ad campaigns.
             </p>
 
             <div className="flex gap-3 items-center relative z-20">
-              <Button name="Start Earning" href={"/welcome"} />
+              {/* <Button name="Start Earning" href={"/welcome"} /> */}
               <Button
                 href="/campaign?tab=start"
                 name="Start Campaign"
-                outline
-                className="bg-primary"
               />
             </div>
           </div>

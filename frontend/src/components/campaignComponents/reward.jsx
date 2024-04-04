@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Image from "next/image";
 import UploadIcon from "../../assets/uploadIcon.svg";
@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { CloseCircle } from "iconsax-react";
 import CampaignSuccess from "../../assets/campaignSuccess.svg";
 import { createCampaign } from "@/store/slices/campaignSlice";
+import CampaignPreview from "../modals/campaignPreview";
 const data = [
   {
     name: "Random Selection",
@@ -26,12 +27,16 @@ const data = [
   },
 ];
 
-const Reward = ({account}) => {
+const Reward = ({ account }) => {
+  const questions = useSelector((state) => state.generalStates?.input);
+
   const [participants, setParticipants] = useState(0);
   const [showOptions, setShowOptions] = useState(false);
   // const [selectedOption, setSelectedOption] = useState("");
   const [index, setIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const [campaignModalOpen, setCampaignModalOpen] = useState(false);
+  const [newQuestions, setNewQuestions] = useState(questions);
 
   const dispatch = useDispatch();
 
@@ -43,12 +48,12 @@ const Reward = ({account}) => {
     (state) => state.generalStates?.start?.startDate
   );
   const endDate = useSelector((state) => state.generalStates?.start?.endDate);
-  const questions = useSelector((state) => state.generalStates?.input);
   const eligibility = useSelector((state) => state.generalStates?.criterion);
   const userId = useSelector((state) => state.generalStates.userId);
   const status = useSelector((state) => state.campaign.campaign.status);
+  const reward = useSelector((state) => state.generalStates.rewards);
 
-  console.log(account);
+  console.log(questions);
 
   const initialValues = {
     title: title,
@@ -71,9 +76,10 @@ const Reward = ({account}) => {
       if (typeof obj[key] === "object") {
         removeKeys(obj[key]);
       }
-      if (key === "show" || key === "point") {
-        delete obj[key];
-      }
+      // if (key === "show" || key === "point") {
+      //   delete obj[key];
+      // } 
+  
     }
   }
   removeKeys(questions);
@@ -239,23 +245,32 @@ const Reward = ({account}) => {
               <div className="mt-5 flex flex-col gap-8">
                 <Button
                   type="button"
+                  name="preview"
+                  className="font-medium text-[20px] bg-white"
+                  outline
+                  onClick={() => {
+                    console.log(values);
+                    setCampaignModalOpen(true);
+                    // setModalOpen(true);
+                    dispatch(setRewards(values));
+                  }}
+                />
+                <Button
+                  type="button"
                   name="publish"
                   className="border border-primary font-medium text-[20px]"
                   shade="border-primary"
                   isLoading={status === "loading"}
                   onClick={() => {
-                    console.log(values);
-                    setFieldValue("totalRewardPoint", totalReward);
-                    dispatch(setRewards(values));
-                    createNewCampaign(values);
+                    if (userId !== '') {
+                      console.log(values);
+                      setFieldValue("totalRewardPoint", totalReward);
+                      dispatch(setRewards(values));
+                      createNewCampaign(values);
+                    } else {
+                      toast.info("Connect your wallet to publish your campaign");
+                    }
                   }}
-                />
-                <Button
-                  type="button"
-                  name="preview"
-                  className="font-medium text-[20px] bg-white"
-                  outline
-                  onClick={() => console.log(values)}
                 />
               </div>
             </Form>
@@ -292,6 +307,15 @@ const Reward = ({account}) => {
             </p>
           </div>
         </div>
+      )}
+
+      {campaignModalOpen && (
+        <CampaignPreview
+          setCampaignModalOpen={setCampaignModalOpen}
+          reward={reward}
+          totalPoints={totalPoints}
+          totalReward={totalReward}
+        />
       )}
     </section>
   );

@@ -12,7 +12,7 @@ export default function Home() {
     <main>
       <Navbar />
       <LandingPageHero />
-      <HowToEarn />
+      {/* <HowToEarn /> */}
       <SliderSection />
       <Tasks />
       <Footer />

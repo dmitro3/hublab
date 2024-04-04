@@ -5,7 +5,7 @@ import { IoClose } from "react-icons/io5";
 import { setChoosePoint } from "@/store/slices/statesSlice";
 import { useDispatch } from "react-redux";
 
-const SubmitUrl = ({ showQuestions, setShowQuestions, setSubmitUrlTotal, value }) => {
+const SubmitUrl = ({ showQuestions, setShowQuestions, value }) => {
 
 
   const dispatch = useDispatch()
