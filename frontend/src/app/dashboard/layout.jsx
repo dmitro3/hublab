@@ -3,7 +3,8 @@ import Sidebar from "../../components/sidebar";
 
 export const metadata = {
   title: "Verxio Protocol",
-  description: "Verxio is revolutionalizing the way people learn and interact with the blockchain",
+  description:
+    "Verxio is revolutionalizing the way people learn and interact with the blockchain",
 };
 
 const Layout = ({ children }) => {
@@ -12,9 +13,7 @@ const Layout = ({ children }) => {
       <main className=" flex h-screen overflow-hidden">
         <Sidebar />
         <section className="w-full h-[calc(100%-0px)] overflow-scroll bg-white ">
-          <div>
-            {children}
-          </div>
+          <div>{children}</div>
         </section>
       </main>
     </NavProvider>
