@@ -76,9 +76,9 @@ const Reward = ({ account }) => {
       if (typeof obj[key] === "object") {
         removeKeys(obj[key]);
       }
-      // if (key === "show" || key === "point") {
-      //   delete obj[key];
-      // } 
+      if (key === "show" || key === "point") {
+        delete obj[key];
+      } 
   
     }
   }
@@ -95,7 +95,7 @@ const Reward = ({ account }) => {
     totalPoints += question.points;
   });
 
-  console.log("Total number of points:", totalPoints);
+  // console.log("Total number of points:", totalPoints);
   // calculate total points*******************
 
   const totalReward = participants * totalPoints;
@@ -249,7 +249,7 @@ const Reward = ({ account }) => {
                   className="font-medium text-[20px] bg-white"
                   outline
                   onClick={() => {
-                    console.log(values);
+                    // console.log(values);
                     setCampaignModalOpen(true);
                     // setModalOpen(true);
                     dispatch(setRewards(values));
@@ -263,7 +263,7 @@ const Reward = ({ account }) => {
                   isLoading={status === "loading"}
                   onClick={() => {
                     if (userId !== '') {
-                      console.log(values);
+                      // console.log(values);
                       setFieldValue("totalRewardPoint", totalReward);
                       dispatch(setRewards(values));
                       createNewCampaign(values);
