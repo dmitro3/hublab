@@ -44,6 +44,7 @@ const page = () => {
     <div className="h-full">
       {singleCampaign && Object.keys(singleCampaign).length !== 0 && (
         <CampaignPreview
+        campaignId={id}
           reward={singleCampaign}
           totalReward={singleCampaign.totalRewardPoint}
         />

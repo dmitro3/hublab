@@ -37,6 +37,7 @@ const Reward = ({ account }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [campaignModalOpen, setCampaignModalOpen] = useState(false);
   const [newQuestions, setNewQuestions] = useState(questions);
+  const [campaignId, setCampaignId] = useState('')
 
   const dispatch = useDispatch();
 
@@ -125,8 +126,10 @@ const Reward = ({ account }) => {
       );
       if (response.payload.success === true) {
         toast.success(response.payload.message);
+        setCampaignId(response?.payload?.campaignId)
         console.log(response);
         setModalOpen(true);
+        setCampaignModalOpen(true);
         setTimeout(() => {
           setModalOpen(false);
         }, 3000);
@@ -314,6 +317,7 @@ const Reward = ({ account }) => {
       {campaignModalOpen && (
         <div className="bg-[#000]/40  absolute w-full h-full top-0 left-0 z-50 p-10 text-[#484851] ">
           <CampaignPreview
+            campaignId={campaignId}
             setCampaignModalOpen={setCampaignModalOpen}
             reward={reward}
             totalPoints={totalPoints}

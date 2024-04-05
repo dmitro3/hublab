@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button";
 import Image from "next/image";
 import Check from "../../assets/check-icon.svg";
 import { CloseCircle } from "iconsax-react";
 
-const CampaignLink = ({ setModalOpen, id }) => {
+const CampaignLink = ({ setModalOpen, id, campaignId }) => {
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleCopy = () => {
@@ -22,8 +22,18 @@ const CampaignLink = ({ setModalOpen, id }) => {
       });
   };
 
+  useEffect(() => {
+    // Disable scrolling on mount
+    document.body.style.overflow = "hidden";
+
+    // Re-enable scrolling on unmount
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   return (
-    <div className="bg-[#000]/40  absolute w-full h-full top-0 left-0 z-50 flex justify-center items-center px-28">
+    <div className="bg-[#000]/40  absolute w-full h-screen overflow-hidden top-0 left-0 z-50 flex justify-center items-center px-28">
       <div className="bg-white p-5 rounded-lg">
         <div className="flex justify-end mb-2">
           <CloseCircle
@@ -46,7 +56,7 @@ const CampaignLink = ({ setModalOpen, id }) => {
         </p>
         <div className="bg-[#DFDFF7] p-5 rounded-md flex flex-col sm:flex-row justify-between items-center gap-6">
           <p className="p-2 rounded-lg bg-white text-[12px]" id="text-to-copy">
-            {`http://localhost:3000/campaign?id=${id}`}
+            {`http://localhost:3000/campaign?id=${campaignId}`}
           </p>
           <div className="-top-3">
             <Button name="copy link" onClick={handleCopy} />

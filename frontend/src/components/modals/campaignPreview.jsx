@@ -7,15 +7,25 @@ import VerxioGold from "../../assets/VerxioCoin.svg";
 import { CloseCircle } from "iconsax-react";
 import PreviewTask from "../campaignComponents/previewTask";
 import CampaignLink from "./campainLink";
+import { useSelector, useDispatch } from "react-redux";
 
 const CampaignPreview = ({
   setCampaignModalOpen,
   reward,
   totalPoints,
   totalReward,
+  campaignId,
+  // setFieldValue,
+  // createNewCampaign
 }) => {
   const [totalPointArray, setTotalPointArray] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+
+  const userId = useSelector((state) => state.generalStates.userId);
+  const status = useSelector((state) => state.campaign.campaign.status);
+
+
+  const dispatch = useDispatch()
 
   const addValueToArray = (newValue) => {
     // Copy the current array state
@@ -37,10 +47,20 @@ const CampaignPreview = ({
     total += totalPointArray[i];
   }
 
+  // useEffect(() => {
+  //   // Disable scrolling on mount
+  //   document.body.style.overflow = "hidden";
+
+  //   // Re-enable scrolling on unmount
+  //   // return () => {
+  //   //   document.body.style.overflow = "auto";
+  //   // };
+  // }, []);
+
   console.log("The total number is:", total);
   return (
     <>
-      <div className="bg-white w-full h-full flex p-6 border rounded-lg ">
+      <div className="bg-white w-full h-full flex p-6 border rounded-lg overflow-hidden">
         <div className="w-[60%] border-r p-6 ">
           <div className="flex justify-end mb-5">
             <Button
@@ -121,9 +141,28 @@ const CampaignPreview = ({
             </div>
           </div>
         </div>
+{/* 
+        <Button
+          type="button"
+          name="publish"
+          className="border border-primary font-medium text-[20px]"
+          shade="border-primary"
+          isLoading={status === "loading"}
+          onClick={() => {
+            if (userId !== undefined) {
+              // console.log(values);
+              setFieldValue("totalRewardPoint", totalReward);
+              dispatch(setRewards(values));
+              createNewCampaign(values);
+            } else {
+              toast.info("Connect your wallet to publish your campaign");
+            }
+          }}
+        /> */}
       </div>
       {modalOpen && (
         <CampaignLink
+          campaignId={campaignId}
           setModalOpen={setModalOpen}
           id="660dba89934e99274e09dcb8"
         />
