@@ -20,8 +20,7 @@ const layout = ({ children }) => {
         <Image src={logo} alt="Verxio Logo" className="w-[50px]" />
         <div className="flex items-center gap-3">
           {/* <Button name="start earning" /> */}
-          {account && <LogoutButton />}
-          <WalletLogin/>
+          {account ? <LogoutButton /> : <WalletLogin />}
         </div>
       </div>
       <div className="px-10 py-8 relativ">
