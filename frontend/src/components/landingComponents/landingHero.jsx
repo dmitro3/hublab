@@ -62,7 +62,7 @@ const LandingPageHero = () => {
             <p className="font-normal text-lg text-[#DFDFF7]">
 
               Grow your business by rewarding community particpiation with  {" "}
-              <br className="hidden md:block" />  tokenized ad campaigns.
+              <br className="hidden md:block" />  crypto incentives.
             </p>
 
             <div className="flex gap-3 items-center relative z-20">
