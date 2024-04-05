@@ -10,6 +10,16 @@ const initialState = {
     error: null,
     data: {},
   },
+  userCampaign: {
+    status: "idle",
+    error: null,
+    data: {},
+  },
+  singleCampaign: {
+    status: "idle",
+    error: null,
+    data: {},
+  },
 };
 
 export const createCampaign = createAsyncThunk(
@@ -19,6 +29,42 @@ export const createCampaign = createAsyncThunk(
       const response = await axios.post(
         `https://backend-verxio.vercel.app/api/v1/campaigns`, // Assuming apiUrl is defined somewhere in your code
         data
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err.response.data);
+      if (!err.response) {
+        throw err.message;
+      }
+      return err.response.data;
+    }
+  }
+);
+
+
+export const getUserCampaigns = createAsyncThunk(
+  "profile/userCampaigns",
+  async ({ id }) => {
+    try {
+      const response = await axios.get(
+        `https://backend-verxio.vercel.app/api/v1/campaigns/profile/${id}` // Assuming apiUrl is defined somewhere in your code
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err.response.data);
+      if (!err.response) {
+        throw err.message;
+      }
+      return err.response.data;
+    }
+  }
+);
+export const getCampaign = createAsyncThunk(
+  "profile/singleCampaign",
+  async ({ id }) => {
+    try {
+      const response = await axios.get(
+        `https://backend-verxio.vercel.app/api/v1/campaigns/${id}` // Assuming apiUrl is defined somewhere in your code
       );
       return response.data;
     } catch (err) {
@@ -60,27 +106,49 @@ const campaignSlice = createSlice({
         state.campaign.status = "failed";
       })
 
-    //   //get user profile
-    //   .addCase(getProfile.pending, (state) => {
-    //     state.profile.status = "loading";
-    //     state.profile.error = null;
-    //   })
-    //   .addCase(getProfile.fulfilled, (state, action) => {
-    //     if (
-    //       // action.payload === "Success" ||
-    //       action.payload.success === true
-    //     ) {
-    //       state.profile.data = action.payload;
-    //       state.profile.status = "succeeded";
-    //     } else {
-    //       state.profile.status = "failed";
-    //       state.profile.error = action.payload;
-    //     }
-    //   })
-    //   .addCase(getProfile.rejected, (state, action) => {
-    //     state.profile.error = action.payload;
-    //     state.profile.status = "failed";
-    //   })
+      //get user campaigns
+      .addCase(getUserCampaigns.pending, (state) => {
+        state.userCampaign.status = "loading";
+        state.userCampaign.error = null;
+      })
+      .addCase(getUserCampaigns.fulfilled, (state, action) => {
+        if (
+          // action.payload === "Success" ||
+          action.payload.success === true
+        ) {
+          state.userCampaign.data = action.payload;
+          state.userCampaign.status = "succeeded";
+        } else {
+          state.userCampaign.status = "failed";
+          state.userCampaign.error = action.payload;
+        }
+      })
+      .addCase(getUserCampaigns.rejected, (state, action) => {
+        state.userCampaign.error = action.payload;
+        state.userCampaign.status = "failed";
+      })
+
+      //get single campaigns
+      .addCase(getCampaign.pending, (state) => {
+        state.singleCampaign.status = "loading";
+        state.singleCampaign.error = null;
+      })
+      .addCase(getCampaign.fulfilled, (state, action) => {
+        if (
+          // action.payload === "Success" ||
+          action.payload.success === true
+        ) {
+          state.singleCampaign.data = action.payload;
+          state.singleCampaign.status = "succeeded";
+        } else {
+          state.singleCampaign.status = "failed";
+          state.singleCampaign.error = action.payload;
+        }
+      })
+      .addCase(getCampaign.rejected, (state, action) => {
+        state.singleCampaign.error = action.payload;
+        state.singleCampaign.status = "failed";
+      })
 
       //purge all state
       .addCase(PURGE, () => {
