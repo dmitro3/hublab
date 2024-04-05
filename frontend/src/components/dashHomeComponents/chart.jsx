@@ -39,22 +39,24 @@ const ResponsiveChart = () => {
         "Dec",
       ],
     },
-    // colors: ["#039BFA", "#2D37485C", "#4ab6fb", "#c4c6cd"],
   });
 
   return (
-    <section className="w-full flex flex-col items-start md:items-center gap-5">
-
-    <div className>
-      <h2></h2>
-    </div>
+    <section className="w-full flex flex-col items-start gap-5">
+      <section className="flex items-center justify-between">
+        <div className>
+          <h2>
+            Ongoing Campaign <span>Join Lexifay</span>
+          </h2>
+        </div>
+        <div className></div>
+      </section>
 
       <Chart
         options={options}
         series={options.series}
         type="area"
         height={options.chart.height}
-        // color={options.colors}
       />
     </section>
   );
