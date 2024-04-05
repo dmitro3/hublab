@@ -30,18 +30,18 @@ const PreviewTask = ({ question, setTotalPointArray, addValueToArray }) => {
     const updatedTaskDoneArray = [...performActionTaskDoneArray];
     updatedTaskDoneArray[index] = true;
     setPerformActionTaskDoneArray(updatedTaskDoneArray);
-      if (performActionTaskDoneArray[index] === false) {
-        addValueToArray(point);
-      }
+    if (performActionTaskDoneArray[index] === false) {
+      addValueToArray(point);
+    }
   };
 
   const handleSubmitUrlTaskDone = (index, point) => {
     const updatedTaskDoneArray = [...submitUrlTaskDoneArray];
     updatedTaskDoneArray[index] = true;
     setSubmitUrlTaskDoneArray(updatedTaskDoneArray);
-      if (submitUrlTaskDoneArray[index] === false) {
-        addValueToArray(point);
-      }
+    if (submitUrlTaskDoneArray[index] === false) {
+      addValueToArray(point);
+    }
   };
   const handlePickanswerTaskDone = (index, point) => {
     const updatedTaskDoneArray = [...pickAnswerTaskDoneArray];
@@ -149,6 +149,7 @@ const PreviewTask = ({ question, setTotalPointArray, addValueToArray }) => {
         <div className="flex flex-col gap-2">
           {performAction?.value?.map((item, index) => (
             <SocialTask
+              key={index}
               question={item.question}
               point={item.points}
               href={item.url}

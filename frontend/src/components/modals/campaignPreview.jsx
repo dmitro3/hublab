@@ -6,6 +6,7 @@ import Image from "next/image";
 import VerxioGold from "../../assets/VerxioCoin.svg";
 import { CloseCircle } from "iconsax-react";
 import PreviewTask from "../campaignComponents/previewTask";
+import CampaignLink from "./campainLink";
 
 const CampaignPreview = ({
   setCampaignModalOpen,
@@ -14,6 +15,7 @@ const CampaignPreview = ({
   totalReward,
 }) => {
   const [totalPointArray, setTotalPointArray] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const addValueToArray = (newValue) => {
     // Copy the current array state
@@ -37,11 +39,16 @@ const CampaignPreview = ({
 
   console.log("The total number is:", total);
   return (
-    <div className="bg-[#000]/40  absolute w-full h-full top-0 left-0 z-50 p-10 text-[#484851] ">
-      <div className="bg-white w-full h-full flex p-6 border rounded-lg  overflow-scrol ">
+    <>
+      <div className="bg-white w-full h-full flex p-6 border rounded-lg ">
         <div className="w-[60%] border-r p-6 ">
           <div className="flex justify-end mb-5">
-            <Button name="share " outline className="bg-white" />
+            <Button
+              name="share "
+              outline
+              className="bg-white"
+              onClick={() => setModalOpen(true)}
+            />
           </div>
           <div className="flex flex-col gap-2 ">
             <div>
@@ -115,7 +122,13 @@ const CampaignPreview = ({
           </div>
         </div>
       </div>
-    </div>
+      {modalOpen && (
+        <CampaignLink
+          setModalOpen={setModalOpen}
+          id="660dba89934e99274e09dcb8"
+        />
+      )}
+    </>
   );
 };
 

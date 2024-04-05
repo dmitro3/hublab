@@ -62,11 +62,11 @@ const InputCampaign = () => {
       value: [],
       point: 0,
     },
-    chooseImg: {
-      show: false,
-      value: [],
-      points: 0,
-    },
+    // chooseImg: {
+    //   show: false,
+    //   value: [],
+    //   points: 0,
+    // },
     // openEndedQuestion: {
     //   show: false,
     //   value: [],
@@ -131,11 +131,11 @@ const InputCampaign = () => {
         <div className="w-full my-8">
           <Button
             name="Continue"
-            // href="/campaign?tab=criterion"
+            // href="/create_campaign?tab=criterion"
             className="w-full text-[20px] mt-12"
             onClick={() => {
               dispatch(setInput(showQuestions));
-              router.push("/campaign?tab=criterion");
+              router.push("/create_campaign?tab=criterion");
               console.log(showQuestions);
             }}
           />

@@ -185,13 +185,13 @@ const Start = () => {
             <div className="mt-5">
               <Button
                 type="button"
-                // href="/campaign?tab=inputs"
+                // href="/create_campaign?tab=inputs"
                 name="continue"
                 className="text-[20px]"
                 onClick={() => {
                   console.log(values);
                   dispatch(setStart(values));
-                  router.push("/campaign?tab=inputs");
+                  router.push("/create_campaign?tab=inputs");
                 }}
               />
             </div>

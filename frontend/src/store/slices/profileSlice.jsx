@@ -10,6 +10,16 @@ const initialState = {
     error: null,
     data: {},
   },
+  userProfile: {
+    status: "idle",
+    error: null,
+    data: {},
+  },
+  claim: {
+    status: "idle",
+    error: null,
+    data: {},
+  },
 };
 
 export const createProfile = createAsyncThunk(
@@ -97,46 +107,46 @@ const profileSlice = createSlice({
 
       //get user profile
       .addCase(getProfile.pending, (state) => {
-        state.profile.status = "loading";
-        state.profile.error = null;
+        state.userProfile.status = "loading";
+        state.userProfile.error = null;
       })
       .addCase(getProfile.fulfilled, (state, action) => {
         if (
           // action.payload === "Success" ||
           action.payload.success === true
         ) {
-          state.profile.data = action.payload;
-          state.profile.status = "succeeded";
+          state.userProfile.data = action.payload;
+          state.userProfile.status = "succeeded";
         } else {
-          state.profile.status = "failed";
-          state.profile.error = action.payload;
+          state.userProfile.status = "failed";
+          state.userProfile.error = action.payload;
         }
       })
       .addCase(getProfile.rejected, (state, action) => {
-        state.profile.error = action.payload;
-        state.profile.status = "failed";
+        state.userProfile.error = action.payload;
+        state.userProfile.status = "failed";
       })
       
         //claim user point
         .addCase(claim.pending, (state) => {
-          state.profile.status = "loading";
-          state.profile.error = null;
+          state.claim.status = "loading";
+          state.claim.error = null;
         })
         .addCase(claim.fulfilled, (state, action) => {
           if (
             // action.payload === "Success" ||
             action.payload.success === true
           ) {
-            state.profile.data = action.payload;
-            state.profile.status = "succeeded";
+            state.claim.data = action.payload;
+            state.claim.status = "succeeded";
           } else {
-            state.profile.status = "failed";
-            state.profile.error = action.payload;
+            state.claim.status = "failed";
+            state.claim.error = action.payload;
           }
         })
         .addCase(claim.rejected, (state, action) => {
-          state.profile.error = action.payload;
-          state.profile.status = "failed";
+          state.claim.error = action.payload;
+          state.claim.status = "failed";
         })
 
       //purge all state
