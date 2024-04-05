@@ -20,7 +20,7 @@ const campaignSchema = Joi.object({
         openEndedQuestion: Joi.object({
             value: Joi.array()
         }),
-        action: Joi.object({
+        performAction: Joi.object({
             value: Joi.array()
         })
     }).required(),

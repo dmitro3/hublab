@@ -44,7 +44,7 @@ export default class CampaignController {
         .send({
             success: true,
             message: CREATED,
-            campaign: createdCampaign
+            campaignId: createdCampaign?._id
         })
     }
 

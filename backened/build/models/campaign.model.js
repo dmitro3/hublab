@@ -87,7 +87,7 @@ const campaignSchema = new mongoose_1.Schema({
                 },
                 required: false
             },
-            action: {
+            performAction: {
                 type: {
                     value: [{
                             question: String,
