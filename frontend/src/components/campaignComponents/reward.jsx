@@ -8,6 +8,7 @@ import Button from "../Button";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { useSelector, useDispatch } from "react-redux";
 import dayjs from "dayjs";
+import { useAccount } from "@particle-network/connect-react-ui";
 import { setRewards } from "@/store/slices/statesSlice";
 import { root } from "@/store/store";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -28,6 +29,7 @@ const data = [
 ];
 
 const Reward = ({ account }) => {
+  const user = useAccount();
   const questions = useSelector((state) => state.generalStates?.input);
 
   const [participants, setParticipants] = useState(0);
@@ -72,6 +74,7 @@ const Reward = ({ account }) => {
   };
 
   console.log(questions);
+  
 
   function removeKeys(obj) {
     for (let key in obj) {
@@ -271,14 +274,14 @@ const Reward = ({ account }) => {
                   shade="border-primary"
                   isLoading={status === "loading"}
                   onClick={() => {
-                    if (userId !== undefined) {
+                    if (user !== undefined) {
                       // console.log(values);
                       setFieldValue("totalRewardPoint", totalReward);
                       dispatch(setRewards(values));
                       createNewCampaign(values);
                     } else {
                       toast.info(
-                        "Connect your wallet to publish your campaign"
+                        "Connect your wallet to publish campaign"
                       );
                     }
                   }}
