@@ -48,7 +48,6 @@ const layout = ({ children }) => {
             />
             <Button
               name="inputs"
-              // href="/campaign?tab=inputs"
               className={`${
                 tab === "inputs"
                   ? "bg-white text-primary"
@@ -61,7 +60,6 @@ const layout = ({ children }) => {
             />
             <Button
               name="criterion"
-              // href="/campaign?tab=criterion"
               className={`${
                 tab === "criterion"
                   ? "bg-white text-primary"
@@ -74,7 +72,6 @@ const layout = ({ children }) => {
             />
             <Button
               name="rewards"
-              // href="/campaign?tab=rewards"
               className={`${
                 tab === "rewards"
                   ? "bg-white text-primary"
