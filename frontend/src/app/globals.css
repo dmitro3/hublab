@@ -19,6 +19,12 @@
   --scrollbar-background: transparent;
 }
 
+.table-row {
+  padding: 30px;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+}
+
 /* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

@@ -1,41 +1,17 @@
 "use client";
 import { Link } from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { campaignDetailsData, dashboardCardData } from "@/utils/data";
 import { useRouter } from "next/navigation";
+import ResponsiveChart from "@/components/dashHomeComponents/chart";
+import CampaignTable from "@/components/dashHomeComponents/campaignTable";
 import DashboardCards from "@/components/dashHomeComponents/dashboardCards";
 
 const page = () => {
-  const dashboardCardData = [
-    {
-      headerText: "All Campaigns",
-      number: "72",
-      imgUrl: "/images/allCampaigns.svg",
-      alt: "allCampaign",
-    },
-    {
-      headerText: "All Participants",
-      number: "1,802",
-      imgUrl: "/images/allParticipants.svg",
-      alt: "allParticipants",
-    },
-    {
-      imgUrl: "/images/claimedPoints",
-      alt: "claimedPoints",
-      headerText: "Claimed Points",
-      number: "60,6969",
-    },
-    {
-      imgUrl: "/images/participantsWithReward.svg",
-      alt: "participantsWithReward",
-      headerText: "Participants with rewards",
-      number: "860",
-    },
-  ];
-
   const router = useRouter();
+  const [campaignData, setCampaignData] = useState([]);
   const userId = useSelector((state) => state.generalStates.userId);
-
   console.log(userId);
 
   useEffect(() => {
@@ -43,6 +19,11 @@ const page = () => {
       router.push("/welcome");
     }
   }, []);
+
+  useEffect(() => {
+    setCampaignData(campaignDetailsData);
+  }, []);
+
   return (
     <section className="w-full h-full p-10">
       <section className="border rounded-lg p-6 flex flex-col items-cente gap-3">
@@ -66,6 +47,15 @@ const page = () => {
           {dashboardCardData.map((data, index) => (
             <DashboardCards key={index} {...data} />
           ))}
+        </section>
+
+        <section className="flex flex-col w-full h-full items-start md:items-center">
+          <ResponsiveChart />
+          <ResponsiveChart />
+        </section>
+
+        <section>
+          <CampaignTable campaignData={campaignData} />
         </section>
       </section>
     </section>
