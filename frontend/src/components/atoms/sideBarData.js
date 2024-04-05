@@ -7,10 +7,15 @@ import HandCoins from "../../assets/HandCoins.svg";
 // import Gear from "../../assets/Gear.svg"
 
 export const NavigationItems = [
+  {
+    tab: "Dashboard",
+    icon: HandCoins,
+    tabUrl: "/dashboard",
+  },
   // {
   //   tab: "Earn",
-  //   icon: HandCoins,
-  //   tabUrl: "/dashboard/earn",
+  // icon: HandCoins,
+  // tabUrl: "/dashboard/earn",
   // },
   // {
   //   tab: "Learn",
@@ -38,5 +43,4 @@ export const NavigationItems = [
   //   icon: Gear,
   //   tabUrl: "/dashboard/settings",
   // },
-
 ];

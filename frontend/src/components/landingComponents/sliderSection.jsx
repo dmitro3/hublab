@@ -3,7 +3,7 @@ import SliderCards from "./sliderCards";
 const sliderCardsData = [
   {
     headerText: "715,986 K+",
-    description: "Verxio Minted Coins",
+    description: "Verxio Minted Tokens",
   },
   {
     headerText: "201,986,372 M+",
