@@ -21,5 +21,5 @@ const profileSchema = new mongoose_1.Schema({
     strict: true,
     timestamps: false
 });
-const Profile = (0, mongoose_1.model)(constants_configs_1.DATABASES.PROFILE, profileSchema);
+const Profile = (0, mongoose_1.model)(constants_configs_1.DATABASES.POINTS, profileSchema);
 exports.default = Profile;

@@ -25,7 +25,7 @@ class PointsService {
             const twentyFourHoursAgo = new Date();
             twentyFourHoursAgo.setDate(twentyFourHoursAgo.getDate() - 1);
             const filter = {
-                _id: id,
+                profileId: id,
                 createdAt: { $gte: twentyFourHoursAgo }
             };
             return yield points_model_1.default.find(filter, "-__v");

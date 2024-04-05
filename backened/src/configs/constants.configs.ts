@@ -3,6 +3,7 @@ const SECRET = process.env.SECRET!;
 const basePath = "/api/v1"
 const DATABASES = {
     PROFILE: "profile",
+    POINTS: "point",
     CAMPAIGN: "campaign"
 };
 const MESSAGES = {

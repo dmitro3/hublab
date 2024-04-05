@@ -9,6 +9,7 @@ const basePath = "/api/v1";
 exports.basePath = basePath;
 const DATABASES = {
     PROFILE: "profile",
+    POINTS: "point",
     CAMPAIGN: "campaign"
 };
 exports.DATABASES = DATABASES;

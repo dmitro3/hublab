@@ -11,7 +11,7 @@ export default class PointsService {
         const twentyFourHoursAgo = new Date();
         twentyFourHoursAgo.setDate(twentyFourHoursAgo.getDate() - 1);
         const filter = {
-            _id: id,
+            profileId: id,
             createdAt:  { $gte: twentyFourHoursAgo }
         };
         return await Points.find(filter, "-__v");
