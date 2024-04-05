@@ -11,6 +11,7 @@ export const NavProvider = ({ children }) => {
   const [userProfile3, setUserProfile3] = useState("");
   const [jobDetails, setJobDetails] = useState({});
   const [userProfileDetail, setUserProfileDetail] = useState({});
+  const [singleCampaign, setSingleCampaign] = useState([]);
 
   const toggleNav = () => {
     setIsOpen(!isOpen);
@@ -23,19 +24,21 @@ export const NavProvider = ({ children }) => {
   return (
     <NavContext.Provider
       value={{
-        isOpen,
-        toggleNav,
-        closeNav,
-        user,
-        setUser,
-        jobDetails,
-        setJobDetails,
-        userProfileDetail,
-        setUserProfileDetail,
-        userProfile3,
-        setUserProfile3,
-        userProfileDetail,
-        setUserProfileDetail,
+        // isOpen,
+        // toggleNav,
+        // closeNav,
+        // user,
+        // setUser,
+        // jobDetails,
+        // setJobDetails,
+        // userProfileDetail,
+        // setUserProfileDetail,
+        // userProfile3,
+        // setUserProfile3,
+        // userProfileDetail,
+        // setUserProfileDetail,
+        singleCampaign, setSingleCampaign
+
       }}
     >
       {children}

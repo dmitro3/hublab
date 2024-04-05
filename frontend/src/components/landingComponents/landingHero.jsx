@@ -68,7 +68,7 @@ const LandingPageHero = () => {
             <div className="flex gap-3 items-center relative z-20">
               {/* <Button name="Start Earning" href={"/welcome"} /> */}
               <Button
-                href="/campaign?tab=start"
+                href="/create_campaign?tab=start"
                 name="Start Campaign"
               />
             </div>
