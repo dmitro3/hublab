@@ -4,7 +4,6 @@ import { Button } from "@/components";
 import { useSearchParams, permanentRedirect, redirect } from "next/navigation";
 import Image from "next/image";
 import logo from "../../assets/Logo.svg";
-import { ConnectButton } from "@particle-network/connect-react-ui";
 import { useAccount } from "@particle-network/connect-react-ui";
 import WalletLogin from "@/components/walletLogin";
 import LogoutButton from "@/components/logout";
@@ -23,7 +22,6 @@ const layout = ({ children }) => {
           {/* <Button name="start earning" /> */}
           {account && <LogoutButton />}
           <WalletLogin/>
-          {/* <ConnectButton /> */}
         </div>
       </div>
       <div className="px-10 py-8 relativ">
