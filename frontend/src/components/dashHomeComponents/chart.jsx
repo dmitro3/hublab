@@ -43,7 +43,12 @@ const ResponsiveChart = () => {
   });
 
   return (
-    <div className="container">
+    <section className="w-full flex flex-col items-start md:items-center gap-5">
+
+    <div className>
+      <h2></h2>
+    </div>
+
       <Chart
         options={options}
         series={options.series}
@@ -51,7 +56,7 @@ const ResponsiveChart = () => {
         height={options.chart.height}
         // color={options.colors}
       />
-    </div>
+    </section>
   );
 };
 

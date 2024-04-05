@@ -1,4 +1,4 @@
-import "../../app/globals.css"
+import "../../app/globals.css";
 import { Link } from "next/link";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
@@ -14,7 +14,8 @@ const CampaignTable = ({ campaignData }) => {
     return (
       <Link
         href={rowData.campaignLink}
-        className="py-2 px-6 rounded-lg border bg-primary font-normal text-[14px]">
+        className="py-2 px-6 rounded-lg border bg-primary font-normal text-[14px]"
+      >
         {rowData.link}
       </Link>
     );
@@ -74,7 +75,9 @@ const CampaignTable = ({ campaignData }) => {
     );
   };
   return (
-    <div className="">
+    <div className="w-full flex flex-col items-start gap-5">
+      <h2 className="text-primary font-semibold text-[28px]">All Campaign</h2>
+
       <DataTable
         value={campaignData}
         paginator
