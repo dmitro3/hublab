@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
 import { Link } from "next/link";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 import DashboardCards from "@/components/dashHomeComponents/dashboardCards";
 
-const Page = () => {
+const page = () => {
   const dashboardCardData = [
     {
       headerText: "All Campaigns",
@@ -60,7 +60,6 @@ const Page = () => {
               alt={"add Button"}
             />
             <h3 className="text-[#424242] font-normal text-[14px]">
-              {" "}
               Create Campaign
             </h3>
           </Link>
@@ -73,4 +72,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default page;
