@@ -196,8 +196,8 @@ const Page = () => {
               </div>
 
               <div className="w-[100%] p-5 sm:hidden">
-                {/* <Points balance2={balance.toLocaleString()} /> */}
-                {balance && <Points balance2={balance?.toLocaleString()} />}
+                <Points balance2={balance?.toLocaleString()} />
+                {/* {balance && <Points balance2={balance?.toLocaleString()} />} */}
                 <div className="flex justify-between items-center p-4 border rounded-xl border-[#222482] mt-6">
                   <div className=" w-[50%]">
                     <p className="text-[11px] xl:text-[14px]">
@@ -283,8 +283,8 @@ const Page = () => {
           )}
         </div>
         <div className="w-[40%] p-5 hidden sm:block">
-          {/* <Points balance2={balance.toLocaleString()} /> */}
-          {balance && <Points balance2={balance?.toLocaleString()} />}
+          <Points balance2={balance?.toLocaleString()} />
+          {/* {balance && <Points balance2={balance?.toLocaleString()} />} */}
 
           <div className="flex justify-between items-center p-4 border rounded-xl border-[#222482] mt-6">
             <div className=" w-[50%]">

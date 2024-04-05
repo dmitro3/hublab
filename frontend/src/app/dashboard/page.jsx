@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Link } from "next/link";
 import DashboardCards from "@/components/dashHomeComponents/dashboardCards";
 
-const page = () => {
+const Page = () => {
   const dashboardCardData = [
     {
       headerText: "All Campaigns",
@@ -73,4 +73,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
