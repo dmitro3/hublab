@@ -66,7 +66,7 @@ const Criterion = () => {
         <div className="w-full mt-8">
           <Button
             name="Continue"
-            href="/campaign?tab=rewards"
+            href="/create_campaign?tab=rewards"
             className="w-full text-[20px] mt-"
           />
         </div>

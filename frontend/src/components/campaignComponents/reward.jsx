@@ -37,6 +37,7 @@ const Reward = ({ account }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [campaignModalOpen, setCampaignModalOpen] = useState(false);
   const [newQuestions, setNewQuestions] = useState(questions);
+  const [campaignId, setCampaignId] = useState('')
 
   const dispatch = useDispatch();
 
@@ -53,7 +54,7 @@ const Reward = ({ account }) => {
   const status = useSelector((state) => state.campaign.campaign.status);
   const reward = useSelector((state) => state.generalStates.rewards);
 
-  console.log(questions);
+  console.log(userId);
 
   const initialValues = {
     title: title,
@@ -67,6 +68,7 @@ const Reward = ({ account }) => {
     rewardCoin: "verxio points",
     totalRewardPoint: "",
     rewardWith: "spl token",
+    coverBannerUrl: "",
   };
 
   console.log(questions);
@@ -76,13 +78,15 @@ const Reward = ({ account }) => {
       if (typeof obj[key] === "object") {
         removeKeys(obj[key]);
       }
+
       let propertyDescriptor = Object.getOwnPropertyDescriptor(obj, key);
       if (propertyDescriptor && propertyDescriptor.configurable && (key === "show" || key === "point")) {
           delete obj[key];
       }
-      
-    
-  
+
+      // if (key === "show" || key === "point") {
+      //   delete obj[key];
+      // }
     }
   }
   removeKeys(questions);
@@ -128,8 +132,10 @@ const Reward = ({ account }) => {
       );
       if (response.payload.success === true) {
         toast.success(response.payload.message);
+        setCampaignId(response?.payload?.campaignId)
         console.log(response);
         setModalOpen(true);
+        setCampaignModalOpen(true);
         setTimeout(() => {
           setModalOpen(false);
         }, 3000);
@@ -265,13 +271,15 @@ const Reward = ({ account }) => {
                   shade="border-primary"
                   isLoading={status === "loading"}
                   onClick={() => {
-                    if (userId !== '') {
+                    if (userId !== undefined) {
                       // console.log(values);
                       setFieldValue("totalRewardPoint", totalReward);
                       dispatch(setRewards(values));
                       createNewCampaign(values);
                     } else {
-                      toast.info("Connect your wallet to publish your campaign");
+                      toast.info(
+                        "Connect your wallet to publish your campaign"
+                      );
                     }
                   }}
                 />
@@ -313,12 +321,15 @@ const Reward = ({ account }) => {
       )}
 
       {campaignModalOpen && (
-        <CampaignPreview
-          setCampaignModalOpen={setCampaignModalOpen}
-          reward={reward}
-          totalPoints={totalPoints}
-          totalReward={totalReward}
-        />
+        <div className="bg-[#000]/40  absolute w-full h-full top-0 left-0 z-50 p-10 text-[#484851] ">
+          <CampaignPreview
+            campaignId={campaignId}
+            setCampaignModalOpen={setCampaignModalOpen}
+            reward={reward}
+            totalPoints={totalPoints}
+            totalReward={totalReward}
+          />
+        </div>
       )}
     </section>
   );
