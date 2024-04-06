@@ -238,17 +238,17 @@ const Reward = ({ account }) => {
                     <p>
                       Number of points:{" "}
                       <span className="text-[32px] font-bold ml-2">
-                        {totalPoints} points
+                        {totalPoints.toLocaleString()} points
                       </span>
                     </p>
                     <div className="border my-3"></div>
-                    <p className="text-[32px] font-bold">{totalReward}</p>
+                    <p className="text-[32px] font-bold">{totalReward.toLocaleString()}</p>
                   </div>
                 </div>
                 <div className="flex justify-end text-end border rounded-lg border-primary px-16 py-5 text-[#484851] text-[16px] mt-4">
                   <p>
                     Total Reward:{" "}
-                    <span className="text-[32px] font-bold">{totalReward}</span>{" "}
+                    <span className="text-[32px] font-bold">{totalReward.toLocaleString()}</span>{" "}
                     points
                   </p>
                 </div>

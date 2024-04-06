@@ -15,8 +15,6 @@ const CampaignPreview = ({
   totalPoints,
   totalReward,
   campaignId,
-  // setFieldValue,
-  // createNewCampaign
 }) => {
   const [totalPointArray, setTotalPointArray] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
@@ -77,8 +75,8 @@ const CampaignPreview = ({
                 {reward?.title}
                 {/* <span className="font-bold">{reward?.title}</span>{" "} */}
               </p>
-              <p className="text-[32px] font-bold">
-                <span>{totalReward}</span> Points
+              <p className="text-[22px] font-bold"  style={{ color: '#00ADEF' }}>
+                Reward Pool: <span>{totalReward.toLocaleString()}</span> Points
               </p>
             </div>
             <div className="flex gap-2">
@@ -122,7 +120,7 @@ const CampaignPreview = ({
             <div className="relative mb-7">
               <div className="border border-primary bg-white rounded-lg px-5 relative z-50">
                 <p className="text-[30px] ">
-                  Points: <span className="font-bold">{total}</span>
+                  Points: <span className="font-bold">{total.toLocaleString()}</span>
                 </p>
                 <div className="flex justify-center py-7">
                   <Image alt="coin" src={VerxioGold} className="w-[200px]" />
