@@ -16,4 +16,3 @@ const DashboardCards = ({ src, alt, headerText, number }) => {
 };
 
 export default DashboardCards;
-

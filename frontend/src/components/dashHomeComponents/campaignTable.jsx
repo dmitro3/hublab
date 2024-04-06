@@ -14,8 +14,7 @@ const CampaignTable = ({ campaignData }) => {
     return (
       <Link
         href={rowData.campaignLink}
-        className="py-2 px-6 rounded-lg border bg-primary font-normal text-[14px]"
-      >
+        className="py-2 px-6 rounded-lg border bg-primary font-normal text-[14px]">
         {rowData.link}
       </Link>
     );
