@@ -4,19 +4,15 @@ import { Button } from "@/components";
 import { useSearchParams, permanentRedirect, redirect } from "next/navigation";
 import Image from "next/image";
 import logo from "../../assets/Logo.svg";
-import { ConnectButton } from "@particle-network/connect-react-ui";
 import { useAccount } from "@particle-network/connect-react-ui";
 import WalletLogin from "@/components/walletLogin";
 import LogoutButton from "@/components/logout";
 
+
 const layout = ({ children }) => {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab");
-
-  // const account = useAccount();
-  // const childrenWithProps = React.Children.map(children, (child) => {
-  //   return cloneElement(child, { account: account });
-  // });
+  const account = useAccount();
 
   return (
     <div className="relative">
@@ -24,9 +20,7 @@ const layout = ({ children }) => {
         <Image src={logo} alt="Verxio Logo" className="w-[50px]" />
         <div className="flex items-center gap-3">
           {/* <Button name="start earning" /> */}
-          <LogoutButton/>
-          <WalletLogin/>
-          {/* <ConnectButton /> */}
+          {account ? <LogoutButton /> : <WalletLogin />}
         </div>
       </div>
       <div className="px-10 py-8 relativ">

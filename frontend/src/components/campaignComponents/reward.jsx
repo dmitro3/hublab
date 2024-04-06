@@ -82,9 +82,10 @@ const Reward = ({ account }) => {
       if (propertyDescriptor && propertyDescriptor.configurable && (key === "show" || key === "point")) {
           delete obj[key];
       }
-      
-    
-  
+
+      // if (key === "show" || key === "point") {
+      //   delete obj[key];
+      // }
     }
   }
   removeKeys(questions);
