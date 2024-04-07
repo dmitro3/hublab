@@ -45,7 +45,7 @@ const Criterion = () => {
       <div className="my-3">
         <p className="font-semibold text-[24px]">
           <span className="mr-3 text-">*</span>Choose the eligibilty status of
-          those to participate in this Quest
+          those to participate in this Campaign
         </p>
       </div>
 
