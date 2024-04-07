@@ -128,8 +128,8 @@ const Reward = ({ account }) => {
           // id: 1,
         })
       );
-      if (response.payload.success === true) {
-        toast.success(response.payload.message);
+      if (response?.payload?.success === true) {
+        toast.success(response?.payload?.message);
         setCampaignId(response?.payload?.campaignId)
         console.log(response);
         setModalOpen(true);
@@ -138,7 +138,7 @@ const Reward = ({ account }) => {
           setModalOpen(false);
         }, 3000);
       } else {
-        toast.error(response.payload.message);
+        toast.error(response?.payload?.message);
         console.log(response);
       }
     } catch (error) {

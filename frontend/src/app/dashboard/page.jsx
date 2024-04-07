@@ -52,7 +52,7 @@ const Page = () => {
 
         <section className="flex items-center gap-3 flex-wrap ">
           <Link
-            href={"/create-campaign"}
+            href={"/create_campaign"}
             className="border-2 border-[#00ADEF] rounded-lg bg-[#E0F7FF] flex items-center justify-center"
           >
             <Image
@@ -76,37 +76,4 @@ const Page = () => {
 
 export default Page;
 
-// import React from "react";
-// import  Link  from "next/link";
 
-// const Page = () => {
-//   return (
-//     <section className="w-full h-full p-10">
-//       <section className="border rounded-lg p-6 flex flex-col items-cente gap-3">
-//         <h2 className="text-primary font-semibold text-[28px]">Dashboard</h2>
-
-//         <section className="flex items-center gap-3 flex-wrap ">
-//           <Link
-//             href={"/create-campaign"}
-//             className="border-2 border-[#00ADEF] rounded-lg bg-[#E0F7FF] flex items-center justify-center"
-//           >
-//             {/* <Image
-//             src={"/images/creatCampaign.svg"}
-//              height={50}
-//              width={50}
-//              alt={"add Button"}
-//            /> */}
-//             <h3 className="text-[#424242] font-normal text-[14px]">
-//               Create Campaign
-//             </h3>
-//           </Link>
-//           {/* {dashboardCardData.map((data, index) => (
-//            <DashboardCards key={index} {...data} />
-//          ))} */}
-//         </section>
-//       </section>
-//     </section>
-//   );
-// };
-
-// export default Page;
