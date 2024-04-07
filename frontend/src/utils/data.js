@@ -70,23 +70,23 @@ export const dashboardCardData = [
   {
     headerText: "All Campaigns",
     number: "72",
-    imgUrl: "/images/allCampaigns.svg",
+    src: "/images/allCampaigns.svg",
     alt: "allCampaign",
   },
   {
     headerText: "All Participants",
     number: "1,802",
-    imgUrl: "/images/allParticipants.svg",
+    src: "/images/allParticipants.svg",
     alt: "allParticipants",
   },
   {
-    imgUrl: "/images/claimedPoints.svg",
+    src: "/images/claimedPoints.svg",
     alt: "claimedPoints",
     headerText: "Claimed Points",
     number: "60,6969",
   },
   {
-    imgUrl: "/images/participantsWithReward.svg",
+    src: "/images/participantsWithReward.svg",
     alt: "participantsWithReward",
     headerText: "Participants with rewards",
     number: "860",
