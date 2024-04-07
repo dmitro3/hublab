@@ -19,7 +19,7 @@ import { createCampaign } from "@/store/slices/campaignSlice";
 import CampaignPreview from "../modals/campaignPreview";
 const data = [
   {
-    name: "Early Birds Selection",
+    name: "Early Bird Selection",
     choice: "early",
   },
   {
