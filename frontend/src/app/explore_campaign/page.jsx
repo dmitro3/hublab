@@ -10,16 +10,8 @@ import { toast } from "react-toastify";
 
 const page = () => {
   const [campaign, setCampaign] = useState([]);
-  //   const [singleCampaign, setSingleCampaign] = useState([]);
-
-  //   const { singleCampaign, setSingleCampaign } = useNav();
 
   const dispatch = useDispatch();
-  const router = useRouter();
-
-  const userId = useSelector((state) => state.generalStates.userId);
-  const reward = useSelector((state) => state.generalStates.rewards);
-  console.log();
 
   useEffect(() => {
     getUsersCampaign();
@@ -33,8 +25,8 @@ const page = () => {
         getUserCampaigns({ id: "2mpkvSaewCLPij7xxutARnr6wSueAGDcNt9TU48opmsn" })
       );
       if (response?.payload?.success === true) {
-        toast.success(response?.payload.message);
-        setCampaign(response?.payload.capmaign);
+        toast.success(response?.payload?.message);
+        setCampaign(response?.payload?.capmaign);
         // router.push('/campaign')
       } else {
         toast.info("Create a profile");
@@ -45,22 +37,6 @@ const page = () => {
     }
   };
 
-  //   const getSingleCampaign = async (id) => {
-  //     try {
-  //       const response = await dispatch(getCampaign({ id: id }));
-  //       if (response.payload.success === true) {
-  //         toast.success(response?.payload.message);
-  //         setSingleCampaign(response?.payload.capmaign);
-  //         router.push("/campaign");
-
-  //       } else {
-  //         // toast.info("Create a profile");
-  //         // dispatch(setEdit(true));
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
 
   return (
     <div className="p-4 w-full">
