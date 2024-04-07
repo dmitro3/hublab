@@ -1,9 +1,6 @@
 "use client";
-import { useNav } from "@/context";
-import { getCampaign, getUserCampaigns } from "@/store/slices/campaignSlice";
-import { root } from "@/store/store";
+import { getUserCampaigns } from "@/store/slices/campaignSlice";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -13,9 +10,9 @@ const page = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    getUsersCampaign();
-  }, []);
+  // useEffect(() => {
+  //   getUsersCampaign();
+  // }, []);
 
   console.log(campaign);
 
@@ -27,10 +24,8 @@ const page = () => {
       if (response?.payload?.success === true) {
         toast.success(response?.payload?.message);
         setCampaign(response?.payload?.capmaign);
-        // router.push('/campaign')
       } else {
         toast.info("Create a profile");
-        // dispatch(setEdit(true));
       }
     } catch (error) {
       console.error(error);

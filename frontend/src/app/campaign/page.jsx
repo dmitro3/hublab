@@ -20,7 +20,6 @@ const page = () => {
   const dispatch = useDispatch();
   const account = useAccount();
 
-  const reward = useSelector((state) => state.generalStates.rewards);
 
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
@@ -31,9 +30,9 @@ const page = () => {
   const getSingleCampaign = async () => {
     try {
       const response = await dispatch(getCampaign({ id: id }));
-      if (response.payload.success === true) {
-        toast.success(response?.payload.message);
-        setSingleCampaign(response?.payload.capmaign);
+      if (response?.payload?.success === true) {
+        toast.success(response?.payload?.message);
+        setSingleCampaign(response?.payload?.capmaign);
       } else {
         // toast.info("Create a profile");
         // dispatch(setEdit(true));
