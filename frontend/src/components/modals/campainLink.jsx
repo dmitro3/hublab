@@ -56,7 +56,7 @@ const CampaignLink = ({ setModalOpen, id, campaignId }) => {
         </p>
         <div className="bg-[#DFDFF7] p-5 rounded-md flex flex-col sm:flex-row justify-between items-center gap-6">
           <p className="p-2 rounded-lg bg-white text-[12px]" id="text-to-copy">
-            {`http://localhost:3000/campaign?id=${campaignId}`}
+            {`http://www.verxio.xyz/campaign?id=${campaignId}`}
           </p>
           <div className="-top-3">
             <Button name="copy link" onClick={handleCopy} />

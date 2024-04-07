@@ -7,12 +7,22 @@ import logo from "../../assets/Logo.svg";
 import { useAccount } from "@particle-network/connect-react-ui";
 import WalletLogin from "@/components/walletLogin";
 import LogoutButton from "@/components/logout";
+import {useDispatch} from 'react-redux'
+import { setUserId } from "@/store/slices/statesSlice";
 
 
 const layout = ({ children }) => {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab");
   const account = useAccount();
+  const dispatch = useDispatch()
+
+  
+  console.log(account)
+  
+  useEffect(()=>{
+    dispatch(setUserId(account))
+  },[account])
 
   return (
     <div className="relative">
@@ -21,6 +31,7 @@ const layout = ({ children }) => {
         <div className="flex items-center gap-3">
           {/* <Button name="start earning" /> */}
           {account ? <LogoutButton /> : <WalletLogin />}
+          {/* <WalletLogin/> */}
         </div>
       </div>
       <div className="px-10 py-8 relativ">
@@ -42,7 +53,6 @@ const layout = ({ children }) => {
             />
             <Button
               name="inputs"
-              // href="/campaign?tab=inputs"
               className={`${
                 tab === "inputs"
                   ? "bg-white text-primary"
@@ -55,7 +65,6 @@ const layout = ({ children }) => {
             />
             <Button
               name="criterion"
-              // href="/campaign?tab=criterion"
               className={`${
                 tab === "criterion"
                   ? "bg-white text-primary"
@@ -68,7 +77,6 @@ const layout = ({ children }) => {
             />
             <Button
               name="rewards"
-              // href="/campaign?tab=rewards"
               className={`${
                 tab === "rewards"
                   ? "bg-white text-primary"

@@ -55,6 +55,9 @@ const Reward = ({ account }) => {
   const userId = useSelector((state) => state.generalStates.userId);
   const status = useSelector((state) => state.campaign.campaign.status);
   const reward = useSelector((state) => state.generalStates.rewards);
+  const users = useAccount();
+  console.log(users)
+  // console.log(user)
 
   console.log(userId);
 
@@ -86,10 +89,9 @@ const Reward = ({ account }) => {
       if (propertyDescriptor && propertyDescriptor.configurable && (key === "show" || key === "point")) {
           delete obj[key];
       }
-
-      // if (key === "show" || key === "point") {
-      //   delete obj[key];
-      // }
+      
+    
+  
     }
   }
   removeKeys(questions);
@@ -134,7 +136,7 @@ const Reward = ({ account }) => {
         })
       );
       if (response?.payload?.success === true) {
-        toast.success(response.payload.message);
+        toast.success(response?.payload?.message);
         setCampaignId(response?.payload?.campaignId)
         console.log(response);
         setModalOpen(true);
@@ -143,7 +145,7 @@ const Reward = ({ account }) => {
           setModalOpen(false);
         }, 3000);
       } else {
-        toast.error(response.payload.message);
+        toast.error(response?.payload?.message);
         console.log(response);
       }
     } catch (error) {
@@ -155,7 +157,7 @@ const Reward = ({ account }) => {
     <section>
       <div className={`mt-10 w-[60%] text-[#484851] `}>
         <Formik onSubmit={() => {}} initialValues={initialValues}>
-          {({ isValid, handleSubmit, values, dirty, setFieldValue }) => (
+          {({  values,  setFieldValue }) => (
             <Form className="flex flex-col gap-11">
               <div>
                 <p className="font-semibold text-[24px] mb-5">
