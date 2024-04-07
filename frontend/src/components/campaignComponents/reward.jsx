@@ -19,7 +19,7 @@ import { createCampaign } from "@/store/slices/campaignSlice";
 import CampaignPreview from "../modals/campaignPreview";
 const data = [
   {
-    name: "Early Birds Selection",
+    name: "Early Bird Selection",
     choice: "early",
   },
   {
@@ -89,9 +89,6 @@ const Reward = ({ account }) => {
       if (propertyDescriptor && propertyDescriptor.configurable && (key === "show" || key === "point")) {
           delete obj[key];
       }
-      
-    
-  
     }
   }
   removeKeys(questions);
