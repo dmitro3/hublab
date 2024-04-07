@@ -28,9 +28,9 @@ const CampaignPreview = ({
   const userId = useSelector((state) => state.generalStates.userId);
   const status = useSelector((state) => state.campaign.campaign.status);
 
-  console.log("User Account", user)
+  console.log("User Account", user);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const addValueToArray = (newValue) => {
     // Copy the current array state
@@ -46,11 +46,10 @@ const CampaignPreview = ({
   // console.log(reward);
   console.log(totalPointArray);
 
-
   const handleClaimRewards = async (total) => {
     if (!user) {
       toast.info("Please connect your wallet 😒");
-      return; 
+      return;
     }
 
     if (total > 0) {
@@ -80,15 +79,30 @@ const CampaignPreview = ({
   console.log("The total number is:", total);
   return (
     <>
-      <div className="bg-white w-full h-full flex p-6 border rounded-lg overflow-hidden">
-        <div className="w-[60%] border-r p-6 ">
-          <div className="flex justify-end mb-5">
+      <div className="bg-white w-full h-full flex flex-col p-6 border rounded-lg overflow-hidden">
+        <div className="w-[100%] border-r p-6 ">
+          <div className="flex justify-end mb-5 items-center gap-6">
             <Button
               name="share "
               outline
               className="bg-white"
-              onClick={() => setModalOpen(true)}
+              onClick={() => {
+                if(campaignId){
+                  setModalOpen(true);
+                } else{
+                  toast.info('Link will be available when you publish a campaign')
+                }
+              }}
             />
+            {setCampaignModalOpen && (
+              <div className=" cursor-pointer">
+                {/* <Button name="share " outline className="bg-white" /> */}
+                <CloseCircle
+                  size={35}
+                  onClick={() => setCampaignModalOpen(false)}
+                />
+              </div>
+            )}
           </div>
           <div className="flex flex-col gap-2 ">
             <div>
@@ -97,7 +111,7 @@ const CampaignPreview = ({
                 {reward?.title}
                 {/* <span className="font-bold">{reward?.title}</span>{" "} */}
               </p>
-              <p className="text-[18px] font-bold"  style={{ color: '#00ADEF' }}>
+              <p className="text-[18px] font-bold" style={{ color: "#00ADEF" }}>
                 Reward Pool: <span>{totalReward.toLocaleString()}</span> Points
               </p>
             </div>
@@ -122,7 +136,7 @@ const CampaignPreview = ({
           </div>
           <p className="text-[32px] font-bold mb-5 mt-12">Task</p>
 
-          <div className="mb-5 h-[40%] w-full relative overflow-scroll">
+          <div className="mb-5 h-[40%] w-full relative overflow-scrol">
             <PreviewTask
               question={reward?.questions}
               // setTotalPointArray={setTotalPointArray}
@@ -130,19 +144,13 @@ const CampaignPreview = ({
             />
           </div>
         </div>
-        <div className="w-[40%]">
-          <div className=" p-6">
-            <div className="flex justify-end mb-7">
-              {/* <Button name="share " outline className="bg-white" /> */}
-              <CloseCircle
-                size={30}
-                onClick={() => setCampaignModalOpen(false)}
-              />
-            </div>
+        <div className="w-[100%] flex">
+          <div className=" p-6 w-[50%]">
             <div className="relative mb-7">
               <div className="border border-primary bg-white rounded-lg px-5 relative z-50">
                 <p className="text-[30px] ">
-                  Points: <span className="font-bold">{total.toLocaleString()}</span>
+                  Points:{" "}
+                  <span className="font-bold">{total.toLocaleString()}</span>
                 </p>
                 <div className="flex justify-center py-7">
                   <Image alt="coin" src={VerxioGold} className="w-[200px]" />
@@ -153,34 +161,35 @@ const CampaignPreview = ({
             <Button
               name="claim rewards"
               onClick={() => handleClaimRewards(total)}
-              isLoading={loading}    
+              isLoading={loading}
             />
             {transactionUrl && (
-            <p>
-              <a
-                href={transactionUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center"
-              >
-                View Transaction{" "}
-                <span className="text-red-500">
-                  <RiExternalLinkFill />
-                </span>
-              </a>
-            </p>
-          )}
-
-          </div>
-          <div className="border border-[#B6B8EC] my-8"></div>
-          <div className="p-6">
-            <div className="flex items-center gap-2">
-              <p className="text-[24px] font-bold">Participants</p>
-              <p className="border rounded p-1 px-2">
-                +<span>{reward?.participants}</span>
+              <p>
+                <a
+                  href={transactionUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center"
+                >
+                  View Transaction{" "}
+                  <span className="text-red-500">
+                    <RiExternalLinkFill />
+                  </span>
+                </a>
               </p>
-            </div>
+            )}
           </div>
+          {/* <div className="border border-[#B6B8EC] my-8"></div> */}
+          {!setCampaignModalOpen && (
+            <div className="p-6 w-[50%]">
+              <div className="flex items-center gap-2">
+                <p className="text-[24px] font-bold">Participants</p>
+                <p className="border rounded p-1 px-2">
+                  +<span>{reward?.participants}</span>
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       {modalOpen && (
