@@ -39,7 +39,7 @@ const Reward = ({ account }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [campaignModalOpen, setCampaignModalOpen] = useState(false);
   const [newQuestions, setNewQuestions] = useState(questions);
-  const [campaignId, setCampaignId] = useState('')
+  const [campaignId, setCampaignId] = useState("");
 
   const dispatch = useDispatch();
 
@@ -56,8 +56,8 @@ const Reward = ({ account }) => {
   const status = useSelector((state) => state.campaign.campaign.status);
   const reward = useSelector((state) => state.generalStates.rewards);
   const users = useAccount();
-  console.log(users)
-  // console.log(user)
+  console.log(users);
+  console.log(user);
 
   console.log(userId);
 
@@ -77,21 +77,7 @@ const Reward = ({ account }) => {
   };
 
   console.log(questions);
-  
-
-  function removeKeys(obj) {
-    for (let key in obj) {
-      if (typeof obj[key] === "object") {
-        removeKeys(obj[key]);
-      }
-
-      let propertyDescriptor = Object.getOwnPropertyDescriptor(obj, key);
-      if (propertyDescriptor && propertyDescriptor.configurable && (key === "show" || key === "point")) {
-          delete obj[key];
-      }
-    }
-  }
-  removeKeys(questions);
+  console.log(reward);
 
   // calculate total points*******************
   let totalPoints = 0;
@@ -103,9 +89,6 @@ const Reward = ({ account }) => {
   questions.submitUrl?.value.forEach((question) => {
     totalPoints += question.points;
   });
-
-  // console.log("Total number of points:", totalPoints);
-  // calculate total points*******************
 
   const totalReward = participants * totalPoints;
 
@@ -134,7 +117,7 @@ const Reward = ({ account }) => {
       );
       if (response?.payload?.success === true) {
         toast.success(response?.payload?.message);
-        setCampaignId(response?.payload?.campaignId)
+        setCampaignId(response?.payload?.campaignId);
         console.log(response);
         setModalOpen(true);
         setCampaignModalOpen(true);
@@ -154,7 +137,7 @@ const Reward = ({ account }) => {
     <section>
       <div className={`mt-10 w-[60%] text-[#484851] `}>
         <Formik onSubmit={() => {}} initialValues={initialValues}>
-          {({  values,  setFieldValue }) => (
+          {({ values, setFieldValue }) => (
             <Form className="flex flex-col gap-11">
               <div>
                 <p className="font-semibold text-[24px] mb-5">
@@ -241,13 +224,17 @@ const Reward = ({ account }) => {
                       </span>
                     </p>
                     <div className="border my-3"></div>
-                    <p className="text-[32px] font-bold">{totalReward.toLocaleString()}</p>
+                    <p className="text-[32px] font-bold">
+                      {totalReward.toLocaleString()}
+                    </p>
                   </div>
                 </div>
                 <div className="flex justify-end text-end border rounded-lg border-primary px-16 py-5 text-[#484851] text-[16px] mt-4">
                   <p>
                     Total Reward:{" "}
-                    <span className="text-[32px] font-bold">{totalReward.toLocaleString()}</span>{" "}
+                    <span className="text-[32px] font-bold">
+                      {totalReward.toLocaleString()}
+                    </span>{" "}
                     points
                   </p>
                 </div>
@@ -273,15 +260,12 @@ const Reward = ({ account }) => {
                   shade="border-primary"
                   isLoading={status === "loading"}
                   onClick={() => {
-                    if (user !== undefined) {
-                      // console.log(values);
+                    if (user) {
                       setFieldValue("totalRewardPoint", totalReward);
                       dispatch(setRewards(values));
                       createNewCampaign(values);
                     } else {
-                      toast.info(
-                        "Connect your wallet to publish campaign"
-                      );
+                      toast.info("Connect your wallet to publish campaign");
                     }
                   }}
                 />

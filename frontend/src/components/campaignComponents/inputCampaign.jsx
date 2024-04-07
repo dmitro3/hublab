@@ -41,7 +41,7 @@ const questionFormatData = [
     description:
       "Ask participants to perform a specific action e.g follow your community",
     points: "40 Points",
-    value: 'performAction'
+    value: "performAction",
   },
 ];
 
@@ -74,17 +74,17 @@ const InputCampaign = () => {
     // },
   });
 
+  const transformedState = {};
+  for (const actionType in showQuestions) {
+    transformedState[actionType] = {
+      value: showQuestions[actionType].value,
+    };
+  }
+
+  console.log(transformedState);
+
   const dispatch = useDispatch();
   const router = useRouter();
-
-  console.log(showQuestions);
-
-  const quest = useSelector((state) => state.generalStates.input);
-  console.log(quest);
-
-  // useEffect(() => {
-  //   dispatch(setTotalCampaignPoint(pickAnswerTotal + submitURLTotal));
-  // }, [pickAnswerTotal, submitURLTotal]);
 
   return (
     <>
@@ -134,9 +134,8 @@ const InputCampaign = () => {
             // href="/create_campaign?tab=criterion"
             className="w-full text-[20px] mt-12"
             onClick={() => {
-              dispatch(setInput(showQuestions));
+              dispatch(setInput(transformedState));
               router.push("/create_campaign?tab=criterion");
-              console.log(showQuestions);
             }}
           />
         </div>
