@@ -5,7 +5,7 @@ export const Table = ({ tableHeads, tableData, children }) => {
   return (
     <div>
       <table className="w-full border-collapse">
-        <thead className="border border-red-500">
+        <thead className="">
           <tr className="w-full text-center ">
             {tableHeads?.map((head, index) => (
               <th
@@ -104,7 +104,7 @@ const CampaignStatusTemplate = (tableData) => {
 const CampaignLinkTemplate = (tableData) => {
   return (
     <Link
-      href={tableData.link}
+      href={`/${tableData.page}/${tableData.id}`}
       className="py-2 px-2 rounded-lg cursor-pointer border text-[#00ADEF] border-[#00ADEF] font-normal text-[14px]"
     >
       {tableData.link}
@@ -115,7 +115,7 @@ const CampaignLinkTemplate = (tableData) => {
 const CampaignParticipantsTemplate = (tableData) => {
   return (
     <p className="font-normal text-[16px] text-[#424242]">
-      {tableData.status == "closed" ? "---" : tableData.participants}
+      {tableData.status === "closed" ? "---" : tableData.participants}
     </p>
   );
 };
@@ -123,14 +123,14 @@ const CampaignParticipantsTemplate = (tableData) => {
 const CampaignParticipantsWithRewardTemplate = (tableData) => {
   return (
     <p className="font-normal text-[16px] text-[#424242]">
-      {tableData.status == "closed" ? "---" : tableData.participantsWithReward}
+      {tableData.status === "closed" ? "---" : tableData.participantsWithReward}
     </p>
   );
 };
 const CampaignPointsTemplate = (tableData) => {
   return (
     <p className="font-normal text-[16px] text-[#424242]">
-      {tableData.status == "closed" ? "---" : tableData.points}
+      {tableData.status === "closed" ? "---" : tableData.points}
     </p>
   );
 };

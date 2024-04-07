@@ -11,6 +11,7 @@ const CampaignTable = () => {
       participantsWithReward: 6789,
       points: 876,
       link: "https://www.",
+      page: "campaignpreview",
       status: "ongoing",
     },
     {
@@ -20,6 +21,7 @@ const CampaignTable = () => {
       participantsWithReward: 6789,
       points: 876,
       link: "https://www.",
+      page: "campaignpreview",
       status: "upcoming",
     },
     {
@@ -29,6 +31,7 @@ const CampaignTable = () => {
       participantsWithReward: 6789,
       points: 876,
       link: "https://www.",
+      page: "campaignpreview",
       status: "closed",
     },
     {
@@ -38,6 +41,7 @@ const CampaignTable = () => {
       participantsWithReward: 6789,
       points: 876,
       link: "https://www.",
+      page: "campaignpreview",
       status: "deleted",
     },
   ]);
