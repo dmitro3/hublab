@@ -87,10 +87,12 @@ const CampaignPreview = ({
               outline
               className="bg-white"
               onClick={() => {
-                if(campaignId){
+                if (campaignId) {
                   setModalOpen(true);
-                } else{
-                  toast.info('Link will be available when you publish a campaign')
+                } else {
+                  toast.info(
+                    "Link will be available when you publish a campaign"
+                  );
                 }
               }}
             />
@@ -144,6 +146,7 @@ const CampaignPreview = ({
             />
           </div>
         </div>
+        <p className="text-[32px] font-bold mb-5 mt-12 px-6">Claim rewards</p>
         <div className="w-[100%] flex">
           <div className=" p-6 w-[50%]">
             <div className="relative mb-7">
