@@ -8,6 +8,10 @@ import { CloseCircle } from "iconsax-react";
 import PreviewTask from "../campaignComponents/previewTask";
 import CampaignLink from "./campainLink";
 import { useSelector, useDispatch } from "react-redux";
+import { useAccount } from "@particle-network/connect-react-ui";
+import mintVerxioTokens from "@/utils/claimVerxioToken";
+import { toast } from "react-toastify";
+import { RiExternalLinkFill } from "react-icons/ri";
 
 const CampaignPreview = ({
   setCampaignModalOpen,
@@ -17,11 +21,14 @@ const CampaignPreview = ({
   campaignId,
 }) => {
   const [totalPointArray, setTotalPointArray] = useState([]);
+  const [transactionUrl, setTransactionUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-
+  const user = useAccount();
   const userId = useSelector((state) => state.generalStates.userId);
   const status = useSelector((state) => state.campaign.campaign.status);
 
+  console.log("User Account", user)
 
   const dispatch = useDispatch()
 
@@ -38,6 +45,31 @@ const CampaignPreview = ({
 
   // console.log(reward);
   console.log(totalPointArray);
+
+
+  const handleClaimRewards = async (total) => {
+    if (!user) {
+      toast.info("Please connect your wallet 😒");
+      return; 
+    }
+
+    if (total > 0) {
+      setLoading(true);
+      try {
+        const destinationAddress = user;
+        const claimAmount = total;
+        const url = await mintVerxioTokens(destinationAddress, claimAmount);
+        setTransactionUrl(url);
+        setLoading(false);
+        toast.success(`${claimAmount} Verxio soulbound token claimed 🎊`);
+      } catch (error) {
+        toast.error("Error claiming rewards:");
+        console.log("Error claiming rewards:", error);
+      }
+    } else {
+      toast.info("Complete task first 😶‍🌫️");
+    }
+  };
 
   let total = 0;
 
@@ -75,7 +107,7 @@ const CampaignPreview = ({
                 {reward?.title}
                 {/* <span className="font-bold">{reward?.title}</span>{" "} */}
               </p>
-              <p className="text-[22px] font-bold"  style={{ color: '#00ADEF' }}>
+              <p className="text-[18px] font-bold"  style={{ color: '#00ADEF' }}>
                 Reward Pool: <span>{totalReward.toLocaleString()}</span> Points
               </p>
             </div>
@@ -128,7 +160,27 @@ const CampaignPreview = ({
               </div>
               <div className="rounded-lg border border-primary h-full absolute w-full top-[6px] left-[6px] "></div>
             </div>
-            <Button name="claim rewards" />
+            <Button
+              name="claim rewards"
+              onClick={() => handleClaimRewards(total)}
+              isLoading={loading}    
+            />
+            {transactionUrl && (
+            <p>
+              <a
+                href={transactionUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+              >
+                View Transaction{" "}
+                <span className="text-red-500">
+                  <RiExternalLinkFill />
+                </span>
+              </a>
+            </p>
+          )}
+
           </div>
           <div className="border border-[#B6B8EC] my-8"></div>
           <div className="p-6">

@@ -19,12 +19,12 @@ import { createCampaign } from "@/store/slices/campaignSlice";
 import CampaignPreview from "../modals/campaignPreview";
 const data = [
   {
-    name: "Random Selection",
-    choice: "random",
-  },
-  {
     name: "Early Birds Selection",
     choice: "early",
+  },
+  {
+    name: "Random Selection",
+    choice: "random",
   },
 ];
 
@@ -133,7 +133,7 @@ const Reward = ({ account }) => {
           // id: 1,
         })
       );
-      if (response.payload.success === true) {
+      if (response?.payload?.success === true) {
         toast.success(response.payload.message);
         setCampaignId(response?.payload?.campaignId)
         console.log(response);
