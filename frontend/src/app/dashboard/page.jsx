@@ -1,39 +1,18 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import DashboardCards from "@/components/dashHomeComponents/dashboardCards";
+import {
+  DashboardCards,
+  ResponsiveChart,
+  ResponsiveDonutChart,
+  CampaignTable,
+} from "@/components/dashHomeComponents";
+import { dashboardCardData } from "@/utils/data";
 
 const Page = () => {
-  const dashboardCardData = [
-    {
-      headerText: "All Campaigns",
-      number: "72",
-      imgUrl: "/images/allCampaigns.svg",
-      alt: "allCampaign",
-    },
-    {
-      headerText: "All Participants",
-      number: "1,802",
-      imgUrl: "/images/allParticipants.svg",
-      alt: "allParticipants",
-    },
-    {
-      imgUrl: "/images/claimedPoints.svg",
-      alt: "claimedPoints",
-      headerText: "Claimed Points",
-      number: "60,6969",
-    },
-    {
-      imgUrl: "/images/participantsWithReward.svg",
-      alt: "participantsWithReward",
-      headerText: "Participants with rewards",
-      number: "860",
-    },
-  ];
-
   const router = useRouter();
   const userId = useSelector((state) => state.generalStates.userId);
 
@@ -45,35 +24,47 @@ const Page = () => {
     }
   }, []);
 
+  const colors = [
+    { borderColor: "#3D41CC", backgroundColor: "#DFDFF7" },
+    { borderColor: "#EF00AD", backgroundColor: "#FFE0F7" },
+    { borderColor: "#ADEF00", backgroundColor: "#F7FFE0" },
+    { borderColor: "#00ADEF", backgroundColor: "#E0F7FF" },
+  ];
+
   return (
     <section className="w-full h-full p-10">
-      <section className="border rounded-lg p-6 flex flex-col items-cente gap-3">
+      <section className="w-full border rounded-lg p-6 flex flex-col items-cente gap-3">
         <h2 className="text-primary font-semibold text-[28px]">Dashboard</h2>
 
-        <section className="flex items-center gap-3 flex-wrap ">
+        <section className="flex items-center gap-3 flex-wrap">
           <Link
             href={"/create_campaign"}
-            className="border-2 border-[#00ADEF] rounded-lg bg-[#E0F7FF] flex items-center justify-center"
+            className="border-dashed border-2 border-[#00ADEF] rounded-lg bg-[#E0F7FF] flex flex-col p-10 cursor-pointer items-center justify-center"
           >
             <Image
-            src={"/images/creatCampaign.svg"}
-            height={50}
-            width={50}
-            alt={"add Button"}
-          />
+              src={"/images/createCampaign.svg"}
+              height={50}
+              width={50}
+              alt={"add Button"}
+            />
             <h3 className="text-[#424242] font-normal text-[14px]">
               Create Campaign
             </h3>
           </Link>
           {dashboardCardData.map((data, index) => (
-          <DashboardCards key={index} {...data} />
-        ))}
+            <DashboardCards key={index} {...data} {...colors[index]} />
+          ))}
         </section>
+
+        <section className="w-full flex flex-col items-center md:flex-row my-[50px] border-y">
+          <ResponsiveChart />
+          <ResponsiveDonutChart />
+        </section>
+
+        <CampaignTable />
       </section>
     </section>
   );
 };
 
 export default Page;
-
-
