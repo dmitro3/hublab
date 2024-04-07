@@ -13,7 +13,7 @@ const layout = ({ children }) => {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab");
 
-  // const account = useAccount();
+  const account = useAccount();
   // const childrenWithProps = React.Children.map(children, (child) => {
   //   return cloneElement(child, { account: account });
   // });
