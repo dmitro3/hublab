@@ -1,6 +1,4 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from "react";
 import { PointsModal } from "../../components";
 import { toast } from "react-toastify";
 

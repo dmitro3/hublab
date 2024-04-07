@@ -12,7 +12,11 @@ import LogoutButton from "@/components/logout";
 const layout = ({ children }) => {
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab");
-  const account = useAccount();
+
+  // const account = useAccount();
+  // const childrenWithProps = React.Children.map(children, (child) => {
+  //   return cloneElement(child, { account: account });
+  // });
 
   return (
     <div className="relative">
@@ -42,7 +46,6 @@ const layout = ({ children }) => {
             />
             <Button
               name="inputs"
-              // href="/campaign?tab=inputs"
               className={`${
                 tab === "inputs"
                   ? "bg-white text-primary"
@@ -55,7 +58,6 @@ const layout = ({ children }) => {
             />
             <Button
               name="criterion"
-              // href="/campaign?tab=criterion"
               className={`${
                 tab === "criterion"
                   ? "bg-white text-primary"
@@ -68,7 +70,6 @@ const layout = ({ children }) => {
             />
             <Button
               name="rewards"
-              // href="/campaign?tab=rewards"
               className={`${
                 tab === "rewards"
                   ? "bg-white text-primary"

@@ -24,13 +24,6 @@ const CampaignPreview = ({
   const [transactionUrl, setTransactionUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const user = useAccount();
-  const userId = useSelector((state) => state.generalStates.userId);
-  const status = useSelector((state) => state.campaign.campaign.status);
-
-  console.log("User Account", user)
-
-  const dispatch = useDispatch()
 
   const addValueToArray = (newValue) => {
     // Copy the current array state
@@ -76,16 +69,6 @@ const CampaignPreview = ({
   for (let i = 0; i < totalPointArray.length; i++) {
     total += totalPointArray[i];
   }
-
-  // useEffect(() => {
-  //   // Disable scrolling on mount
-  //   document.body.style.overflow = "hidden";
-
-  //   // Re-enable scrolling on unmount
-  //   // return () => {
-  //   //   document.body.style.overflow = "auto";
-  //   // };
-  // }, []);
 
   console.log("The total number is:", total);
   return (
@@ -192,31 +175,9 @@ const CampaignPreview = ({
             </div>
           </div>
         </div>
-{/* 
-        <Button
-          type="button"
-          name="publish"
-          className="border border-primary font-medium text-[20px]"
-          shade="border-primary"
-          isLoading={status === "loading"}
-          onClick={() => {
-            if (userId !== undefined) {
-              // console.log(values);
-              setFieldValue("totalRewardPoint", totalReward);
-              dispatch(setRewards(values));
-              createNewCampaign(values);
-            } else {
-              toast.info("Connect your wallet to publish your campaign");
-            }
-          }}
-        /> */}
       </div>
       {modalOpen && (
-        <CampaignLink
-          campaignId={campaignId}
-          setModalOpen={setModalOpen}
-          id="660dba89934e99274e09dcb8"
-        />
+        <CampaignLink campaignId={campaignId} setModalOpen={setModalOpen} />
       )}
     </>
   );
