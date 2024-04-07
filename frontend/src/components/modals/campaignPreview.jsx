@@ -8,6 +8,10 @@ import { CloseCircle } from "iconsax-react";
 import PreviewTask from "../campaignComponents/previewTask";
 import CampaignLink from "./campainLink";
 import { useSelector, useDispatch } from "react-redux";
+import { useAccount } from "@particle-network/connect-react-ui";
+import mintVerxioTokens from "@/utils/claimVerxioToken";
+import { toast } from "react-toastify";
+import { RiExternalLinkFill } from "react-icons/ri";
 
 const CampaignPreview = ({
   setCampaignModalOpen,
@@ -17,11 +21,14 @@ const CampaignPreview = ({
   campaignId,
 }) => {
   const [totalPointArray, setTotalPointArray] = useState([]);
+  const [transactionUrl, setTransactionUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-
+  const user = useAccount();
   const userId = useSelector((state) => state.generalStates.userId);
   const status = useSelector((state) => state.campaign.campaign.status);
 
+  console.log("User Account", user)
 
   const dispatch = useDispatch()
 
@@ -39,21 +46,36 @@ const CampaignPreview = ({
   // console.log(reward);
   console.log(totalPointArray);
 
+
+  const handleClaimRewards = async (total) => {
+    if (!user) {
+      toast.info("Please connect your wallet 😒");
+      return; 
+    }
+
+    if (total > 0) {
+      setLoading(true);
+      try {
+        const destinationAddress = user;
+        const claimAmount = total;
+        const url = await mintVerxioTokens(destinationAddress, claimAmount);
+        setTransactionUrl(url);
+        setLoading(false);
+        toast.success(`${claimAmount} Verxio soulbound token claimed 🎊`);
+      } catch (error) {
+        toast.error("Error claiming rewards:");
+        console.log("Error claiming rewards:", error);
+      }
+    } else {
+      toast.info("Complete task first 😶‍🌫️");
+    }
+  };
+
   let total = 0;
 
   for (let i = 0; i < totalPointArray.length; i++) {
     total += totalPointArray[i];
   }
-
-  // useEffect(() => {
-  //   // Disable scrolling on mount
-  //   document.body.style.overflow = "hidden";
-
-  //   // Re-enable scrolling on unmount
-  //   // return () => {
-  //   //   document.body.style.overflow = "auto";
-  //   // };
-  // }, []);
 
   console.log("The total number is:", total);
   return (
@@ -75,7 +97,7 @@ const CampaignPreview = ({
                 {reward?.title}
                 {/* <span className="font-bold">{reward?.title}</span>{" "} */}
               </p>
-              <p className="text-[22px] font-bold"  style={{ color: '#00ADEF' }}>
+              <p className="text-[18px] font-bold"  style={{ color: '#00ADEF' }}>
                 Reward Pool: <span>{totalReward.toLocaleString()}</span> Points
               </p>
             </div>
@@ -128,43 +150,41 @@ const CampaignPreview = ({
               </div>
               <div className="rounded-lg border border-primary h-full absolute w-full top-[6px] left-[6px] "></div>
             </div>
-            <Button name="claim rewards" />
+            <Button
+              name="claim rewards"
+              onClick={() => handleClaimRewards(total)}
+              isLoading={loading}    
+            />
+            {transactionUrl && (
+            <p>
+              <a
+                href={transactionUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+              >
+                View Transaction{" "}
+                <span className="text-red-500">
+                  <RiExternalLinkFill />
+                </span>
+              </a>
+            </p>
+          )}
+
           </div>
           <div className="border border-[#B6B8EC] my-8"></div>
           <div className="p-6">
             <div className="flex items-center gap-2">
               <p className="text-[24px] font-bold">Participants</p>
               <p className="border rounded p-1 px-2">
-                +<span>{reward?.participants}</span>
+                +<span>{reward?.participants.toLocaleString()}</span>
               </p>
             </div>
           </div>
         </div>
-{/* 
-        <Button
-          type="button"
-          name="publish"
-          className="border border-primary font-medium text-[20px]"
-          shade="border-primary"
-          isLoading={status === "loading"}
-          onClick={() => {
-            if (userId !== undefined) {
-              // console.log(values);
-              setFieldValue("totalRewardPoint", totalReward);
-              dispatch(setRewards(values));
-              createNewCampaign(values);
-            } else {
-              toast.info("Connect your wallet to publish your campaign");
-            }
-          }}
-        /> */}
       </div>
       {modalOpen && (
-        <CampaignLink
-          campaignId={campaignId}
-          setModalOpen={setModalOpen}
-          id="660dba89934e99274e09dcb8"
-        />
+        <CampaignLink campaignId={campaignId} setModalOpen={setModalOpen} />
       )}
     </>
   );

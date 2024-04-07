@@ -1,29 +1,18 @@
 "use client";
-import { useNav } from "@/context";
-import { getCampaign, getUserCampaigns } from "@/store/slices/campaignSlice";
-import { root } from "@/store/store";
+import { getUserCampaigns } from "@/store/slices/campaignSlice";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const page = () => {
   const [campaign, setCampaign] = useState([]);
-  //   const [singleCampaign, setSingleCampaign] = useState([]);
-
-  //   const { singleCampaign, setSingleCampaign } = useNav();
 
   const dispatch = useDispatch();
-  const router = useRouter();
 
-  const userId = useSelector((state) => state.generalStates.userId);
-  const reward = useSelector((state) => state.generalStates.rewards);
-  console.log();
-
-  useEffect(() => {
-    getUsersCampaign();
-  }, []);
+  // useEffect(() => {
+  //   getUsersCampaign();
+  // }, []);
 
   console.log(campaign);
 
@@ -33,34 +22,16 @@ const page = () => {
         getUserCampaigns({ id: "2mpkvSaewCLPij7xxutARnr6wSueAGDcNt9TU48opmsn" })
       );
       if (response?.payload?.success === true) {
-        toast.success(response?.payload.message);
-        setCampaign(response?.payload.capmaign);
-        // router.push('/campaign')
+        toast.success(response?.payload?.message);
+        setCampaign(response?.payload?.capmaign);
       } else {
         toast.info("Create a profile");
-        // dispatch(setEdit(true));
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  //   const getSingleCampaign = async (id) => {
-  //     try {
-  //       const response = await dispatch(getCampaign({ id: id }));
-  //       if (response.payload.success === true) {
-  //         toast.success(response?.payload.message);
-  //         setSingleCampaign(response?.payload.capmaign);
-  //         router.push("/campaign");
-
-  //       } else {
-  //         // toast.info("Create a profile");
-  //         // dispatch(setEdit(true));
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
 
   return (
     <div className="p-4 w-full">

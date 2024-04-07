@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+<<<<<<< HEAD
 const DashboardCards = ({
   src,
   alt,
@@ -33,8 +34,25 @@ const DashboardCards = ({
         <p className="font-normal text-[12px] text-[#424242]">{headerText}</p>
       </div>
       <h2 className="font-semibold text-[48px] text-primary">{number}</h2>
+=======
+const DashboardCards = ({ src, alt, headerText, number }) => {
+  return (
+    <secton className="flex items-start flex-col">
+      <div className="flex items-center gap-3">
+        <span>
+          <Image src={src} height={30} width={30} alt={alt} />
+        </span>
+
+        <p>{headerText}</p>
+      </div>
+      <h2>{number}</h2>
+>>>>>>> 9e443c83b56a548a5303115794aadac9a4bee7ec
     </secton>
   );
 };
 
 export default DashboardCards;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9e443c83b56a548a5303115794aadac9a4bee7ec
