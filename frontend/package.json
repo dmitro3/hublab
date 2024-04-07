@@ -55,6 +55,9 @@
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "tweetnacl": "^1.0.3",
+    "react-transition-group": "^4.4.5",
+    "primereact": "^10.6.2",
+    "recharts": "^2.9.3",
     "yup": "^1.4.0"
   },
   "devDependencies": {
