@@ -232,7 +232,7 @@ const Reward = ({ account }) => {
                     <p className="flex items-center">
                       Number of participants:{" "}
                       <span className="text-[32px] font-bold ml-2">
-                        {participants}
+                        {participants.toLocaleString()}
                       </span>
                     </p>
                     <p>

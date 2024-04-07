@@ -187,7 +187,7 @@ const CampaignPreview = ({
             <div className="flex items-center gap-2">
               <p className="text-[24px] font-bold">Participants</p>
               <p className="border rounded p-1 px-2">
-                +<span>{reward?.participants}</span>
+                +<span>{reward?.participants.toLocaleString()}</span>
               </p>
             </div>
           </div>
