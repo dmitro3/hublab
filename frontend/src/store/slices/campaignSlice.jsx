@@ -27,7 +27,7 @@ export const createCampaign = createAsyncThunk(
   async ({ data, id }) => {
     try {
       const response = await axios.post(
-        `https://backend-verxio.vercel.app/api/v1/campaigns`,
+        `https://backend-verxio.vercel.app/api/v1/campaigns`, 
         data
       );
       return response.data;
