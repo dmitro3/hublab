@@ -15,9 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const constants_configs_1 = require("../configs/constants.configs");
 const campaign_service_1 = __importDefault(require("../services/campaign.service"));
 const profile_services_1 = __importDefault(require("../services/profile.services"));
-const { create, findOne, find } = new campaign_service_1.default();
+const { create, findOne, find, count } = new campaign_service_1.default();
 const { findOne: findProfile } = new profile_services_1.default();
-const { DUPLICATE_TITLE, CREATED, FETCHED, NOT_FOUND } = constants_configs_1.MESSAGES.CAMPAIGN;
+const { DUPLICATE_TITLE, CREATED, FETCHED, NOT_FOUND, FETCHED_COUNT } = constants_configs_1.MESSAGES.CAMPAIGN;
 class CampaignController {
     createCampaign(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -102,6 +102,27 @@ class CampaignController {
                 .send({
                 success: false,
                 message: NOT_FOUND
+            });
+        });
+    }
+    getCampaignCount(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            //checks if profile exists
+            const profile = yield findProfile({ _id: req.params.profileId });
+            console.log("hereeee");
+            if (!profile) {
+                return res.status(409)
+                    .send({
+                    success: false,
+                    message: constants_configs_1.MESSAGES.PROFILE.NOT_FOUND
+                });
+            }
+            const campaignCount = yield count({ profileId: req.params.profileId });
+            return res.status(200)
+                .send({
+                success: true,
+                message: FETCHED_COUNT,
+                count: campaignCount
             });
         });
     }

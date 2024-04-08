@@ -5,14 +5,16 @@ import ProfileService from "../services/profile.services";
 const {
   create,
   findOne,
-  find
+  find,
+  count
 } = new CampaignService();
 const {findOne: findProfile} = new ProfileService();
 const {
     DUPLICATE_TITLE,
     CREATED,
     FETCHED,
-    NOT_FOUND
+    NOT_FOUND,
+    FETCHED_COUNT
 } = MESSAGES.CAMPAIGN;
 
 export default class CampaignController {
@@ -100,5 +102,26 @@ export default class CampaignController {
                 success: false,
                 message: NOT_FOUND
         });
+    }
+
+    async getCampaignCount(req: Request, res: Response) {
+        //checks if profile exists
+        const profile = await findProfile({_id: req.params.profileId})
+        console.log("hereeee")
+        if(!profile) {
+            return res.status(409)
+            .send({
+                success: false,
+                message: MESSAGES.PROFILE.NOT_FOUND
+            });
+        }
+        const campaignCount = await count({profileId: req.params.profileId});
+        return res.status(200)
+        .send({
+            success: true,
+            message: FETCHED_COUNT,
+            count: campaignCount
+        });
+
     }
 }
