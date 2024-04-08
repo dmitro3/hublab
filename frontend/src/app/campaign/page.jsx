@@ -34,8 +34,7 @@ const page = () => {
         toast.success(response?.payload?.message);
         setSingleCampaign(response?.payload?.capmaign);
       } else {
-        // toast.info("Create a profile");
-        // dispatch(setEdit(true));
+        toast.error("error");
       }
     } catch (error) {
       console.error(error);
