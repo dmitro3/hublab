@@ -45,7 +45,7 @@ class CampaignController {
                 .send({
                 success: true,
                 message: CREATED,
-                campaign: createdCampaign
+                campaignId: createdCampaign === null || createdCampaign === void 0 ? void 0 : createdCampaign._id
             });
         });
     }

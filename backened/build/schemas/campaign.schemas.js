@@ -25,7 +25,7 @@ const campaignSchema = joi_1.default.object({
         openEndedQuestion: joi_1.default.object({
             value: joi_1.default.array()
         }),
-        action: joi_1.default.object({
+        performAction: joi_1.default.object({
             value: joi_1.default.array()
         })
     }).required(),
