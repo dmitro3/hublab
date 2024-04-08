@@ -1,12 +1,17 @@
-import Image from "next/image";
+"use client";
+// import Image from "next/image";
 import { Button } from "@/components";
+import { useState } from "react";
+// import VerxioGold from "@/assets/VerxioCoin.svg";
 
 const page = () => {
+  const [loading, setLoading] = useState(false);
+
   return (
     <section className="w-full h-full p-10">
       <section className="w-full border rounded-lg p-6 flex flex-col items-center md:flex-row gap-3">
         {/* ID: {params?.[`campaignpreview-${id}`]} */}
-        <section className="w-full h-full md:w-1/2">
+        <section className="w-full h-full md:w-[60%]">
           <div className="border-b py-[20px]">
             <h2>
               Launch Campaign:{" "}
@@ -67,7 +72,50 @@ const page = () => {
             </h2>
           </div>
         </section>
-        <section className="w-full h-full md:w-1/2"></section>
+        <section className="w-full h-full md:w-[40%]">
+          <div className=" p-6">
+            <div className="relative mb-7">
+              <div className="border border-primary bg-white rounded-lg px-5 relative z-50">
+                <p className="text-[30px] ">
+                  Points: <span className="font-bold">200</span>
+                </p>
+                <div className="flex justify-center py-7">
+                  {/* <Image alt="coin" src={VerxioGold} className="w-[200px]" /> */}
+                </div>
+              </div>
+              <div className="rounded-lg border border-primary h-full absolute w-full top-[6px] left-[6px] "></div>
+            </div>
+            <Button
+              name="claim rewards"
+              // onClick={() => handleClaimRewards(total)}
+              isLoading={loading}
+            />
+            {/* {transactionUrl && (
+              <p>
+                <a
+                  href={transactionUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center"
+                >
+                  View Transaction{" "}
+                  <span className="text-red-500">
+                    <RiExternalLinkFill />
+                  </span>
+                </a>
+              </p>
+            )} */}
+          </div>
+          <div className="border border-[#B6B8EC] my-8"></div>
+          <div className="p-6">
+            <div className="flex items-center gap-2">
+              <p className="text-[24px] font-bold">Participants</p>
+              {/* <p className="border rounded p-1 px-2">
+                +<span>{reward?.participants.toLocaleString()}</span>
+              </p> */}
+            </div>
+          </div>
+        </section>
       </section>
     </section>
   );
