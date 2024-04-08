@@ -23,8 +23,8 @@ const MESSAGES = {
         CREATED: "Campaign created successfully.",
         FETCHED: "Campaign fetched successfully.",
         NOT_FOUND: "Campaign not found.",
-        // UPDATED: "Profile details updated successfully.",
-    },
+        FETCHED_COUNT: "User's campaign count fetched successfully."
+    }
 };
 const INTERESTS: string[] = ["Content", "Development", "Trading", "Earning", "Blockchain", "Bounty"];
 const FRONTEND_SIGNUP_LINK = "";
