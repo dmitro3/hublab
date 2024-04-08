@@ -30,8 +30,8 @@ const MESSAGES = {
         CREATED: "Campaign created successfully.",
         FETCHED: "Campaign fetched successfully.",
         NOT_FOUND: "Campaign not found.",
-        // UPDATED: "Profile details updated successfully.",
-    },
+        FETCHED_COUNT: "User's campaign count fetched successfully."
+    }
 };
 exports.MESSAGES = MESSAGES;
 const INTERESTS = ["Content", "Development", "Trading", "Earning", "Blockchain", "Bounty"];

@@ -14,4 +14,8 @@ export default class CampaignService {
     async find(filter: {}) {
         return await Campaign.find(filter, "-__v");
     }
+
+    async count(filter: {}) {
+        return await Campaign.countDocuments(filter);
+    }
 }
