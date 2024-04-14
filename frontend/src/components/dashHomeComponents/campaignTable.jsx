@@ -47,12 +47,12 @@ const CampaignTable = () => {
   ]);
 
   return (
-    <section className="w-full gap-6 shadow px-5 py-[18px] rounded-[14px]">
+    <section className="w-full gap-6 shadow px-2 md:px-5 py-[18px] rounded-[14px]">
       <h2 className="text-primary font-semibold text-[28px] my-3">
         All Campaign
       </h2>
 
-      <div className="flex max-w-full overflow-x-auto">
+      <div className="flex max-w-full overflow-x-auto w-full">
         <Table
           tableHeads={[
             "Campaigns",

@@ -32,11 +32,11 @@ const Page = () => {
   ];
 
   return (
-    <section className="w-full h-full p-10">
-      <section className="w-full border rounded-lg p-6 flex flex-col items-cente gap-3">
+    <section className="w-full h-full p-2 md:p-10 border">
+      <section className="w-full border rounded-lg p-2 md:p-6 flex flex-col items-cente gap-3">
         <h2 className="text-primary font-semibold text-[28px]">Dashboard</h2>
 
-        <section className="flex items-center gap-3 flex-wrap">
+        <section className="flex items-start md:items-center gap-3 flex-wrap">
           <Link
             href={"/create_campaign"}
             className="border-dashed border-2 border-[#00ADEF] rounded-lg bg-[#E0F7FF] flex flex-col p-10 cursor-pointer items-center justify-center"

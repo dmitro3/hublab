@@ -3,13 +3,13 @@ import Link from "next/link";
 
 export const Table = ({ tableHeads, tableData, children }) => {
   return (
-    <div>
+    <div className="w-full h-full">
       <table className="w-full border-collapse">
         <thead className="">
-          <tr className="w-full text-center ">
+          <tr className="w-full text-center  ">
             {tableHeads?.map((head, index) => (
               <th
-                className={`text-[#424242] font-semibold text-[16px] border border-[#F3F3FC] py-2 px-4 text-center`}
+                className={`text-[#424242] font-semibold text-[16px] border border-[#F3F3FC] py-3 px-4 text-center`}
                 key={`${head}-${index}`}
               >
                 <>{head}</>
@@ -30,7 +30,7 @@ export const TableBody = ({ tableData }) => {
       {tableData.map((data, index) => (
         <tr
           key={`table-data-${index}`}
-          className="hover:bg-[#E0EEFB] transition-all duration-500"
+          className="hover:bg-[#e1ecf6] transition-all duration-500"
         >
           <td className="border border-[#F3F3FC] text-center py-2 line-clamp-1 px-4">
             <CampaignNameTemplate name={data.name} />
@@ -63,7 +63,7 @@ export const TableBody = ({ tableData }) => {
 
 const CampaignNameTemplate = (tableData) => {
   return (
-    <p className="font-normal text-[16px] text-[#424242]">{tableData.name}</p>
+    <p className="font-normal line-clamp-1 text-[16px] text-[#424242]">{tableData.name}</p>
   );
 };
 

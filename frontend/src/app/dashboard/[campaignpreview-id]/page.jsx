@@ -4,13 +4,14 @@ import { Button } from "@/components";
 import { useState } from "react";
 // import VerxioGold from "@/assets/VerxioCoin.svg";
 
-const page = () => {
+const page = ({ params }) => {
   const [loading, setLoading] = useState(false);
 
   return (
     <section className="w-full h-full p-10">
       <section className="w-full border rounded-lg p-6 flex flex-col items-center md:flex-row gap-3">
         {/* ID: {params?.[`campaignpreview-${id}`]} */}
+        {/* ID: {params?.["proposal-id"]} */}
         <section className="w-full h-full md:w-[60%]">
           <div className="border-b py-[20px]">
             <h2>
