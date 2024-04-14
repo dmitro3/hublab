@@ -92,3 +92,30 @@ export const dashboardCardData = [
     number: "860",
   },
 ];
+
+export const participantsData = [
+  {
+    imgUrl: "/images/participant1.svg",
+  },
+  {
+    imgUrl: "/images/participant2.svg",
+  },
+  {
+    imgUrl: "/images/participant3.svg",
+  },
+  {
+    imgUrl: "/images/participant2.svg",
+  },
+  {
+    imgUrl: "/images/participant1.svg",
+  },
+  {
+    imgUrl: "/images/participant2.svg",
+  },
+  {
+    imgUrl: "/images/participant3.svg",
+  },
+  {
+    imgUrl: "/images/participant2.svg",
+  },
+];
