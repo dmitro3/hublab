@@ -9,4 +9,6 @@ Verxio protocol is helping businesses create and manage tokenized ad campaigns f
 
 </h3>
 
+Businesses can now create and manage tokenized ad campaigns that uses digital assets as incentives to motivate their community to get involved, increasing engagement and participation.
+
 </div>
