@@ -5,7 +5,7 @@
 Verxio protocol is helping businesses create and manage tokenized ad campaigns for their community
 <h3>
   
-[Verxio Pitch Deck](https://github.com/Axio-Lab/hublab/) | [Verxio Demo URL](https://www.verxio.xyz/) | [Verxio Demo Video](https://youtu.be/qPYI9hFOvI8)
+[Verxio Pitch Deck](https://github.com/Axio-Lab/hublab/) | [Verxio Demo URL](https://www.verxio.xyz/) | [Verxio Demo Video](https://youtu.be/QPe1FQqIbc4?si=CgaAWCkiF6762s1I)
 
 </h3>
 
