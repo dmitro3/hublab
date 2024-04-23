@@ -18,7 +18,9 @@ const page = () => {
   const dispatch = useDispatch();
   const account = useAccount();
 
-  const userId = useSelector((state)=> state.generalStates.userId)
+  const userId = useSelector((state) => state.generalStates.userId);
+
+  console.log(account);
 
   useEffect(() => {
     dispatch(setUserId(account));
@@ -26,20 +28,22 @@ const page = () => {
 
   useEffect(() => {
     getUsersCampaign();
-  }, [account]);
+  }, []);
 
   console.log(campaign);
 
   const getUsersCampaign = async () => {
     try {
       const response = await dispatch(
-        getUserCampaigns({ id: userId })
+        getUserCampaigns({ id: userId || account })
       );
       if (response?.payload?.success === true) {
         setCampaign(response?.payload?.capmaign);
         toast.success(response?.payload?.message);
-      } else {
+      } else if (userId === undefined ) {
         toast.info("Connect your wallet to access campaigns");
+      } else {
+        toast.error("Error:: failed to load");
       }
     } catch (error) {
       console.error(error);

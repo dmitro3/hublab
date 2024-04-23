@@ -26,3 +26,96 @@ export const howToEarnData = [
     description: "Work together and achieve a common goal or objective.",
   },
 ];
+
+export const campaignDetailsData = [
+  {
+    id: 1,
+    name: "Join Lexifey",
+    participants: 9734,
+    participantsWithReward: 6789,
+    points: 876,
+    link: "https://www.figma.com/file/8JhQumgHxLkrNGV9SBCDpw/Verx",
+    status: "ongoing",
+  },
+  {
+    id: 2,
+    name: "Emerald Earners",
+    participants: 9734,
+    participantsWithReward: 6789,
+    points: 876,
+    link: "https://www.figma.com/file/8JhQumgHxLkrNGV9SBCDpw/Verx",
+    status: "upcoming",
+  },
+  {
+    id: 3,
+    name: "Ultimate Speed Lexifey Racers",
+    participants: 9734,
+    participantsWithReward: 6789,
+    points: 876,
+    link: "https://www.figma.com/file/8JhQumgHxLkrNGV9SBCDpw/Verx",
+    status: "closed",
+  },
+  {
+    id: 4,
+    name: "Ultimate Speed Lexifey Racers",
+    participants: 9734,
+    participantsWithReward: 6789,
+    points: 876,
+    link: "https://www.figma.com/file/8JhQumgHxLkrNGV9SBCDpw/Verx",
+    status: "deleted",
+  },
+];
+
+export const dashboardCardData = [
+  {
+    headerText: "All Campaigns",
+    number: "72",
+    src: "/images/allCampaigns.svg",
+    alt: "allCampaign",
+  },
+  {
+    headerText: "All Participants",
+    number: "1,802",
+    src: "/images/allParticipants.svg",
+    alt: "allParticipants",
+  },
+  {
+    src: "/images/claimedPoints.svg",
+    alt: "claimedPoints",
+    headerText: "Claimed Points",
+    number: "60,6969",
+  },
+  {
+    src: "/images/participantsWithReward.svg",
+    alt: "participantsWithReward",
+    headerText: "Participants with rewards",
+    number: "860",
+  },
+];
+
+export const participantsData = [
+  {
+    imgUrl: "/images/participant1.svg",
+  },
+  {
+    imgUrl: "/images/participant2.svg",
+  },
+  {
+    imgUrl: "/images/participant3.svg",
+  },
+  {
+    imgUrl: "/images/participant2.svg",
+  },
+  {
+    imgUrl: "/images/participant1.svg",
+  },
+  {
+    imgUrl: "/images/participant2.svg",
+  },
+  {
+    imgUrl: "/images/participant3.svg",
+  },
+  {
+    imgUrl: "/images/participant2.svg",
+  },
+];

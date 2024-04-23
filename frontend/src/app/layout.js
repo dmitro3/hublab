@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { NavProvider } from "@/context/nav_context";
 import DatePickerProvider from "@/providers/datePickerProvider";
 
-
 const roboto_Slab = Roboto_Slab({ subsets: ["latin"] });
 
 export const metadata = {
@@ -23,9 +22,9 @@ export default function RootLayout({ children }) {
       <body className={roboto_Slab.className}>
         <DatePickerProvider>
           <ReduxProvider>
-          <NavProvider>
+            <NavProvider>
               <PageConnectKit>{children}</PageConnectKit>
-          </NavProvider>
+            </NavProvider>
           </ReduxProvider>
           <ToastContainer />
         </DatePickerProvider>

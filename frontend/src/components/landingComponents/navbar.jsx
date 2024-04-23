@@ -86,7 +86,7 @@ const Navbar = () => {
             <AiOutlineClose />
           ) : (
             <span>
-              <AiOutlineMenu />
+              <AiOutlineMenu className="text-[#fff]" />
             </span>
           )}
         </button>

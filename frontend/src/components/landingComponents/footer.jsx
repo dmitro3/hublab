@@ -4,7 +4,7 @@ import { Copyright } from "iconsax-react";
 
 const Footer = () => {
   return (
-    <footer className="relative w-full h-full max-w-[1440px] mx-auto px-[MIN(100px,8%)] flex flex-col gap-12 md:gap-24 bg-tertiary min-h-[568px] py-24">
+    <footer className="relative w-full h-full max-w-[1920px] mx-auto px-[MIN(100px,8%)] flex flex-col gap-12 md:gap-24 bg-tertiary min-h-[568px] py-24">
       {/* <div className="absolute top-0 right-[-10p]">
         <Image
           src={"/images/footerDoddle.svg"}
@@ -47,7 +47,7 @@ const Footer = () => {
             <h2 className="font-bold font-base mb-6">Contact Us</h2>
             <blockquote className="flex flex-col gap-2">
               <Link href={"/"}>Email: Support@Verxio.com</Link>
-              <Link href={"/"}>Phone: +2349035537</Link>
+              <Link href={"/"}>Phone: +1 458 478 55666</Link>
             </blockquote>
           </div>
 
@@ -78,7 +78,7 @@ const Footer = () => {
                   src={"/images/footerGithub.svg"}
                 />{" "}
               </Link>
-              <Link href={"/"}>
+              <Link href={"https://x.com/verxioprotocol"}>
                 <Image
                   width={18}
                   height={18}
