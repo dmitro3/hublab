@@ -1,6 +1,9 @@
 "use client";
 import { useState } from "react";
-import Chart from "react-apexcharts";
+// import Chart from "react-apexcharts";
+import dynamic from "next/dynamic";
+const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
+
 import { IoIosArrowDown } from "react-icons/io";
 
 const ResponsiveDonutChart = () => {
@@ -40,11 +43,11 @@ const ResponsiveDonutChart = () => {
         <section className="flex items-center justify-between">
           <h2>Campaigns</h2>
         </section>
-        <Chart
+        <ApexChart
           options={options}
           series={options.series}
-          type={options.chart.type}
-          height={options.chart.height}
+          type={options.chart?.type}
+          height={options.chart?.height}
           className="w-full h-full"
         />
       </section>

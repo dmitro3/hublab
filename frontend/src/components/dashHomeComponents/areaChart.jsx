@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import Chart from "react-apexcharts";
+import dynamic from "next/dynamic";
+const ApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const ResponsiveChart = () => {
   const [options] = useState({
@@ -48,11 +49,11 @@ const ResponsiveChart = () => {
         </div>
         <div className></div>
       </section>
-      <Chart
+      <ApexChart
         options={options}
         series={options.series}
-        type={options.chart.type}
-        height={options.chart.height}
+        type={options.chart?.type}
+        height={options.chart?.height}
         className="w-full h-full border rounded-lg"
       />
     </section>
