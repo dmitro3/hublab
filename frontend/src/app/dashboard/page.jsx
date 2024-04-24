@@ -38,7 +38,7 @@ const Page = () => {
 
         <section className="flex items-start md:items-center gap-3 flex-wrap">
           <Link
-            href={"/create_campaign"}
+            href={"/create_campaign?tab=start"}
             className="border-dashed border-2 border-[#00ADEF] rounded-lg bg-[#E0F7FF] flex flex-col p-10 cursor-pointer items-center justify-center"
           >
             <Image
